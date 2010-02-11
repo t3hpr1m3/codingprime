@@ -1,0 +1,12 @@
+RSpec
+mysql
+ZenTest
+autotest-rails
+redgreen
+nginx
+mongrel
+mongrel_cluster (requires keyword)
+
+- Got some pretty good info on mongrel_cluster from :
+http://itsignals.cascadia.com.au/?p=16
+http://blog.goyello.com/2009/12/18/how-to-install-redmine-with-nginx-and-mongrel-cluster-on-gentoo-linux/
