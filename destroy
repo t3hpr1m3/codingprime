@@ -1,0 +1,13 @@
+Script started on Thu Feb 11 13:11:43 2010
+
+ [32;01m*[0m [35;01mkeychain [0m[36m2.7.0[0m ~ [32;01mhttp://www.funtoo.org[0m
+ [32;01m*[0m Found existing ssh-agent: [36m3519[0m
+ [32;01m*[0m Found existing gpg-agent: [36m3544[0m
+ [32;01m*[0m Known ssh key: [36m/home/josh/.ssh/id_dsa[0m
+
+]0;josh@dvlp-jwilliams1-gentoo:/web/codingprime.com[?1034h[0;31;43m-->[m[1;37m /web/codingprime.com [0;31;43m<--[m
+[0;31mjosh@dvlp-jwilliams1-gentoo: [1;33mpts/5[m -> [0;37;00m^C
+]0;josh@dvlp-jwilliams1-gentoo:/web/codingprime.com[0;31;43m-->[m[1;37m /web/codingprime.com [0;31;43m<--[m
+[0;31mjosh@dvlp-jwilliams1-gentoo: [1;33mpts/5[m -> [0;37;00mhalt    exit
+
+Script done on Thu Feb 11 13:11:48 2010
