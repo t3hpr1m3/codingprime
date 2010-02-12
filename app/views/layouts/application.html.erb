@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title><%= title %></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<%= render 'layouts/stylesheets' %>
+</head>
+<body>
+	<div id="container">
+		<div id="header" class="clearfix">
+			<h1>CodingPrime</h1>
+			<p>
+				<span>&lt;blurb&gt;</span>insert witty text here<span>&lt;/blurb&gt;</span>
+			</p>
+		</div>
+		<div id="content">
+<%= yield %>
+		</div>
+		<div id="footer">
+		</div>
+	</div>
+<%= render 'layouts/nav' %>
+</body>
+</html>

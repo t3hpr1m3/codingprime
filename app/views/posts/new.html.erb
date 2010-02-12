@@ -1,2 +1,15 @@
-<h1>Posts#new</h1>
-<p>Find me in app/views/posts/new.html.erb</p>
+<% form_for( @post ) do |f| %>
+	<fieldset>
+		<%= f.error_messages %>
+		<dl class="formfields clearfix">
+			<dt><%= f.label :title %></dt>
+			<dd><%= f.text_field :title %></dd>
+			<dt><%= f.label :body %></dt>
+			<dd><%= f.text_area :body %></dd>
+		</dl>
+		<p class="centertext">
+			<%= f.submit 'Create' %>
+		</p>
+<% end %>
+
+<%= link_to 'Back', posts_path %>

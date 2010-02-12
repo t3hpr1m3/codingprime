@@ -1,0 +1,146 @@
+body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	background: #000000 url( '../images/background.jpg' ) top left repeat;
+	background-color: #000000;
+	font-size: 70%;
+	font-family: verdana, arial, sans-serif;
+}
+
+fieldset {
+	border: 0 none;
+}
+
+.clearfix:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+
+.centertext {
+	text-align: center;
+}
+
+#container {
+	width: 800px;
+	margin: 20px auto 0 auto;
+	background-color: #ffffff;
+}
+
+#header {
+	background: #ff7900 url( '../images/header_bg.jpg' ) top left repeat-y;
+	color: #ffffff;
+	font-size: 1.2em;
+	border-top: 2px solid #ffffff;
+	border-left: 2px solid #ffffff;
+	border-right: 2px solid #ffffff;
+	font-family: "Trebuchet MS", "Lucida Grande", arial, helvetica, sans-serif;
+	height: 80px;
+}
+
+#header h1 {
+	margin: 10px 0 0 10px;
+	font-variant: small-caps;
+}
+
+#header h1 a {
+	color: #ffffff;
+	text-decoration: none;
+}
+
+#header p {
+	margin: .5em 0 .5em 10px;
+	font-style: italic;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+#header p span {
+	font-style: normal;
+}
+
+#nav {
+	width: 796px;
+	overflow: hidden;
+	position: absolute;
+	top: 100px;
+	left: 50%;
+	margin: 0 0 0 -398px;
+	padding: 0;
+	border-top: 2px solid #ffffff;
+	border-bottom: 1px solid #000000;
+	background-color: transparent;
+	background: url( '../images/menu_bg.gif' ) top left repeat-x;
+}
+
+#menu {
+	margin: 0;
+	padding: 0;
+	position: relative;
+	left: 50%;
+	float: left;
+	list-style-type: none;
+	text-align: center;
+}
+
+#menu li {
+	display: inline;
+	float: left;
+	position: relative;
+	right: 50%;
+	margin: 0;
+	padding: 0;
+	border-right: 1px solid #000000;
+}
+
+#menu li a {
+	display: block;
+	line-height: 2em;
+	background-color: #ae4600;
+	color: #ffffff;
+	border-left: 1px solid #ffb573;
+	border-right: 1px solid #bf7330;
+	width: 10em;
+	text-align: center;
+	text-decoration: none;
+	font-weight: bold;
+	font-variant: small-caps;
+	background-color: transparent;
+}
+
+#menu li a:hover {
+	background: url( '../images/menu_bg_on.gif' ) top left repeat-x;
+}
+
+#content {
+	padding: 25px 10px;
+}
+
+dl.formfields {
+	margin: 0;
+}
+dl.formfields dt {
+	float: left;
+	clear: left;
+	width: 11em;
+	position: relative;
+	padding: 0 .5em 0 0;
+	margin: 0 1em .5em 0;
+	line-height: 2em;
+	font-weight: bold;
+}
+
+dl.formfields dt label {
+	line-height: 2em;
+}
+
+dl.formfields dd {
+	margin: 0 0 .5em 0;
+	clear: right;
+	line-height: 2em;
+	padding-left: 13em;
+}
+
