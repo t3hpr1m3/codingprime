@@ -1,2 +1,15 @@
 <h1>Posts#edit</h1>
-<p>Find me in app/views/posts/edit.html.erb</p>
+<% form_for( @post ) do |f| %>
+	<fieldset>
+		<dl class="formfields clearfix">
+			<dt><%= f.label :title %></dt>
+			<dd><%= f.text_field :title %></dd>
+			<dt><%= f.label :body %></dt>
+			<dd><%= f.text_area :body%></dd>
+		</dl>
+		<p class="centertext">
+			<%= f.submit 'Update' %>
+		</p>
+	</fieldset>
+<% end %>
+<%= link_to 'Show', @post %> | <%= link_to 'Back', posts_path %>

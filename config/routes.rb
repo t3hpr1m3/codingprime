@@ -41,5 +41,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :posts
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
+  map.connect ':year/:month/:day/:slug.:format', :controller => 'posts', :action => 'show'
+  map.connect ':year/:month/:day/:slug', :controller => 'posts', :action => 'show'
   map.root :controller => 'posts'
 end

@@ -3,12 +3,13 @@
 #
 # Table name: posts
 #
-#  id         :integer         not null, primary key
-#  title      :string(255)
-#  body       :text
-#  slug       :string(255)
-#  created_at :datetime
-#  updated_at :datetime
+#  id            :integer         not null, primary key
+#  title         :string(255)
+#  body          :text
+#  rendered_body :text
+#  slug          :string(255)
+#  created_at    :datetime
+#  updated_at    :datetime
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html

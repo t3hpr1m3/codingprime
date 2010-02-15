@@ -1,6 +1,4 @@
-<% @posts.each do |post| %>
-	<h2><%=h post.title %></h2>
-	<p><%=h post.body.gsub( /\n\n/, "</p><p>" ).gsub( /\n/, "<br />" ) %></p>
-<% end %>
-<br />
+<%= render :partial => @posts %>
+<% if admin? %>
 <%= link_to 'New post', new_post_path %>
+<% end %>

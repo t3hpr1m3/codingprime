@@ -1,0 +1,8 @@
+			<% div_for post do %>
+				<h2><%= link_to_unless_current h(post.title), post.url %></h2>
+				<span class="dateline"><%= post.created_at.to_s( :datetime ) %></span>
+				<%= post.rendered_body %>
+				<% if admin? %>
+				<%= link_to 'Edit', edit_post_path( post ) %>
+				<% end %>
+			<% end %>

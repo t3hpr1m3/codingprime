@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+	before_filter :authorize, :except => [:index, :show]
 	# GET /posts
 	# GEt /posts.xml
 	def index
@@ -13,7 +14,11 @@ class PostsController < ApplicationController
 	# GET /posts/1
 	# GET /posts/1.xml
 	def show
-		@post = Post.find( params[:id] )
+		@post = Post.find_by_slug( params[:slug] )
+		if @post
+			@title = @post.title
+		end
+		#@post = Post.find( params[:id] )
 
 		respond_to do |format|
 			format.html # show.html.erb
@@ -80,5 +85,12 @@ class PostsController < ApplicationController
 			format.xml { head :ok }
 		end
 	end
+
+	private
+		def authenticate
+			authenticate_or_request_with_http_basic do |name, password|
+				name == "admin" && password == "secure"
+			end
+		end
 
 end
