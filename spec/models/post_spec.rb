@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100211191224
+# Schema version: 20100215170027
 #
 # Table name: posts
 #
@@ -10,18 +10,14 @@
 #  slug          :string(255)
 #  created_at    :datetime
 #  updated_at    :datetime
+#  user_id       :integer
 #
 
 require 'spec_helper'
 
 describe Post do
 	before(:each) do
-		@valid_attributes = {
-			:title => "A very cool - first post!",
-			:body => "Some *interesting* text."
-		}
-		@post = Post.new( @valid_attributes )
-		ActiveRecord.stub!(:create).and_return(nil)
+		@post = Factory.create( :post )
 	end
  
  	it "should be valid" do
@@ -38,19 +34,24 @@ describe Post do
 		@post.should be_invalid
 	end
 
+	it "should be invalid without a user" do
+		@post.user = nil
+		@post.should be_invalid
+	end
+
 	it "should generate a valid slug on save" do
-		@post.save
+		@post = Factory.create( :post, :title => "A very cool - first post!" )
 		@post.slug.should match( /^a-very-cool-first-post$/ )
 	end
 
 	it "should render a valid body on save" do
-		@post.save
+		@post = Factory.create( :post, :body => "Some *interesting* text." )
 		@post.rendered_body.chomp.should eql( '<p>Some <em>interesting</em> text.</p>' )
 	end
 
 	it "should generate a valid url after save" do
+		@post = Factory.create( :post, :title => "A very cool - first post!" )
 		@post.created_at = '2010/02/08'
-		@post.save
 		@post.url.should match( /^\/2010\/02\/08\/a-very-cool-first-post$/ )
 	end
 

@@ -1,0 +1,33 @@
+<p>
+  <b>Username:</b>
+  <%=h @user.username %>
+</p>
+
+<p>
+  <b>Encrypted password:</b>
+  <%=h @user.encrypted_password %>
+</p>
+
+<p>
+  <b>Salt:</b>
+  <%=h @user.salt %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%=h @user.name %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%=h @user.email %>
+</p>
+
+<p>
+  <b>Is admin:</b>
+  <%=h @user.is_admin %>
+</p>
+
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>

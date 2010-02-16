@@ -1,0 +1,10 @@
+Script started on Mon Feb 15 11:00:37 2010
+
+ [32;01m*[0m [35;01mkeychain [0m[36m2.7.0[0m ~ [32;01mhttp://www.funtoo.org[0m
+ [32;01m*[0m Found existing ssh-agent: [36m4482[0m
+ [32;01m*[0m Known ssh key: [36m/home/josh/.ssh/id_dsa[0m
+
+]0;josh@saturn-gentoo:/web/codingprime.com[?1034h[37m/web/codingprime.com
+[31mjosh@saturn-gentoo: [1;33mpts/3[0m -> [0mvim .xinitrc ls -l ~/Desktop/Autostart/[13Pvim .xinitrc [Kexit
+
+Script done on Mon Feb 15 11:00:42 2010

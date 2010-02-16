@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100211191224
+# Schema version: 20100215170027
 #
 # Table name: posts
 #
@@ -10,14 +10,19 @@
 #  slug          :string(255)
 #  created_at    :datetime
 #  updated_at    :datetime
+#  user_id       :integer
 #
 
 require 'rdiscount'
 
 class Post < ActiveRecord::Base
-	validates_presence_of :title, :body
+	validates_presence_of :title, :body, :user_id
+	belongs_to :user
+	attr_accessible :title, :body
+
 	before_create :add_slug
 	before_save :render_body
+
 	def year
 		created_at.strftime( '%Y' )
 	end
