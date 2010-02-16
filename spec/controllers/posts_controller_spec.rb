@@ -98,7 +98,8 @@ describe PostsController do
 	#===============
 	describe "when logged in as an admin" do
 		before( :each ) do
-			controller.stub!( :admin? ).and_return( true )
+			@user = Factory.create( :admin )
+			controller.stub!( :current_user ).and_return( @user )
 		end
 
 		#
@@ -140,13 +141,34 @@ describe PostsController do
 		# CREATE
 		#
 		describe "POST 'create'" do
-			before( :each ) do
-				Post.should_receive( :new ).and_return( @post )
-				@post.stub!( :save ).and_return( true )
-				post :create, :post => {}
+			describe "when preview clicked" do
+				before( :each ) do
+					@new_body = "A new body with more *emphasized* text."
+					@new_rendered_body = "<p>A new body with more <em>emphasized</em> text.</p>\n"
+					@post = Factory.build( :new_post, :body => @new_body )
+					Post.should_receive( :new ).and_return( @post )
+					@post.should_not_receive( :save )
+					post :create, :preview_button => "Preview", :post => {}
+				end
+
+				it { should respond_with( :success ) }
+				it { should assign_to( :post ).with( @post ) }
+				it { should assign_to( :post_preview ).with( @new_rendered_body ) }
 			end
 
-			it { should redirect_to( post_url( @post ) ) }
+			describe "when submit clicked" do
+				before( :each ) do
+					Post.should_receive( :new ).and_return( @post )
+					@post.should_receive( :save ).and_return( true )
+					post :create, :post => {}
+				end
+
+				it { should redirect_to( @post.url ) }
+				it { should set_the_flash }
+				it "should set user on @post" do
+					assert_equal @user, @post.user
+				end
+			end
 		end
 
 		#
@@ -154,13 +176,30 @@ describe PostsController do
 		#
 		describe "PUT 'update'" do
 			describe "with a valid id" do
-				before( :each ) do
-					@post.should_receive( :update_attributes ).with( {} ).and_return( true )
-					Post.should_receive( :find ).with( @post.id.to_s ).and_return( @post )
-					put :update, :id => @post.id, :post => {}
+				describe "when preview clicked" do
+					before( :each ) do
+						@new_body = "A new body with more *emphasized* text."
+						@new_rendered_body = "<p>A new body with more <em>emphasized</em> text.</p>\n"
+						Post.should_receive( :find ).with( @post.id.to_s ).and_return( @post )
+						@post.should_not_receive( :update_attributes )
+						put :update, :preview_button => "Preview", :id => @post.id, :post => { :body => @new_body}
+					end
+
+					it { should respond_with( :success ) }
+					it { should assign_to( :post ).with( @post ) }
+					it { should assign_to( :post_preview ).with( @new_rendered_body ) }
 				end
 
-				it { should redirect_to( post_url( @post ) ) }
+				describe "when submit clicked" do
+					before( :each ) do
+						Post.should_receive( :find ).with( @post.id.to_s ).and_return( @post )
+						@post.should_receive( :update_attributes ).and_return( true )
+						put :update, :id => @post.id, :post => {}
+					end
+
+					it { should redirect_to( @post.url ) }
+					it { should set_the_flash }
+				end
 			end
 
 			describe "with an invalid id" do

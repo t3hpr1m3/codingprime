@@ -28,6 +28,22 @@ fieldset {
 	border: 0 none;
 }
 
+.flash {
+	padding: 1em;
+}
+
+.notice {
+	border: 1px solid #329000;
+	background-color: #99eeb6;
+	color: #55a62a;
+}
+
+.error {
+	border: 1px solid #a62f00;
+	background-color: #fa7080;
+	color: #b72e3e;
+}
+
 .clearfix:after {
 	content: ".";
 	display: block;

@@ -39,12 +39,16 @@ describe Post do
 		@post.should be_invalid
 	end
 
-	it "should generate a valid slug on save" do
+	it "should render proper markdown" do
+		Post.render_markdown( "Some *interesting* text." ).chomp.should eql( "<p>Some <em>interesting</em> text.</p>" )
+	end
+
+	it "should generate a valid slug after save" do
 		@post = Factory.create( :post, :title => "A very cool - first post!" )
 		@post.slug.should match( /^a-very-cool-first-post$/ )
 	end
 
-	it "should render a valid body on save" do
+	it "should render a valid body after save" do
 		@post = Factory.create( :post, :body => "Some *interesting* text." )
 		@post.rendered_body.chomp.should eql( '<p>Some <em>interesting</em> text.</p>' )
 	end

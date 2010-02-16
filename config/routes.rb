@@ -45,5 +45,6 @@ ActionController::Routing::Routes.draw do |map|
   map.connect ':controller/:action/:id.:format'
   map.connect ':year/:month/:day/:slug.:format', :controller => 'posts', :action => 'show'
   map.connect ':year/:month/:day/:slug', :controller => 'posts', :action => 'show'
+  map.login 'login', :controller => 'sessions', :action => 'new'
   map.root :controller => 'posts'
 end

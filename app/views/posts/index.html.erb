@@ -1,4 +1,4 @@
-<%= render :partial => @posts %>
+<%= render :partial => 'shared/post', :collection => @posts  %>
 <% if admin? %>
 <%= link_to 'New post', new_post_path %>
 <% end %>

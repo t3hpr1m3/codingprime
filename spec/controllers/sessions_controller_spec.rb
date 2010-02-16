@@ -1,24 +1,36 @@
 require 'spec_helper'
 
 describe SessionsController do
-
-	#Delete these examples and add some real ones
-	it "should use SessionsController" do
-		controller.should be_an_instance_of(SessionsController)
-	end
-
-
-	describe "GET 'create'" do
-		it "should be successful" do
-			get 'create'
-			response.should be_redirect
+	describe "GET 'new'" do
+		before( :each ) do
+			get :new
 		end
+
+		it { should respond_with( :success ) }
 	end
 
-	describe "GET 'destroy'" do
-		it "should be successful" do
-			get 'destroy'
-			response.should be_redirect
+	describe "POST 'create'" do
+		describe "with a valid username/password" do
+			before( :each ) do
+				@user = Factory.create( :user )
+				User.should_receive( :authenticate ).with( @user.username, @user.password ).and_return( @user )
+				post :create, :username => @user.username, :password => @user.password
+			end
+	
+			it { should redirect_to root_path }
+			it { should set_session( :user_id ).to( @user.id ) }
+			it { should set_the_flash.to( { :notice => "Login Successful" } ) }
+		end
+
+		describe "with an invalid username/password" do
+			before( :each ) do
+				@user = Factory.create( :user )
+				User.should_receive( :authenticate ).with( @user.username, @user.password ).and_return( nil )
+				post :create, :username => @user.username, :password => @user.password
+			end
+
+			it { should redirect_to login_path }
+			it { should set_the_flash.to( { :notice => "Invalid username/password" } ) }
 		end
 	end
 end

@@ -1,3 +1,6 @@
+<% if @post_preview -%>
+<%= @post_preview %>
+<% end -%>
 <% form_for( @post ) do |f| %>
 	<fieldset>
 		<%= f.error_messages %>
@@ -9,6 +12,7 @@
 		</dl>
 		<p class="centertext">
 			<%= f.submit 'Create' %>
+			<%= f.submit 'Preview', :name => 'preview_button' %>
 		</p>
 	</fieldset>
 <% end %>

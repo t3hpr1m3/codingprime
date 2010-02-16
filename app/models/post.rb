@@ -39,6 +39,10 @@ class Post < ActiveRecord::Base
 		"/#{year}/#{month}/#{day}/#{slug}"
 	end
 
+	def self.render_markdown( text )
+		RDiscount.new( text ).to_html
+	end
+
 	private
 		def add_slug
 			str = self.title
@@ -49,6 +53,6 @@ class Post < ActiveRecord::Base
 		end
 
 		def render_body
-			self.rendered_body = RDiscount.new( self.body ).to_html
+			self.rendered_body = Post.render_markdown( self.body )
 		end
 end

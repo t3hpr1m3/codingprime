@@ -21,6 +21,13 @@ Factory.define :post do |p|
 	p.body "This is some test text"
 	p.association :user
 end
+
+Factory.define :new_post, :class => Post do |p|
+	p.sequence(:title) { |n| "Test Post #{n} " }
+	p.body "This is some test text"
+	p.user nil
+	p.rendered_body nil
+end
 #
 #  id            :integer         not null, primary key
 #  title         :string(255)

@@ -5,7 +5,7 @@
 # Make sure the secret is at least 30 characters and all random, 
 # no regular words or you'll be exposed to dictionary attacks.
 ActionController::Base.session = {
-  :key         => '_codingprime.com_session',
+  :key         => '_codingprime_session_id',
   :secret      => 'e1ef344f28789f0dc82c15997fc8ba48f540a2f41a141c263c76454f180e6d80264a74c1d6e7a668c902c78f8325dec0d5ae76e6ad2ff294ce53e404625e4e9a'
 }
 
