@@ -211,12 +211,13 @@ dl.formfields {
 dl.formfields dt {
 	float: left;
 	clear: left;
-	width: 11em;
+	width: 7em;
 	position: relative;
 	padding: 0 .5em 0 0;
 	margin: 0 1em .5em 0;
 	line-height: 2em;
 	font-weight: bold;
+	border: 1px solid blue;
 }
 
 dl.formfields dt label {
@@ -227,7 +228,8 @@ dl.formfields dd {
 	margin: 0 0 .5em 0;
 	clear: right;
 	line-height: 2em;
-	padding-left: 13em;
+	padding-left: 10em;
+	border: 1px solid red;
 }
 
 #footer {
