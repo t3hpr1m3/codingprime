@@ -67,7 +67,7 @@ fieldset {
 	background: #0e0940;
 	width: 800px;
 	margin: 0 auto;
-	padding: 10px 0;
+	padding: 10px 0 .5em 0;
 }
 
 #headercontent h1 {
@@ -75,12 +75,12 @@ fieldset {
 }
 
 #headercontent h1 a {
-	color: #90cb84;
+	color: #ffffff;
 	text-decoration: none;
 	font-family: courier, times, serif;
 }
 
-#headercontent h1  a span {
+#headercontent h1 a span {
 	color: #ffffff;
 	font-variant: small-caps;
 	font-family: georgia;
@@ -88,10 +88,11 @@ fieldset {
 }
 
 #headercontent p {
-	margin: .5em 0 .5em 10px;
+	margin: 0 0 0 10px;
 	font-style: italic;
 	text-transform: uppercase;
 	color: #dec1a1;
+	font-size: .8em;
 }
 
 #headercontent p span {
@@ -229,3 +230,10 @@ dl.formfields dd {
 	padding-left: 13em;
 }
 
+#footer {
+	width: 790px;
+	margin: 0 auto;
+	background-color: #9dcb93;
+	padding: 5px;
+	color: #0e0940;
+}

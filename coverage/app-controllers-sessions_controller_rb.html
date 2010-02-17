@@ -28,17 +28,17 @@
         <tbody>
           <tr>
             <td class="left_align"><a href="app-controllers-sessions_controller_rb.html">app/controllers/sessions_controller.rb</a></td>
-            <td class='right_align'><tt>21</tt></td>
-            <td class='right_align'><tt>19</tt></td>
-            <td class="left_align"><div class="percent_graph_legend"><tt class=''>71.43%</tt></div>
+            <td class='right_align'><tt>34</tt></td>
+            <td class='right_align'><tt>31</tt></td>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>100.00%</tt></div>
           <div class="percent_graph">
-            <div class="covered" style="width:71px"></div>
-            <div class="uncovered" style="width:29px"></div>
+            <div class="covered" style="width:100px"></div>
+            <div class="uncovered" style="width:0px"></div>
           </div></td>
-            <td class="left_align"><div class="percent_graph_legend"><tt class=''>73.68%</tt></div>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>100.00%</tt></div>
           <div class="percent_graph">
-            <div class="covered" style="width:74px"></div>
-            <div class="uncovered" style="width:26px"></div>
+            <div class="covered" style="width:100px"></div>
+            <div class="uncovered" style="width:0px"></div>
           </div></td>
           </tr>
         </tbody>
@@ -63,7 +63,7 @@
           
           
           <tr class="marked">
-            <td><pre><a name="line2">2</a> 	def create</pre></td>
+            <td><pre><a name="line2">2</a> 	def new</pre></td>
           </tr>
         
           
@@ -75,115 +75,193 @@
           
           
           <tr class="marked">
-            <td><pre><a name="line4">4</a> 			if user = User.authenticate( params[:username], params[:password] )</pre></td>
+            <td><pre><a name="line4">4</a> 			if current_user</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line5">5</a> 				session[:user_id] = user.id</pre></td>
+            <td><pre><a name="line5">5</a> 				flash[:error] = 'Already logged in.  Please log out first.'</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line6">6</a> 				flash[:notice] = 'Login Successful'</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line7">7</a> 				format.html { redirect_to( root_path ) }</pre></td>
+            <td><pre><a name="line6">6</a> 				format.html { redirect_to( root_path ) }</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line8">8</a> 			else</pre></td>
+            <td><pre><a name="line7">7</a> 			else</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line9">9</a> 				flash[:error] = &quot;Invalid Username/Password&quot;</pre></td>
+            <td><pre><a name="line8">8</a> 				format.html</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line9">9</a> 			end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line10">10</a> 		end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line11">11</a> 	end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line12">12</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line10">10</a> 				format.html { redirect_to( login_path ) }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line11">11</a> 			end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line12">12</a> 		end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line13">13</a> 	end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line14">14</a> </pre></td>
+            <td><pre><a name="line13">13</a> 	def create</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line15">15</a> 	def destroy</pre></td>
+            <td><pre><a name="line14">14</a> 		respond_to do |format|</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
-            <td><pre><a name="line16">16</a> 		reset_session</pre></td>
+          <tr class="marked">
+            <td><pre><a name="line15">15</a> 			if user = User.authenticate( params[:username], params[:password] )</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
-            <td><pre><a name="line17">17</a> 		flash[:notice] = 'Successfully logged out'</pre></td>
+          <tr class="marked">
+            <td><pre><a name="line16">16</a> 				session[:user_id] = user.id</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
-            <td><pre><a name="line18">18</a> 		redirect_to root_path</pre></td>
+          <tr class="marked">
+            <td><pre><a name="line17">17</a> 				flash[:notice] = 'Login Successful'</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
-            <td><pre><a name="line19">19</a> 	end</pre></td>
+          <tr class="marked">
+            <td><pre><a name="line18">18</a> 				format.html { redirect_to( root_path ) }</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
-            <td><pre><a name="line20">20</a> </pre></td>
+          <tr class="inferred">
+            <td><pre><a name="line19">19</a> 			else</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
-            <td><pre><a name="line21">21</a> end</pre></td>
+          <tr class="marked">
+            <td><pre><a name="line20">20</a> 				flash[:error] = &quot;Invalid Username/Password&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line21">21</a> 				format.html { redirect_to( login_path ) }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line22">22</a> 			end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line23">23</a> 		end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line24">24</a> 	end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line25">25</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line26">26</a> 	def destroy</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line27">27</a> 		if current_user</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line28">28</a> 			reset_session</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line29">29</a> 			flash[:notice] = 'Successfully logged out'</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line30">30</a> 		end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line31">31</a> 		redirect_to root_path</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line32">32</a> 	end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line33">33</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line34">34</a> end</pre></td>
           </tr>
         
       </tbody>
     </table>
 
-    <p>Generated on Tue Feb 16 21:37:50 -0600 2010 with <a href="http://github.com/relevance/rcov">rcov 0.9.7.1</a></p>
+    <p>Generated on Tue Feb 16 22:55:44 -0600 2010 with <a href="http://github.com/relevance/rcov">rcov 0.9.7.1</a></p>
 
   </body>
 </html>

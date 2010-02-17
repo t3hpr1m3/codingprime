@@ -28,17 +28,17 @@
         <tbody>
           <tr>
             <td class="left_align"><a href="app-controllers-users_controller_rb.html">app/controllers/users_controller.rb</a></td>
-            <td class='right_align'><tt>86</tt></td>
-            <td class='right_align'><tt>61</tt></td>
-            <td class="left_align"><div class="percent_graph_legend"><tt class=''>67.44%</tt></div>
+            <td class='right_align'><tt>89</tt></td>
+            <td class='right_align'><tt>64</tt></td>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>100.00%</tt></div>
           <div class="percent_graph">
-            <div class="covered" style="width:67px"></div>
-            <div class="uncovered" style="width:33px"></div>
+            <div class="covered" style="width:100px"></div>
+            <div class="uncovered" style="width:0px"></div>
           </div></td>
-            <td class="left_align"><div class="percent_graph_legend"><tt class=''>57.38%</tt></div>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>100.00%</tt></div>
           <div class="percent_graph">
-            <div class="covered" style="width:57px"></div>
-            <div class="uncovered" style="width:43px"></div>
+            <div class="covered" style="width:100px"></div>
+            <div class="uncovered" style="width:0px"></div>
           </div></td>
           </tr>
         </tbody>
@@ -345,7 +345,7 @@
           
           
           <tr class="marked">
-            <td><pre><a name="line49">49</a> 				format.html { redirect_to(@user) }</pre></td>
+            <td><pre><a name="line49">49</a> 				format.html { redirect_to( users_path ) }</pre></td>
           </tr>
         
           
@@ -356,224 +356,242 @@
         
           
           
-          <tr class="uncovered">
+          <tr class="inferred">
             <td><pre><a name="line51">51</a> 			else</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
-            <td><pre><a name="line52">52</a> 				format.html { render :action =&gt; &quot;new&quot; }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line53">53</a> 				format.xml	{ render :xml =&gt; @user.errors, :status =&gt; :unprocessable_entity }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line54">54</a> 			end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line55">55</a> 		end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line56">56</a> 	end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line57">57</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line58">58</a> 	# PUT /users/1</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line59">59</a> 	# PUT /users/1.xml</pre></td>
+          <tr class="marked">
+            <td><pre><a name="line52">52</a> 				flash[:error] = 'Error creating user.'</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line60">60</a> 	def update</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line61">61</a> 		@user = User.find(params[:id])</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line62">62</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line63">63</a> 		respond_to do |format|</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line64">64</a> 			if @user.update_attributes(params[:user])</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line65">65</a> 				flash[:notice] = 'User was successfully updated.'</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line66">66</a> 				format.html { redirect_to(@user) }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line67">67</a> 				format.xml	{ head :ok }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line68">68</a> 			else</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line69">69</a> 				format.html { render :action =&gt; &quot;edit&quot; }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line70">70</a> 				format.xml	{ render :xml =&gt; @user.errors, :status =&gt; :unprocessable_entity }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line71">71</a> 			end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line72">72</a> 		end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line73">73</a> 	end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line74">74</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line75">75</a> 	# DELETE /users/1</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line76">76</a> 	# DELETE /users/1.xml</pre></td>
+            <td><pre><a name="line53">53</a> 				format.html { render :action =&gt; &quot;new&quot; }</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line77">77</a> 	def destroy</pre></td>
+            <td><pre><a name="line54">54</a> 				format.xml	{ render :xml =&gt; @user.errors, :status =&gt; :unprocessable_entity }</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
-            <td><pre><a name="line78">78</a> 		@user = User.find(params[:id])</pre></td>
+          <tr class="inferred">
+            <td><pre><a name="line55">55</a> 			end</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
-            <td><pre><a name="line79">79</a> 		@user.destroy</pre></td>
+          <tr class="inferred">
+            <td><pre><a name="line56">56</a> 		end</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
-            <td><pre><a name="line80">80</a> </pre></td>
+          <tr class="inferred">
+            <td><pre><a name="line57">57</a> 	end</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
-            <td><pre><a name="line81">81</a> 		respond_to do |format|</pre></td>
+          <tr class="inferred">
+            <td><pre><a name="line58">58</a> </pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
-            <td><pre><a name="line82">82</a> 			format.html { redirect_to(users_url) }</pre></td>
+          <tr class="inferred">
+            <td><pre><a name="line59">59</a> 	# PUT /users/1</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
-            <td><pre><a name="line83">83</a> 			format.xml	{ head :ok }</pre></td>
+          <tr class="inferred">
+            <td><pre><a name="line60">60</a> 	# PUT /users/1.xml</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
-            <td><pre><a name="line84">84</a> 		end</pre></td>
+          <tr class="marked">
+            <td><pre><a name="line61">61</a> 	def update</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
-            <td><pre><a name="line85">85</a> 	end</pre></td>
+          <tr class="marked">
+            <td><pre><a name="line62">62</a> 		@user = User.find( params[:id] )</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
-            <td><pre><a name="line86">86</a> end</pre></td>
+          <tr class="inferred">
+            <td><pre><a name="line63">63</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line64">64</a> 		respond_to do |format|</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line65">65</a> 			if @user.update_attributes(params[:user])</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line66">66</a> 				flash[:notice] = 'User was successfully updated.'</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line67">67</a> 				format.html { redirect_to( users_path ) }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line68">68</a> 				format.xml	{ head :ok }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line69">69</a> 			else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line70">70</a> 				flash[:error] = 'Unable to create user.'</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line71">71</a> 				format.html { render :action =&gt; &quot;edit&quot; }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line72">72</a> 				format.xml	{ render :xml =&gt; @user.errors, :status =&gt; :unprocessable_entity }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line73">73</a> 			end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line74">74</a> 		end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line75">75</a> 	end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line76">76</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line77">77</a> 	# DELETE /users/1</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line78">78</a> 	# DELETE /users/1.xml</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line79">79</a> 	def destroy</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line80">80</a> 		@user = User.find(params[:id])</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line81">81</a> 		@user.destroy</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line82">82</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line83">83</a> 		respond_to do |format|</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line84">84</a> 			flash[:notice] = 'User deleted.'</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line85">85</a> 			format.html { redirect_to( users_path ) }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line86">86</a> 			format.xml	{ head :ok }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line87">87</a> 		end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line88">88</a> 	end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line89">89</a> end</pre></td>
           </tr>
         
       </tbody>
     </table>
 
-    <p>Generated on Tue Feb 16 21:37:50 -0600 2010 with <a href="http://github.com/relevance/rcov">rcov 0.9.7.1</a></p>
+    <p>Generated on Tue Feb 16 22:55:44 -0600 2010 with <a href="http://github.com/relevance/rcov">rcov 0.9.7.1</a></p>
 
   </body>
 </html>

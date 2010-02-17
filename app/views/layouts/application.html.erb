@@ -9,18 +9,15 @@
 <body>
 	<div id="header" class="clearfix">
 		<div id="headercontent">
-			<h1><%= link_to '#coding <span>Prime</span>', root_url %></h1>
-			<!--
+			<h1><%= link_to '#codingPrime', root_url %></h1>
 			<p>
 				<span>&lt;blurb&gt;</span>insert witty text here<span>&lt;/blurb&gt;</span>
 			</p>
-			-->
 <%= render 'layouts/nav' %>
 		</div>
 	</div>
 	<div id="container" class="clearfix">
 		<div id="content">
-				
 <%= yield %>
 		</div>
 		<div id="sidebar">
@@ -30,6 +27,9 @@
 		</div>
 	</div>
 	<div id="footer">
+		<p>
+			All content Copyright &copy; 2009-2010 Josh Williams
+		</p>
 	</div>
 </body>
 </html>

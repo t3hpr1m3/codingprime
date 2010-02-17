@@ -46,9 +46,10 @@ class UsersController < ApplicationController
 		respond_to do |format|
 			if @user.save
 				flash[:notice] = 'User was successfully created.'
-				format.html { redirect_to(@user) }
+				format.html { redirect_to( users_path ) }
 				format.xml	{ render :xml => @user, :status => :created, :location => @user }
 			else
+				flash[:error] = 'Error creating user.'
 				format.html { render :action => "new" }
 				format.xml	{ render :xml => @user.errors, :status => :unprocessable_entity }
 			end
@@ -58,14 +59,15 @@ class UsersController < ApplicationController
 	# PUT /users/1
 	# PUT /users/1.xml
 	def update
-		@user = User.find(params[:id])
+		@user = User.find( params[:id] )
 
 		respond_to do |format|
 			if @user.update_attributes(params[:user])
 				flash[:notice] = 'User was successfully updated.'
-				format.html { redirect_to(@user) }
+				format.html { redirect_to( users_path ) }
 				format.xml	{ head :ok }
 			else
+				flash[:error] = 'Unable to create user.'
 				format.html { render :action => "edit" }
 				format.xml	{ render :xml => @user.errors, :status => :unprocessable_entity }
 			end
@@ -79,7 +81,8 @@ class UsersController < ApplicationController
 		@user.destroy
 
 		respond_to do |format|
-			format.html { redirect_to(users_url) }
+			flash[:notice] = 'User deleted.'
+			format.html { redirect_to( users_path ) }
 			format.xml	{ head :ok }
 		end
 	end
