@@ -2,11 +2,26 @@ require 'spec_helper'
 
 describe SessionsController do
 	describe "GET 'new'" do
-		before( :each ) do
-			get :new
+		describe "while logged in" do
+			before( :each ) do
+				@user = Factory.create( :user )
+				controller.should_receive( :current_user ).and_return( @user )
+				get :new
+			end
+
+			it { should set_the_flash }
+			it { should redirect_to( root_url ) }
 		end
 
-		it { should respond_with( :success ) }
+		describe "while not logged in" do
+			before( :each ) do
+				controller.should_receive( :current_user ).and_return( nil )
+				get :new
+			end
+	
+			it { should respond_with( :success ) }
+			it { should render_template( :new ) }
+		end
 	end
 
 	describe "POST 'create'" do
@@ -31,6 +46,30 @@ describe SessionsController do
 
 			it { should redirect_to login_path }
 			it { should set_the_flash.to( { :notice => "Invalid username/password" } ) }
+		end
+	end
+
+	describe "DELETE 'delete'" do
+		describe "while logged in" do
+			before( :each ) do
+				@user = Factory.create( :user )
+				controller.should_receive( :current_user ).and_return( @user )
+				delete :destroy
+			end
+	
+			it { should redirect_to root_path }
+			it { should set_the_flash }
+			it { should set_session( :user_id ).to( nil ) }
+		end
+
+		describe "while not logged in" do
+			before( :each ) do
+				controller.should_receive( :current_user ).and_return( nil )
+				delete :destroy
+			end
+
+			it { should redirect_to root_path }
+			it { should_not set_session( :user_id ) }
 		end
 	end
 end

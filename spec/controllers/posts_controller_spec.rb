@@ -157,16 +157,29 @@ describe PostsController do
 			end
 
 			describe "when submit clicked" do
-				before( :each ) do
-					Post.should_receive( :new ).and_return( @post )
-					@post.should_receive( :save ).and_return( true )
-					post :create, :post => {}
+				describe "and save is successful" do
+					before( :each ) do
+						Post.should_receive( :new ).and_return( @post )
+						@post.should_receive( :save ).and_return( true )
+						post :create, :post => {}
+					end
+	
+					it { should redirect_to( @post.url ) }
+					it { should set_the_flash }
+					it "should set user on @post" do
+						assert_equal @user, @post.user
+					end
 				end
 
-				it { should redirect_to( @post.url ) }
-				it { should set_the_flash }
-				it "should set user on @post" do
-					assert_equal @user, @post.user
+				describe "and save fails" do
+					before( :each ) do
+						Post.should_receive( :new ).and_return( @post )
+						@post.should_receive( :save ).and_return( false )
+						post :create, :post => {}
+					end
+
+					it { should set_the_flash }
+					it { response.should render_template( :new ) } 
 				end
 			end
 		end
@@ -191,14 +204,27 @@ describe PostsController do
 				end
 
 				describe "when submit clicked" do
-					before( :each ) do
-						Post.should_receive( :find ).with( @post.id.to_s ).and_return( @post )
-						@post.should_receive( :update_attributes ).and_return( true )
-						put :update, :id => @post.id, :post => {}
+					describe "and save succeeds" do
+						before( :each ) do
+							Post.should_receive( :find ).with( @post.id.to_s ).and_return( @post )
+							@post.should_receive( :update_attributes ).and_return( true )
+							put :update, :id => @post.id, :post => {}
+						end
+	
+						it { should redirect_to( @post.url ) }
+						it { should set_the_flash }
 					end
 
-					it { should redirect_to( @post.url ) }
-					it { should set_the_flash }
+					describe "and save fails" do
+						before( :each ) do
+							Post.should_receive( :find ).with( @post.id.to_s ).and_return( @post )
+							@post.should_receive( :update_attributes ).and_return( false )
+							put :update, :id => @post.id, :post => {}
+						end
+
+						it { should set_the_flash }
+						it { should render_template( :edit ) }
+					end
 				end
 			end
 

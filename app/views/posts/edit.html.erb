@@ -1,6 +1,9 @@
-<h1>Posts#edit</h1>
+<% if @post_preview -%>
+<%= @post_preview %>
+<% end -%>
 <% form_for( @post ) do |f| %>
 	<fieldset>
+		<%= f.error_messages %>
 		<dl class="formfields clearfix">
 			<dt><%= f.label :title %></dt>
 			<dd><%= f.text_field :title %></dd>

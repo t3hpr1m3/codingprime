@@ -1,4 +1,15 @@
 class SessionsController < ApplicationController
+	def new
+		respond_to do |format|
+			if current_user
+				flash[:error] = 'Already logged in.  Please log out first.'
+				format.html { redirect_to( root_path ) }
+			else
+				format.html
+			end
+		end
+	end
+
 	def create
 		respond_to do |format|
 			if user = User.authenticate( params[:username], params[:password] )
@@ -13,8 +24,10 @@ class SessionsController < ApplicationController
 	end
 
 	def destroy
-		reset_session
-		flash[:notice] = 'Successfully logged out'
+		if current_user
+			reset_session
+			flash[:notice] = 'Successfully logged out'
+		end
 		redirect_to root_path
 	end
 
