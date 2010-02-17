@@ -3,7 +3,7 @@ body {
 	margin: 0;
 	padding: 0;
 	background: #928ebb;
-	font-size: 70%;
+	font-size: 80%;
 	font-family: verdana, arial, sans-serif;
 }
 
@@ -26,6 +26,10 @@ h2 a {
 
 fieldset {
 	border: 0 none;
+}
+
+pre {
+	padding: 10px;
 }
 
 .flash {
@@ -65,7 +69,7 @@ fieldset {
 
 #headercontent {
 	background: #0e0940;
-	width: 800px;
+	width: 900px;
 	margin: 0 auto;
 	padding: 10px 0 .5em 0;
 }
@@ -125,73 +129,18 @@ fieldset {
 	text-decoration: underline;
 	color: #002670;
 }
-/*
-#nav {
-	width: 796px;
-	overflow: hidden;
-	position: absolute;
-	top: 84px;
-	left: 50%;
-	margin: 0 0 0 -398px;
-	padding: 0;
-	border-top: 2px solid #ffffff;
-	border-bottom: 1px solid #000000;
-	background-color: transparent;
-	background: url( '../images/menu_bg.gif' ) top left repeat-x;
-}
-
-#menu {
-	margin: 0;
-	padding: 0;
-	position: relative;
-	left: 50%;
-	float: left;
-	list-style-type: none;
-	text-align: center;
-}
-
-#menu li {
-	display: inline;
-	float: left;
-	position: relative;
-	right: 50%;
-	margin: 0;
-	padding: 0;
-	border-right: 1px solid #000000;
-}
-
-#menu li a {
-	display: block;
-	line-height: 2em;
-	background-color: #ae4600;
-	color: #ffffff;
-	border-left: 1px solid #ffb573;
-	border-right: 1px solid #bf7330;
-	width: 10em;
-	text-align: center;
-	text-decoration: none;
-	font-weight: bold;
-	font-variant: small-caps;
-	background-color: transparent;
-}
-
-#menu li a:hover {
-	background: url( '../images/menu_bg_on.gif' ) top left repeat-x;
-}
-*/
 
 #container {
-	width: 790px;
+	width: 900px;
 	margin: 0 auto;
-	padding: 5px;
 	background-color: #ffffff;
 }
 
 #content {
-	padding: 5px 10px 30px 10px;
+	padding: 5px 30px 30px 30px;
 	width: 600px;
 	float: left;
-	border: 1px solid #90cb84;
+	border-right: 1px solid #90cb84;
 }
 
 #sidebar {
@@ -217,7 +166,6 @@ dl.formfields dt {
 	margin: 0 1em .5em 0;
 	line-height: 2em;
 	font-weight: bold;
-	border: 1px solid blue;
 }
 
 dl.formfields dt label {
@@ -229,11 +177,10 @@ dl.formfields dd {
 	clear: right;
 	line-height: 2em;
 	padding-left: 10em;
-	border: 1px solid red;
 }
 
 #footer {
-	width: 790px;
+	width: 890px;
 	margin: 0 auto;
 	background-color: #9dcb93;
 	padding: 5px;

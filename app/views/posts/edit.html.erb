@@ -1,5 +1,6 @@
-<% if @post_preview -%>
-<%= @post_preview %>
+<%= render :partial => "shared/display_flash" %>
+<% if @preview -%>
+<%= render_text( @post.body ) %>
 <% end -%>
 <% form_for( @post ) do |f| %>
 	<fieldset>
@@ -12,6 +13,7 @@
 		</dl>
 		<p class="centertext">
 			<%= f.submit 'Update' %>
+			<%= f.submit 'Preview', :name => 'preview_button' %>
 		</p>
 	</fieldset>
 <% end %>

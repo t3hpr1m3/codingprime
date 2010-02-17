@@ -13,15 +13,12 @@
 #  user_id       :integer
 #
 
-require 'rdiscount'
-
 class Post < ActiveRecord::Base
 	validates_presence_of :title, :body, :user_id
 	belongs_to :user
 	attr_accessible :title, :body
 
 	before_create :add_slug
-	before_save :render_body
 
 	def year
 		created_at.strftime( '%Y' )
@@ -39,10 +36,6 @@ class Post < ActiveRecord::Base
 		"/#{year}/#{month}/#{day}/#{slug}"
 	end
 
-	def self.render_markdown( text )
-		RDiscount.new( text ).to_html
-	end
-
 	private
 		def add_slug
 			str = self.title
@@ -50,9 +43,5 @@ class Post < ActiveRecord::Base
 			str = str.gsub( /[\s]+/, " " )
 			str = str.gsub( /\s/, "-" )
 			self.slug = str
-		end
-
-		def render_body
-			self.rendered_body = Post.render_markdown( self.body )
 		end
 end

@@ -46,7 +46,7 @@ class PostsController < ApplicationController
 		@post = Post.new( params[:post] )
 
 		if params[:preview_button]
-			@post_preview = Post.render_markdown( @post.body )
+			@preview = true
 			respond_to do |format|
 				format.html { render :action => "new" }
 			end
@@ -72,7 +72,9 @@ class PostsController < ApplicationController
 		@post = Post.find( params[:id] )
 
 		if params[:preview_button]
-			@post_preview = Post.render_markdown( params[:post][:body] )
+			@preview = true
+			@post.title = params[:post][:title]
+			@post.body = params[:post][:body]
 			respond_to do |format|
 				format.html { render :action => "edit" }
 			end
