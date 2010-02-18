@@ -30,3 +30,5 @@ config.action_mailer.delivery_method = :test
   config.gem 'rspec-rails', :version => '>= 1.3.2', :lib => false unless File.directory?(File.join(Rails.root, 'vendor/plugins/rspec-rails'))
   config.gem "factory_girl", :source => "http://gemcutter.org"
   config.gem "rcov"
+  config.gem "thoughtbot-shoulda", :lib => "shoulda", :source => "http://gems.github.com"
+  config.gem "sqlite3-ruby", :lib => "sqlite3"

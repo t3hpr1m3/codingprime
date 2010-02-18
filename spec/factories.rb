@@ -27,3 +27,15 @@ Factory.define :new_post, :class => Post do |p|
 	p.body "This is some test text"
 	p.user nil
 end
+
+Factory.define :comment do |c|
+	c.user_name "comment_user"
+	c.user_site "www.google.com"
+	c.user_email "testuser@foo.com"
+	c.comment_text "My test comment"
+	c.user_ip "127.0.0.1"
+	c.user_agent "Mozilla"
+	c.referrer ""
+	c.approved false
+	c.association :post
+end

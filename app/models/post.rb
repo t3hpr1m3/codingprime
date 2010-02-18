@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100218121927
+# Schema version: 20100218212613
 #
 # Table name: posts
 #
@@ -15,6 +15,7 @@
 class Post < ActiveRecord::Base
 	validates_presence_of :title, :body, :user_id
 	belongs_to :user
+	has_many :comment
 	attr_accessible :title, :body
 
 	before_create :add_slug
