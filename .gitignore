@@ -1,4 +1,6 @@
 log/*.log
+coverage/*
+coverate/**/*
 tmp/*
 tmp/**/*
 doc/api
