@@ -153,7 +153,7 @@ describe PostsController do
 
 				it { should respond_with( :success ) }
 				it { should assign_to( :post ).with( @post ) }
-				it { should assign_to( :post_preview ).with( @new_rendered_body ) }
+				it { should assign_to( :preview ).with( true ) }
 			end
 
 			describe "when submit clicked" do
@@ -200,7 +200,7 @@ describe PostsController do
 
 					it { should respond_with( :success ) }
 					it { should assign_to( :post ).with( @post ) }
-					it { should assign_to( :post_preview ).with( @new_rendered_body ) }
+					it { should assign_to( :preview ).with( true ) }
 				end
 
 				describe "when submit clicked" do

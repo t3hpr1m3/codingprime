@@ -49,7 +49,7 @@ class UsersController < ApplicationController
 				format.html { redirect_to( users_path ) }
 				format.xml	{ render :xml => @user, :status => :created, :location => @user }
 			else
-				flash[:error] = 'Error creating user.'
+				flash.now[:error] = 'Error creating user.'
 				format.html { render :action => "new" }
 				format.xml	{ render :xml => @user.errors, :status => :unprocessable_entity }
 			end
@@ -67,7 +67,7 @@ class UsersController < ApplicationController
 				format.html { redirect_to( users_path ) }
 				format.xml	{ head :ok }
 			else
-				flash[:error] = 'Unable to create user.'
+				flash.now[:error] = 'Unable to create user.'
 				format.html { render :action => "edit" }
 				format.xml	{ render :xml => @user.errors, :status => :unprocessable_entity }
 			end

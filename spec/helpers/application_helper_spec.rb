@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe ApplicationHelper do
-
 	describe "page_title" do
 		describe "with a nil title" do
 			it "should be CodingPrime" do
