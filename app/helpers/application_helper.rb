@@ -26,7 +26,8 @@ module ApplicationHelper
 				nil
 			elsif in_pre
 				lang = language ? language : "ruby"
-				harsh(piece.strip, :lang => lang)
+				logger.debug( "lang => #{lang}" )
+				harsh(piece.strip, { :format => lang, :theme => "spacecadet" } )
 			else
 				concat( markdown( piece, options ) )
 			end

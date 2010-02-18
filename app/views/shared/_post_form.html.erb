@@ -1,0 +1,17 @@
+<% if @preview -%>
+<%= render :partial => "shared/post_preview" %>
+<% end -%>
+<% form_for( @post ) do |f| %>
+	<fieldset>
+		<%= f.error_messages %>
+		<p>
+			<%= f.label :title, 'Title:' %> <%= f.text_field :title, :size => 60 %>
+		</p>
+		<%= f.label :body, 'Body:', :class => 'invisible' %>
+		<%= f.text_area :body, :size => '80x30' %>
+		<p class="centertext">
+			<%= f.submit button_text %>
+			<%= f.submit 'Preview', :id => 'preview_button', :name => 'preview_button' %>
+		</p>
+	</fieldset>
+<% end %>

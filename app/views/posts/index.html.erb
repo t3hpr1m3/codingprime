@@ -1,4 +1,5 @@
 <%= render :partial => 'shared/post', :collection => @posts  %>
 <% if admin? %>
+<hr />
 <%= link_to 'New post', new_post_path %>
 <% end %>

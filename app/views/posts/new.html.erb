@@ -1,21 +1,2 @@
-<%= render :partial => "shared/display_flash" %>
-<% if @preview -%>
-<%= render_text( @post.body ) %>
-<% end -%>
-<% form_for( @post ) do |f| %>
-	<fieldset>
-		<%= f.error_messages %>
-		<dl class="formfields clearfix">
-			<dt><%= f.label :title %></dt>
-			<dd><%= f.text_field :title %></dd>
-			<dt><%= f.label :body %></dt>
-			<dd><%= f.text_area :body %></dd>
-		</dl>
-		<p class="centertext">
-			<%= f.submit 'Create' %>
-			<%= f.submit 'Preview', :name => 'preview_button' %>
-		</p>
-	</fieldset>
-<% end %>
-
+<%= render :partial => "shared/post_form", :locals => { :button_text => 'Create' } %>
 <%= link_to 'Back', posts_path %>

@@ -7,6 +7,9 @@ body {
 	font-family: verdana, arial, sans-serif;
 }
 
+/***********************
+ * Global Styles
+ ***********************/
 a {
 	color: #0e0940;
 }
@@ -32,6 +35,9 @@ pre {
 	padding: 10px;
 }
 
+/***********************
+ * Global Classes
+ ***********************/
 .flash {
 	padding: 1em;
 }
@@ -56,10 +62,42 @@ pre {
 	visibility: hidden;
 }
 
+.invisible {
+	display: none;
+}
+
 .centertext {
 	text-align: center;
 }
 
+dl.formfields {
+	margin: 0;
+}
+dl.formfields dt {
+	float: left;
+	clear: left;
+	width: 7em;
+	position: relative;
+	padding: 0 .5em 0 0;
+	margin: 0 1em .5em 0;
+	line-height: 2em;
+	font-weight: bold;
+}
+
+dl.formfields dt label {
+	line-height: 2em;
+}
+
+dl.formfields dd {
+	margin: 0 0 .5em 0;
+	clear: right;
+	line-height: 2em;
+	padding-left: 8em;
+}
+
+/***********************
+ * Site Structure
+ ***********************/
 #header {
 	background: #dac1a1;
 	font-size: 1.2em;
@@ -149,40 +187,35 @@ pre {
 	margin-left: 5px;
 }
 
-.dateline {
-	font-size: .8em;
-	color: #303030;
-}
-
-dl.formfields {
-	margin: 0;
-}
-dl.formfields dt {
-	float: left;
-	clear: left;
-	width: 7em;
-	position: relative;
-	padding: 0 .5em 0 0;
-	margin: 0 1em .5em 0;
-	line-height: 2em;
-	font-weight: bold;
-}
-
-dl.formfields dt label {
-	line-height: 2em;
-}
-
-dl.formfields dd {
-	margin: 0 0 .5em 0;
-	clear: right;
-	line-height: 2em;
-	padding-left: 10em;
-}
-
 #footer {
 	width: 890px;
 	margin: 0 auto;
 	background-color: #9dcb93;
 	padding: 5px;
 	color: #0e0940;
+}
+
+/***********************
+ * Post Display
+ ***********************/
+.dateline {
+	font-size: .8em;
+	color: #303030;
+}
+
+.code_block_title {
+	font-style: italic;
+}
+
+/***********************
+ * Post Editing
+ ***********************/
+
+.post_preview_header {
+	text-size: 1.2em;
+}
+
+.post_preview {
+	border: 1px solid #000000;
+	padding: .5em;
 }
