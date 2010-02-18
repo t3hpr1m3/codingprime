@@ -26,14 +26,4 @@ Factory.define :new_post, :class => Post do |p|
 	p.sequence(:title) { |n| "Test Post #{n} " }
 	p.body "This is some test text"
 	p.user nil
-	p.rendered_body nil
 end
-#
-#  id            :integer         not null, primary key
-#  title         :string(255)
-#  body          :text
-#  rendered_body :text
-#  slug          :string(255)
-#  created_at    :datetime
-#  updated_at    :datetime
-#  user_id       :integer

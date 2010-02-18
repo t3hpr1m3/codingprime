@@ -143,9 +143,7 @@ describe PostsController do
 		describe "POST 'create'" do
 			describe "when preview clicked" do
 				before( :each ) do
-					@new_body = "A new body with more *emphasized* text."
-					@new_rendered_body = "<p>A new body with more <em>emphasized</em> text.</p>\n"
-					@post = Factory.build( :new_post, :body => @new_body )
+					@post = Factory.build( :new_post )
 					Post.should_receive( :new ).and_return( @post )
 					@post.should_not_receive( :save )
 					post :create, :preview_button => "Preview", :post => {}
