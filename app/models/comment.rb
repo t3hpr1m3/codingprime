@@ -19,5 +19,14 @@
 
 class Comment < ActiveRecord::Base
   belongs_to :post
-  validates_presence_of :comment_text
+  validates_presence_of :user_name, :user_email, :comment_text, :user_ip, :user_agent, :post
+  attr_accessible :user_name, :user_site, :user_email, :comment_text
+
+  def self.approved
+    find( :all, :conditions => 'approved=1', :order => 'created_at DESC' )
+  end
+
+  def self.recent( limit, criteria = nil )
+    find( :all, :limit => limit, :conditions => criteria, :order => 'created_at DESC' )
+  end
 end

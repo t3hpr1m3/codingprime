@@ -2,22 +2,12 @@ class CommentsController < ApplicationController
   # GET /comments
   # GET /comments.xml
   def index
-    @comments = Comment.all
+    @approved_comments = Comment.recent( 20, :approved => true )
+    @rejected_comments = Comment.recent( 100, :approved => false ) if admin?
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @comments }
-    end
-  end
-
-  # GET /comments/1
-  # GET /comments/1.xml
-  def show
-    @comment = Comment.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @comment }
     end
   end
 
