@@ -17,35 +17,35 @@
 require 'spec_helper'
 
 describe User do
-	before(:each) do
-		@user = Factory.create( :user )
-		User.stub( :find ).and_return( @user )
-	end
+  before(:each) do
+    @user = Factory.create( :user )
+    User.stub( :find ).and_return( @user )
+  end
 
-	it "should create a new instance given valid attributes" do
-		@user.should be_valid
-	end
+  it "should create a new instance given valid attributes" do
+    @user.should be_valid
+  end
 
-	it "should be invalid without a username" do
-		@user.username = nil
-		@user.should be_invalid
-	end
+  it "should be invalid without a username" do
+    @user.username = nil
+    @user.should be_invalid
+  end
 
-	it "should be invalid without an email address" do
-		@user.email = nil
-		@user.should be_invalid
-	end
+  it "should be invalid without an email address" do
+    @user.email = nil
+    @user.should be_invalid
+  end
 
-	it "should be invalid without a password" do
-		@user.password = nil
-		@user.should be_invalid
-	end
+  it "should be invalid without a password" do
+    @user.password = nil
+    @user.should be_invalid
+  end
 
-	it "should authenticate with a valid password" do
-		User.authenticate( "testuser", "foobar" ).should eql( @user )
-	end
+  it "should authenticate with a valid password" do
+    User.authenticate( "testuser", "foobar" ).should eql( @user )
+  end
 
-	it "should fail authentication with an invalid password" do
-		User.authenticate( "testuser", "invalid" ).should be_nil
-	end
+  it "should fail authentication with an invalid password" do
+    User.authenticate( "testuser", "invalid" ).should be_nil
+  end
 end

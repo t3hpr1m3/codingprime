@@ -13,35 +13,35 @@
 #
 
 class Post < ActiveRecord::Base
-	validates_presence_of :title, :body, :user_id
-	belongs_to :user
-	has_many :comment
-	attr_accessible :title, :body
+  validates_presence_of :title, :body, :user_id
+  belongs_to :user
+  has_many :comment
+  attr_accessible :title, :body
 
-	before_create :add_slug
+  before_create :add_slug
 
-	def year
-		created_at.strftime( '%Y' )
-	end
+  def year
+    created_at.strftime( '%Y' )
+  end
 
-	def month
-		created_at.strftime( '%0m' )
-	end
+  def month
+    created_at.strftime( '%0m' )
+  end
 
-	def day
-		created_at.strftime( '%0d' )
-	end
+  def day
+    created_at.strftime( '%0d' )
+  end
 
-	def url
-		"/#{year}/#{month}/#{day}/#{slug}"
-	end
+  def url
+    "/#{year}/#{month}/#{day}/#{slug}"
+  end
 
-	private
-		def add_slug
-			str = self.title
-			str = str.gsub( /[^a-zA-Z0-9\s]/, "" ).downcase
-			str = str.gsub( /[\s]+/, " " )
-			str = str.gsub( /\s/, "-" )
-			self.slug = str
-		end
+  private
+    def add_slug
+      str = self.title
+      str = str.gsub( /[^a-zA-Z0-9\s]/, "" ).downcase
+      str = str.gsub( /[\s]+/, " " )
+      str = str.gsub( /\s/, "-" )
+      self.slug = str
+    end
 end
