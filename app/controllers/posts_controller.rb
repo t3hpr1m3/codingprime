@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-	before_filter :authorize, :except => [:index, :show]
+	before_filter :authorize, :except => [:index, :show, :show_by_slug]
 	# GET /posts
 	# GEt /posts.xml
 	def index
@@ -8,14 +8,31 @@ class PostsController < ApplicationController
 		respond_to do |format|
 			format.html #index.html.erb
 			format.xml { render :xml => @posts }
+            format.atom
 		end
 	end
+
+    # GET /2010/02/01/my-post-title
+    # GET /2010/02/01/my-post-title.xml
+    def show_by_slug
+        @post = Post.find_by_slug( params[:slug] )
+
+        if @post.nil?
+          raise ActiveRecord::RecordNotFound
+        end
+
+        @title = @post.title
+
+        respond_to do |format|
+          format.html { render :action => "show" }
+          format.xml { render :xml => @post }
+        end
+    end
 
 	# GET /posts/1
 	# GET /posts/1.xml
 	def show
-		@post = Post.find_by_slug( params[:slug] )
-		raise ActiveRecord::RecordNotFound if @post.nil?
+		@post = Post.find( params[:id] )
 
 		@title = @post.title
 
@@ -36,8 +53,15 @@ class PostsController < ApplicationController
 		end
 	end
 
+    # GET /posts/1/edit
 	def edit
 		@post = Post.find( params[:id] )
+
+        respond_to do |format|
+          format.html
+          format.xml { render :xml => @post }
+          format.json { render :json => @post }
+        end
 	end
 
 	# POST /posts
@@ -49,6 +73,7 @@ class PostsController < ApplicationController
 			@preview = true
 			respond_to do |format|
 				format.html { render :action => "new" }
+                format.xml
 			end
 		else
 			@post.user = current_user

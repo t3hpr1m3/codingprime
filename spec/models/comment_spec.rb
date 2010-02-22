@@ -57,4 +57,28 @@ describe Comment do
     @comment.post = nil
     @comment.should be_invalid
   end
+
+  it "should be approved it it's not spam" do
+    @comment.should_receive( :spam? ).and_return( false )
+    @comment.save
+    @comment.approved.should eql( true )
+  end
+
+  it "should be rejected if it's spam" do
+    @comment.should_receive( :spam? ).and_return( true )
+    @comment.save
+    @comment.approved.should eql( false )
+  end
+
+  it "should be marked as ham if it's approved" do
+    @comment.should_receive( :ham! )
+    @comment.approve
+    @comment.approved.should eql( true )
+  end
+
+  it "should be marked as spam if it's rejected" do
+    @comment.should_receive( :spam! )
+    @comment.reject
+    @comment.approved.should eql( false )
+  end
 end

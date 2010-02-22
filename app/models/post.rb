@@ -15,7 +15,7 @@
 class Post < ActiveRecord::Base
   validates_presence_of :title, :body, :user_id
   belongs_to :user
-  has_many :comment
+  has_many :comments
   attr_accessible :title, :body
 
   before_create :add_slug

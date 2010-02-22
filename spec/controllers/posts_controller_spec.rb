@@ -27,11 +27,11 @@ describe PostsController do
     #
     # SHOW
     #
-    describe "GET 'show'" do
+    describe "GET 'show_by_slug'" do
       describe "with a valid id" do
         before( :each ) do
           Post.stub( :find_by_slug ).with( @post.slug ).and_return( @post )
-          get :show, :slug => @post.slug
+          get :show_by_slug, :year => @post.year, :month => @post.month, :day => @post.day, :slug => @post.slug
         end
 
         it { should respond_with( :success ) }
@@ -42,7 +42,7 @@ describe PostsController do
 
         it "should fail with 404" do
           Post.stub( :find_by_slug ).and_return( nil )
-          lambda { get :show, :slug => "invalid-slug" }.should raise_error ActiveRecord::RecordNotFound
+          lambda { get :show_by_slug, :year => @post.year, :month => @post.month, :day => @post.day, :slug => "invalid-slug" }.should raise_error ActiveRecord::RecordNotFound
         end
       end
     end
@@ -61,7 +61,7 @@ describe PostsController do
     #
     describe "GET 'edit'" do
       it "should raise a 403" do
-        lambda { get :edit }.should raise_error PermissionDenied
+        lambda { get :edit, :id => "1" }.should raise_error PermissionDenied
       end
     end
 

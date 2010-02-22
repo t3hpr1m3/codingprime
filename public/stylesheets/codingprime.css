@@ -74,25 +74,19 @@ dl.formfields {
 	margin: 0;
 }
 dl.formfields dt {
-	float: left;
-	clear: left;
-	width: 7em;
-	position: relative;
 	padding: 0 .5em 0 0;
-	margin: 0 1em .5em 0;
+	margin: 1em 0 0 0;
 	line-height: 2em;
-	font-weight: bold;
 }
 
 dl.formfields dt label {
 	line-height: 2em;
+	font-weight: bold;
 }
 
 dl.formfields dd {
-	margin: 0 0 .5em 0;
-	clear: right;
+	margin: 0;
 	line-height: 2em;
-	padding-left: 8em;
 }
 
 /***********************

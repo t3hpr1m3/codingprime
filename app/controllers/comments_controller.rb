@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
   # GET /comments.xml
   def index
     @approved_comments = Comment.recent( 20, :approved => true )
-    @rejected_comments = Comment.recent( 100, :approved => false ) if admin?
+    @rejected_comments = Comment.recent( 20, :approved => false ) if admin?
 
     respond_to do |format|
       format.html # index.html.erb

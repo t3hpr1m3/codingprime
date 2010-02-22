@@ -15,6 +15,7 @@ module ApplicationHelper
       <code lang='[A-Za-z0-9_-]+'>|<\/code>)/)
     in_pre = false
     language = nil
+    output = ""
     text_pieces.collect do |piece|
       if piece =~ /^<code( lang=(["'])?(.*)\2)?>$/
         language = $3
@@ -25,17 +26,25 @@ module ApplicationHelper
         language = nil
         nil
       elsif in_pre
-        lang = language ? language : "ruby"
-        logger.debug( "lang => #{lang}" )
-        harsh(piece.strip, { :format => lang, :theme => "spacecadet" } )
+        if options[:escape_harsh]
+          "<pre>" + h( piece.strip ) + "</pre>"
+        else
+          lang = language ? language : "ruby"
+          logger.debug( "lang => #{lang}" )
+          harsh( piece.strip, { :format => lang, :theme => "spacecadet" } )
+        end
       else
-        concat( markdown( piece, options ) )
+        #concat( markdown( piece, options ) )
+        #output = output + markdown( piece, options )
+        render_markdown( piece, options )
       end
     end
-    ""
+    #output
+    #nil
+    #""
   end
 
-  def markdown( text, options = {} )
+  def render_markdown( text, options = {} )
     if options[:strip]
       RDiscount.new( strip_tags( text.strip ) ).to_html
     else
