@@ -1,4 +1,4 @@
-<% form_for( @post, @comment ) do |f| %>
+<% form_for [@post, Comment.new] do |f| %>
 	<fieldset>
 		<%= f.error_messages %>
 		<dl class="formfields">
@@ -13,7 +13,7 @@
 		</dl>
 		<p class="centertext">
 			<%= f.submit 'Preview', :id => 'preview_button', :name => 'preview_button' %>
-			<%= f.submit button_text %>
+			<%= f.submit 'Submit' %>
 		</p>
 	</fieldset>
 <% end %>

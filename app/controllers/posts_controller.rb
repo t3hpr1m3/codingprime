@@ -9,6 +9,7 @@ class PostsController < ApplicationController
 			format.html #index.html.erb
 			format.xml { render :xml => @posts }
             format.atom
+			format.json { render :json => @posts }
 		end
 	end
 

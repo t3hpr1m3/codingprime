@@ -204,7 +204,6 @@ dl.formfields dd {
 /***********************
  * Post Editing
  ***********************/
-
 .post_preview_header {
 	text-size: 1.2em;
 }
@@ -212,4 +211,14 @@ dl.formfields dd {
 .post_preview {
 	border: 1px solid #000000;
 	padding: .5em;
+}
+
+/***********************
+ * Post Editing
+ ***********************/
+.comment {
+	border: 1px solid #cccccc;
+	background-color: #e0e0e0;
+	padding: 1em;
+	margin-bottom: 20px;
 }

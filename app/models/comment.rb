@@ -31,6 +31,12 @@ class Comment < ActiveRecord::Base
   validates_presence_of :user_name, :user_email, :comment_text, :user_ip, :user_agent, :post
   attr_accessible :user_name, :user_site, :user_email, :comment_text
 
+  def request=( request )
+    self.user_ip = request.remote_ip
+	self.user_agent = request.env['HTTP_USER_AGENT']
+	self.referrer = request.env['HTTP_REFERER']
+  end
+
   def check_spam
     self.approved = !spam?
   end
