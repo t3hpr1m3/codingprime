@@ -13,6 +13,17 @@ class CommentsController < ApplicationController
     end
   end
 
+  # GET /comments/1
+  # GET /comments/1.xml
+  def show
+    @comment = Comment.find( params[:id] )
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @comment }
+    end
+  end
+
   # GET /comments/new
   # GET /comments/new.xml
   def new

@@ -28,6 +28,10 @@ describe Comment do
     @comment.should be_valid
   end
 
+  it "should save" do
+    @comment.save!
+  end
+
   it "should be invalid without text" do
     @comment.comment_text = ""
     @comment.should be_invalid
