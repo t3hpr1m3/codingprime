@@ -20,67 +20,44 @@
 require 'spec_helper'
 
 describe Comment do
-  before(:each) do
-    @comment = Factory.build( :comment )
+  before( :each ) do
+    Factory( :comment )
   end
 
-  it "should be valid" do
-    @comment.should be_valid
-  end
-
-  it "should save" do
-    @comment.save!
-  end
-
-  it "should be invalid without text" do
-    @comment.comment_text = ""
-    @comment.should be_invalid
-  end
-
-  it "should be invalid without a user_name" do
-    @comment.user_name = ""
-    @comment.should be_invalid
-  end
-
-  it "should be invalid without an email address" do
-    @comment.user_email = ""
-    @comment.should be_invalid
-  end
-
-  it "should be invalid without an IP" do
-    @comment.user_ip = ""
-    @comment.should be_invalid
-  end
-
-  it "should be invalid without a user_agent" do
-    @comment.user_agent = ""
-    @comment.should be_invalid
-  end
-
-  it "should be invalid without a post" do
-    @comment.post = nil
-    @comment.should be_invalid
-  end
+  #it { should validate_presence_of( :comment_text ) }
+  #it { should validate_presence_of( :user_name ) }
+  #it { should validate_presence_of( :user_email ) }
+  #it { should validate_presence_of( :user_ip ) }
+  #it { should validate_presence_of( :user_agent ) }
+  #it { should validate_presence_of( :post ) }
 
   it "should be approved it it's not spam" do
+    @comment = Factory.build( :comment )
+    @comment.should be_valid
     @comment.should_receive( :spam? ).and_return( false )
-    @comment.save
+    @comment.save!
     @comment.approved.should eql( true )
   end
 
   it "should be rejected if it's spam" do
+    @comment = Factory.build( :comment )
+    @comment.should be_valid
     @comment.should_receive( :spam? ).and_return( true )
-    @comment.save
+    @comment.save!
     @comment.approved.should eql( false )
   end
 
   it "should be marked as ham if it's approved" do
+    @comment = Factory.build( :comment )
+    @comment.should be_valid
     @comment.should_receive( :ham! )
     @comment.approve
     @comment.approved.should eql( true )
   end
 
   it "should be marked as spam if it's rejected" do
+    @comment = Factory.build( :comment )
+    @comment.should be_valid
     @comment.should_receive( :spam! )
     @comment.reject
     @comment.approved.should eql( false )

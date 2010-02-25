@@ -1,31 +1,37 @@
-Factory.define :user do |u|
-  u.sequence(:username) { |n| "user#{n}" }
-  u.password "foobar"
-  u.password_confirmation { |f| f.password }
-  u.sequence(:email) { |n| "foo#{n}@bar.com" }
-  u.name "Test User"
-  u.is_admin false
+Factory.sequence :username do |n|
+  "user#{n}"
+end
+
+Factory.sequence :email do |n|
+  "foo#{n}@bar.com"
+end
+
+Factory.sequence :blog_title do |n|
+  "Test Post #{n}"
+end
+
+Factory.define :user do |f|
+  f.username { Factory.next( :username ) }
+  f.password "foobar"
+  f.password_confirmation { |u| u.password }
+  f.email { Factory.next( :email ) }
+  f.name "Test User"
+  f.is_admin false
 end
 
 Factory.define :admin, :class => User do |u|
-  u.username "admin"
+  u.username { Factory.next( :username ) }
   u.password "foobar"
   u.password_confirmation { |f| f.password }
-  u.email "fooadmin@bar.com"
+  u.email { Factory.next( :email ) }
   u.name "Test User"
   u.is_admin true
 end
 
 Factory.define :post do |p|
-  p.sequence(:title) { |n| "Test Post #{n} " }
+  p.title { Factory.next( :blog_title ) }
   p.body "This is some test text"
   p.association :user
-end
-
-Factory.define :new_post, :class => Post do |p|
-  p.sequence(:title) { |n| "Test Post #{n} " }
-  p.body "This is some test text"
-  p.user nil
 end
 
 Factory.define :comment do |c|

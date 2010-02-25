@@ -99,8 +99,9 @@ class PostsController < ApplicationController
 
 		if params[:preview_button]
 			@preview = true
-			@post.title = params[:post][:title]
-			@post.body = params[:post][:body]
+            @post.attributes= params[:post]
+			#@post.title = params[:post][:title]
+			#@post.body = params[:post][:body]
 			respond_to do |format|
 				format.html { render :action => "edit" }
 			end

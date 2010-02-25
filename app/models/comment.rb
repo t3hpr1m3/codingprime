@@ -39,6 +39,7 @@ class Comment < ActiveRecord::Base
 
   def check_spam
     self.approved = !spam?
+    true
   end
 
   def approve

@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
   attr_accessor       :password
   attr_accessible       :name, :email, :is_admin, :password
   validates_presence_of   :username, :password, :email
+  validates_uniqueness_of :username, :email
   validates_confirmation_of :password
   before_save         :encrypt_password
 
