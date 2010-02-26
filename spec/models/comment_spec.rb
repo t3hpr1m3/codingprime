@@ -34,7 +34,7 @@ describe Comment do
   it "should be approved it it's not spam" do
     @comment = Factory.build( :comment )
     @comment.should be_valid
-    @comment.should_receive( :spam? ).and_return( false )
+    @comment.expects( :spam? ).returns( false )
     @comment.save!
     @comment.approved.should eql( true )
   end
@@ -42,7 +42,7 @@ describe Comment do
   it "should be rejected if it's spam" do
     @comment = Factory.build( :comment )
     @comment.should be_valid
-    @comment.should_receive( :spam? ).and_return( true )
+    @comment.expects( :spam? ).returns( true ).once
     @comment.save!
     @comment.approved.should eql( false )
   end
@@ -50,7 +50,7 @@ describe Comment do
   it "should be marked as ham if it's approved" do
     @comment = Factory.build( :comment )
     @comment.should be_valid
-    @comment.should_receive( :ham! )
+    @comment.expects( :ham! ).once
     @comment.approve
     @comment.approved.should eql( true )
   end
@@ -58,7 +58,7 @@ describe Comment do
   it "should be marked as spam if it's rejected" do
     @comment = Factory.build( :comment )
     @comment.should be_valid
-    @comment.should_receive( :spam! )
+    @comment.expects( :spam! ).once
     @comment.reject
     @comment.approved.should eql( false )
   end

@@ -11,6 +11,7 @@
 #
 
 class Category < ActiveRecord::Base
+  include SlugExtensions
   has_many :posts
   validates_presence_of :name
   validates_uniqueness_of :name
@@ -20,11 +21,7 @@ class Category < ActiveRecord::Base
   private
 
   def add_slug
-    str = self.name
-    str = str.gsub( /[^a-zA-Z0-9\s]/, "" ).downcase
-    str = str.gsub( /[\s]+/, " " )
-    str = str.gsub( /\s/, "-" )
-    self.slug = str
+    self.slug = generate_slug( self.name )
   end
 end
 

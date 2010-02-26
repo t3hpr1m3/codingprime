@@ -14,6 +14,7 @@
 #
 
 class Post < ActiveRecord::Base
+  include SlugExtensions
   validates_presence_of :title, :body, :user_id
   belongs_to :user
   belongs_to :category
@@ -48,10 +49,6 @@ class Post < ActiveRecord::Base
 
   private
     def add_slug
-      str = self.title
-      str = str.gsub( /[^a-zA-Z0-9\s]/, "" ).downcase
-      str = str.gsub( /[\s]+/, " " )
-      str = str.gsub( /\s/, "-" )
-      self.slug = str
+      self.slug = generate_slug( self.title )
     end
 end

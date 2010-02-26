@@ -28,12 +28,12 @@ describe User do
   it { should validate_uniqueness_of( :email ) }
 
   it "should authenticate with a valid password" do
-    User.stub!( :find ).and_return( @user )
+    User.stubs( :find ).returns( @user )
     User.authenticate( @user.username, @user.password ).should eql( @user )
   end
 
   it "should fail authentication with an invalid password" do
-    User.stub!( :find ).and_return( @user )
+    User.stubs( :find ).returns( @user )
     User.authenticate( @user.username, 'invalid' ).should be_nil
   end
 end
