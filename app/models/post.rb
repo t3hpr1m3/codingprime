@@ -1,20 +1,22 @@
 # == Schema Information
-# Schema version: 20100218212613
+# Schema version: 20100226030058
 #
 # Table name: posts
 #
-#  id         :integer         not null, primary key
-#  title      :string(255)
-#  body       :text
-#  slug       :string(255)
-#  created_at :datetime
-#  updated_at :datetime
-#  user_id    :integer
+#  id          :integer         not null, primary key
+#  title       :string(255)
+#  body        :text
+#  slug        :string(255)
+#  created_at  :datetime
+#  updated_at  :datetime
+#  user_id     :integer
+#  category_id :integer
 #
 
 class Post < ActiveRecord::Base
   validates_presence_of :title, :body, :user_id
   belongs_to :user
+  belongs_to :category
   has_many :comments
   attr_accessible :title, :body
 

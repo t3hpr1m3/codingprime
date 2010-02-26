@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100218212613
+# Schema version: 20100226030058
 #
 # Table name: comments
 #
@@ -24,12 +24,12 @@ describe Comment do
     Factory( :comment )
   end
 
-  #it { should validate_presence_of( :comment_text ) }
-  #it { should validate_presence_of( :user_name ) }
-  #it { should validate_presence_of( :user_email ) }
-  #it { should validate_presence_of( :user_ip ) }
-  #it { should validate_presence_of( :user_agent ) }
-  #it { should validate_presence_of( :post ) }
+  it { should validate_presence_of( :comment_text ) }
+  it { should validate_presence_of( :user_name ) }
+  it { should validate_presence_of( :user_email ) }
+  it { should validate_presence_of( :user_ip ) }
+  it { should validate_presence_of( :user_agent ) }
+  it { should belong_to( :post ) }
 
   it "should be approved it it's not spam" do
     @comment = Factory.build( :comment )

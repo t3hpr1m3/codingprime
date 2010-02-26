@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :categories
+
   map.resources :posts do |post|
     post.resources :comments, :except => [:index, :update, :destroy]
   end

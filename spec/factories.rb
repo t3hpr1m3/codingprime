@@ -10,6 +10,10 @@ Factory.sequence :blog_title do |n|
   "Test Post #{n}"
 end
 
+Factory.sequence :category_name do |n|
+  "Text Category #{n}"
+end
+
 Factory.define :user do |f|
   f.username { Factory.next( :username ) }
   f.password "foobar"
@@ -28,10 +32,16 @@ Factory.define :admin, :class => User do |u|
   u.is_admin true
 end
 
+Factory.define :category do |c|
+  c.name { Factory.next( :category_name ) }
+  c.slug "test-category"
+end
+
 Factory.define :post do |p|
   p.title { Factory.next( :blog_title ) }
   p.body "This is some test text"
   p.association :user
+  p.association :category
 end
 
 Factory.define :comment do |c|
