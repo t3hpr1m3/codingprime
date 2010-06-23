@@ -81,8 +81,7 @@ describe PostsController do
       describe "with an invalid slug" do
 
         it "should fail with 404" do
-          Post.stub!( :find_by_slug ).and_return( nil )
-          get :show_by_slug , :year => 2010, :month => 02, :day => 01, :slug => 'test-title'
+	  Post.stubs( :find_by_slug ).returns( nil )
           lambda { get :show_by_slug, :year => 2010, :month => 02, :day => 01, :slug => "invalid-slug" }.should raise_error ActiveRecord::RecordNotFound
         end
       end
