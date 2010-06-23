@@ -2,7 +2,9 @@ body {
 	height: 100%;
 	margin: 0;
 	padding: 0;
-	background: #928ebb;
+	/*
+	background: #6996d3;
+	*/
 	font-size: 80%;
 	font-family: verdana, arial, sans-serif;
 }
@@ -99,17 +101,21 @@ dl.formfields dd {
  * Site Structure
  ***********************/
 #header {
-	background: #dac1a1;
+	/*
+	background: #160773;
+	*/
 	font-size: 1.2em;
 	font-family: "Trebuchet MS", "Lucida Grande", arial, helvetica, sans-serif;
-	border-bottom: 10px solid #7b6b59;
+	border-bottom: 10px solid #bfa130;
 }
 
 #headercontent {
-	background: #0e0940;
 	width: 900px;
 	margin: 0 auto;
 	padding: 10px 0 .5em 0;
+	background-color: #05316d;
+	border-right: 1px solid #000000;
+	border-left: 1px solid #000000;
 }
 
 #headercontent h1 {
@@ -119,7 +125,7 @@ dl.formfields dd {
 #headercontent h1 a {
 	color: #ffffff;
 	text-decoration: none;
-	font-family: courier, times, serif;
+	font-family: helvetica, times, serif;
 }
 
 #headercontent h1 a span {
@@ -140,7 +146,7 @@ dl.formfields dd {
 #headercontent p span {
 	font-weight: bold;
 	font-style: normal;
-	color: #5c360c;
+	color: #ffe273;
 }
 
 #nav {
@@ -172,6 +178,8 @@ dl.formfields dd {
 	width: 900px;
 	margin: 0 auto;
 	background-color: #ffffff;
+	border-right: 1px solid #000000;
+	border-left: 1px solid #000000;
 }
 
 #content {
@@ -190,9 +198,12 @@ dl.formfields dd {
 #footer {
 	width: 890px;
 	margin: 0 auto;
-	background-color: #9dcb93;
+	background-color: #05316d;
 	padding: 5px;
-	color: #0e0940;
+	color: #ffffff;
+	border-right: 1px solid #000000;
+	border-left: 1px solid #000000;
+	border-bottom: 1px solid #000000;
 }
 
 /***********************
