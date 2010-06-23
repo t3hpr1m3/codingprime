@@ -28,14 +28,8 @@ config.action_mailer.delivery_method = :test
 # config.active_record.schema_format = :sql
 
   config.gem 'rspec-rails', :version => '>= 1.3.2', :lib => false unless File.directory?(File.join(Rails.root, 'vendor/plugins/rspec-rails'))
-<<<<<<< HEAD
-  config.gem "factory_girl", :source => "http://gemcutter.org"
-  config.gem "rcov"
-  config.gem "sqlite3-ruby", :lib => 'sqlite3'
-=======
   config.gem 'factory_girl', :source => 'http://gemcutter.org'
   config.gem 'rcov'
   config.gem 'thoughtbot-shoulda', :lib => 'shoulda', :source => 'http://gems.github.com'
   config.gem 'sqlite3-ruby', :lib => 'sqlite3'
   config.gem 'mocha'
->>>>>>> e86d1c6c557cbbf511087523224bde4f194ecd2b
