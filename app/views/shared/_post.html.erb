@@ -3,6 +3,9 @@
 				<span class="dateline"><%= post.created_at.to_s( :long_ordinal ) %></span>
 				<%= render_text( post.body ) %>
 				<% if admin? %>
-				<%= link_to 'Edit', edit_post_path( post ) %>
+					<%= link_to 'Edit', edit_post_path( post ) %>
 				<% end %>
+				<p>
+					Posted by <%= link_to post.user.name, root_url %>
+				</p>
 			<% end %>

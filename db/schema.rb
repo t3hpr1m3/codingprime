@@ -9,16 +9,37 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100215170027) do
+ActiveRecord::Schema.define(:version => 20100226030058) do
+
+  create_table "categories", :force => true do |t|
+    t.string   "name"
+    t.string   "slug"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "comments", :force => true do |t|
+    t.string   "user_name"
+    t.string   "user_site"
+    t.string   "user_email"
+    t.text     "comment_text"
+    t.string   "user_ip"
+    t.string   "user_agent"
+    t.string   "referrer"
+    t.integer  "post_id"
+    t.boolean  "approved"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "posts", :force => true do |t|
     t.string   "title"
     t.text     "body"
-    t.text     "rendered_body"
     t.string   "slug"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.integer  "category_id"
   end
 
   create_table "users", :force => true do |t|

@@ -1,0 +1,6 @@
+			<% div_for comment do %>
+				<strong><%= comment.user_site ? link_to( comment.user_name, comment.user_site ) : comment.user_name %></strong>
+				<%=h comment.created_at.to_s( :post_date ) %>
+				<%= render_text( comment.comment_text ) %>
+			<% end %>
+

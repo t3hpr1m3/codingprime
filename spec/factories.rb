@@ -1,39 +1,57 @@
-Factory.define :user do |u|
-	u.sequence(:username) { |n| "user#{n}" }
-	u.password "foobar"
-	u.password_confirmation { |f| f.password }
-	u.sequence(:email) { |n| "foo#{n}@bar.com" }
-	u.name "Test User"
-	u.is_admin false
+Factory.sequence :username do |n|
+  "user#{n}"
+end
+
+Factory.sequence :email do |n|
+  "foo#{n}@bar.com"
+end
+
+Factory.sequence :blog_title do |n|
+  "Test Post #{n}"
+end
+
+Factory.sequence :category_name do |n|
+  "Text Category #{n}"
+end
+
+Factory.define :user do |f|
+  f.username { Factory.next( :username ) }
+  f.password "foobar"
+  f.password_confirmation { |u| u.password }
+  f.email { Factory.next( :email ) }
+  f.name "Test User"
+  f.is_admin false
 end
 
 Factory.define :admin, :class => User do |u|
-	u.username "admin"
-	u.password "foobar"
-	u.password_confirmation { |f| f.password }
-	u.email "fooadmin@bar.com"
-	u.name "Test User"
-	u.is_admin true
+  u.username { Factory.next( :username ) }
+  u.password "foobar"
+  u.password_confirmation { |f| f.password }
+  u.email { Factory.next( :email ) }
+  u.name "Test User"
+  u.is_admin true
+end
+
+Factory.define :category do |c|
+  c.name { Factory.next( :category_name ) }
+  c.slug "test-category"
 end
 
 Factory.define :post do |p|
-	p.sequence(:title) { |n| "Test Post #{n} " }
-	p.body "This is some test text"
-	p.association :user
+  p.title { Factory.next( :blog_title ) }
+  p.body "This is some test text"
+  p.association :user
+  p.association :category
 end
 
-Factory.define :new_post, :class => Post do |p|
-	p.sequence(:title) { |n| "Test Post #{n} " }
-	p.body "This is some test text"
-	p.user nil
-	p.rendered_body nil
+Factory.define :comment do |c|
+  c.user_name "comment_user"
+  c.user_site "www.google.com"
+  c.user_email "testuser@foo.com"
+  c.comment_text "My test comment"
+  c.user_ip "127.0.0.1"
+  c.user_agent "Mozilla"
+  c.referrer ""
+  c.approved false
+  c.association :post
 end
-#
-#  id            :integer         not null, primary key
-#  title         :string(255)
-#  body          :text
-#  rendered_body :text
-#  slug          :string(255)
-#  created_at    :datetime
-#  updated_at    :datetime
-#  user_id       :integer

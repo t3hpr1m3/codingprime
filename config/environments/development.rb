@@ -15,5 +15,9 @@ config.action_controller.perform_caching             = false
 
 # Don't care if the mailer can't send
 config.action_mailer.raise_delivery_errors = false
+<<<<<<< HEAD
 
 config.gem "sqlite3-ruby", :lib => 'sqlite3'
+=======
+config.gem "sqlite3-ruby", :lib => "sqlite3"
+>>>>>>> e86d1c6c557cbbf511087523224bde4f194ecd2b

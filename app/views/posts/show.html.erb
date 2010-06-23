@@ -1,1 +1,8 @@
 <%= render :partial => 'shared/post', :collection => [@post] %>
+<hr />
+<%= render :partial => 'shared/comment', :collection => @post.approved_comments %>
+<%= render :partial => 'shared/comment_form' %>
+<% if admin? -%>
+<h3>Rejected Comments</h3>
+<%= render :partial => 'shared/comment', :collection => @post.rejected_comments %>
+<% end -%>

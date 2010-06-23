@@ -39,8 +39,9 @@ module Harsh
         text = capture(&block)
         text = text.sub(/\n/,"") if text =~ /^(\s*)\n/
       end
-      concat(Uv.parse( text, "xhtml", opts[:format].to_s, opts[:lines], opts[:theme].to_s))
-      ""
+      #concat(Uv.parse( text, "xhtml", opts[:format].to_s, opts[:lines], opts[:theme].to_s))
+      Uv.parse( text, "xhtml", opts[:format].to_s, opts[:lines], opts[:theme].to_s)
+      #""
     end
     alias_method :harsh, :syntax_highlight
   end
