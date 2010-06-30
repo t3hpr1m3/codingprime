@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe PostsController do
+describe Blog::PostsController do
 #  def mock_post( stubs = nil )
 #    args = {
 #      :title => 'Test Post',
@@ -37,7 +37,7 @@ describe PostsController do
       before( :each ) do
         @posts = mock()
         Post.stubs( :find ).with( :all ).returns( @posts )
-        get :index
+        get :index, {:subdomains => ["blog"]}
       end
 
       it { should respond_with( :success ) }
@@ -53,7 +53,8 @@ describe PostsController do
         before( :each ) do
           @post = mock( 'post', :title => 'Test Title' )
           Post.stubs( :find ).returns( @post )
-          get :show, :id => 1
+          #get :show, :id => 1
+          get :show, {:id => 1, :subdomains => ["blog"]}
         end
 
         it { should respond_with( :success ) }

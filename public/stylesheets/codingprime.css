@@ -100,13 +100,16 @@ dl.formfields dd {
 	*/
 	font-size: 1.2em;
 	font-family: "Trebuchet MS", "Lucida Grande", arial, helvetica, sans-serif;
+	/*
 	border-bottom: 10px solid #bfa130;
+	*/
 }
 
 #headercontent {
 	width: 900px;
+	height: 100px;
 	margin: 0 auto;
-	padding: 10px 0 .5em 0;
+	padding: 10px 0 0 0;
 	background-color: #05316d;
 	border-right: 1px solid #000000;
 	border-left: 1px solid #000000;
@@ -145,15 +148,18 @@ dl.formfields dd {
 
 #nav {
 	position: absolute;
-	bottom: 0;
+	top: 100px;
+	background-color: #bfa130;
 	text-decoration: none;
-	margin: .2em 1em;
-	padding: 0;
-	display: none;
+	padding: 0 0 0 10px;
+	margin: 0;
+	width: 890px;
+	height: 1.5em;
 }
 
 #nav li {
 	display: inline-block;
+	float: left;
 	width: 5em;
 }
 
@@ -171,6 +177,7 @@ dl.formfields dd {
 #container {
 	width: 900px;
 	margin: 0 auto;
+	padding: 1.5em 0 0 0;
 	background-color: #ffffff;
 	border-right: 1px solid #000000;
 	border-left: 1px solid #000000;

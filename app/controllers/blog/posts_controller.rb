@@ -1,10 +1,9 @@
-class PostsController < ApplicationController
+class Blog::PostsController < ApplicationController
 	before_filter :authorize, :except => [:index, :show, :show_by_slug]
 	# GET /posts
 	# GEt /posts.xml
 	def index
 		@posts = Post.all
-
 		respond_to do |format|
 			format.html #index.html.erb
 			format.xml { render :xml => @posts }
