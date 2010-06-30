@@ -33,13 +33,7 @@ class Blog::PostsController < ApplicationController
 	# GET /posts/1.xml
 	def show
 		@post = Post.find( params[:id] )
-
-		@title = @post.title
-
-		respond_to do |format|
-			format.html # show.html.erb
-			format.xml { render :xml => @post }
-		end
+		redirect_to @post.url, :status => 301
 	end
 
 	# GET /posts/new
