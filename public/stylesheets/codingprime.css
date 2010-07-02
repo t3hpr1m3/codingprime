@@ -221,6 +221,7 @@ dl.formfields dd {
 	width: 160px;
 	float: left;
 	margin-left: 5px;
+    padding-top: 1em;
 }
 
 #footer {
