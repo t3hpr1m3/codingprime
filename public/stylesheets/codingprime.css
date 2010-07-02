@@ -72,6 +72,14 @@ pre {
 	text-align: center;
 }
 
+.fright {
+  float: right;
+}
+
+.fleft {
+  float: left;
+}
+
 dl.formfields {
 	margin: 0;
 }
@@ -103,6 +111,7 @@ dl.formfields dd {
 	/*
 	border-bottom: 10px solid #bfa130;
 	*/
+    display: none;
 }
 
 #headercontent {
@@ -148,39 +157,57 @@ dl.formfields dd {
 
 #nav {
 	position: absolute;
-	top: 100px;
-	background-color: #bfa130;
-	text-decoration: none;
-	padding: 0 0 0 10px;
-	margin: 0;
-	width: 890px;
-	height: 1.5em;
+	top: 0;
+	background-color: #000000;
+    width: 100%;
 }
 
-#nav li {
+#nav span a {
+  color: #ffffff;
+  text-decoration: none;
+  font-style: italic;
+  line-height: 2em;
+  margin-right: 2em;
+}
+
+#nav ul {
+	text-decoration: none;
+	margin: 0;
+    width: 900px;
+    margin: 0 auto;
+    line-height: 2em;
+}
+
+#nav ul li {
 	display: inline-block;
 	float: left;
 	width: 5em;
+    color: #ffe273;
+    font-variant: small-caps;
 }
 
-#nav li a {
+#nav ul li a {
 	text-decoration: none;
 	color: #ffffff;
+    /*
 	font-variant: small-caps;
+    */
 }
 
-#nav li a:hover {
+#nav ul li a:hover {
 	text-decoration: underline;
 	color: #002670;
 }
 
 #container {
 	width: 900px;
-	margin: 0 auto;
-	padding: 1.5em 0 0 0;
+	margin: 2em auto;
+	padding: 0;
 	background-color: #ffffff;
+    /*
 	border-right: 1px solid #000000;
 	border-left: 1px solid #000000;
+    */
 }
 
 #content {
@@ -197,14 +224,24 @@ dl.formfields dd {
 }
 
 #footer {
+  /*
 	width: 890px;
 	margin: 0 auto;
 	background-color: #05316d;
+    */
+  background-color: #000000;
 	padding: 5px;
 	color: #ffffff;
+    /*
 	border-right: 1px solid #000000;
 	border-left: 1px solid #000000;
 	border-bottom: 1px solid #000000;
+    */
+}
+
+#footer p {
+  width: 890px;
+  margin: 0 auto;
 }
 
 /***********************
