@@ -90,6 +90,7 @@ class CommentsController < ApplicationController
 
   private
   def get_post
-    @post = Post.find( params[:post_id] )
+    @post = Post.find_by_slug( params[:post_id] )
+    raise ActiveRecord::RecordNotFound if @post.nil?
   end
 end
