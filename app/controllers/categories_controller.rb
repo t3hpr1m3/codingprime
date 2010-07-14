@@ -1,4 +1,12 @@
 class CategoriesController < ApplicationController
+  before_filter :authorize, :except => [:show]
+  before_filter :get_category_by_slug, :except => [:index, :new, :create]
+
+  def get_category_by_slug
+    @category = Category.find_by_slug( params[:id] )
+    raise ActiveRecord::RecordNotFound if @category.nil?
+  end
+
   # GET /categories
   # GET /categories.xml
   def index
@@ -13,7 +21,7 @@ class CategoriesController < ApplicationController
   # GET /categories/1
   # GET /categories/1.xml
   def show
-    @category = Category.find(params[:id])
+    @title = @category.name
 
     respond_to do |format|
       format.html # show.html.erb
@@ -34,7 +42,11 @@ class CategoriesController < ApplicationController
 
   # GET /categories/1/edit
   def edit
-    @category = Category.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.xml { render :xml => @category }
+      format.json { render :json => @category }
+    end
   end
 
   # POST /categories

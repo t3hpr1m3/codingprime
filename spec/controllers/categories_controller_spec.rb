@@ -1,131 +1,151 @@
 require 'spec_helper'
 
-#describe CategoriesController do
-#
-#  def mock_category(stubs={})
-#    @mock_category ||= mock_model(Category, stubs)
-#  end
-#
-#  describe "GET index" do
-#    it "assigns all categories as @categories" do
-#      Category.stub(:find).with(:all).and_return([mock_category])
-#      get :index
-#      assigns[:categories].should == [mock_category]
-#    end
-#  end
-#
-#  describe "GET show" do
-#    it "assigns the requested category as @category" do
-#      Category.stub(:find).with("37").and_return(mock_category)
-#      get :show, :id => "37"
-#      assigns[:category].should equal(mock_category)
-#    end
-#  end
-#
-#  describe "GET new" do
-#    it "assigns a new category as @category" do
-#      Category.stub(:new).and_return(mock_category)
-#      get :new
-#      assigns[:category].should equal(mock_category)
-#    end
-#  end
-#
-#  describe "GET edit" do
-#    it "assigns the requested category as @category" do
-#      Category.stub(:find).with("37").and_return(mock_category)
-#      get :edit, :id => "37"
-#      assigns[:category].should equal(mock_category)
-#    end
-#  end
-#
-#  describe "POST create" do
-#
-#    describe "with valid params" do
-#      it "assigns a newly created category as @category" do
-#        Category.stub(:new).with({'these' => 'params'}).and_return(mock_category(:save => true))
-#        post :create, :category => {:these => 'params'}
-#        assigns[:category].should equal(mock_category)
-#      end
-#
-#      it "redirects to the created category" do
-#        Category.stub(:new).and_return(mock_category(:save => true))
-#        post :create, :category => {}
-#        response.should redirect_to(category_url(mock_category))
-#      end
-#    end
-#
-#    describe "with invalid params" do
-#      it "assigns a newly created but unsaved category as @category" do
-#        Category.stub(:new).with({'these' => 'params'}).and_return(mock_category(:save => false))
-#        post :create, :category => {:these => 'params'}
-#        assigns[:category].should equal(mock_category)
-#      end
-#
-#      it "re-renders the 'new' template" do
-#        Category.stub(:new).and_return(mock_category(:save => false))
-#        post :create, :category => {}
-#        response.should render_template('new')
-#      end
-#    end
-#
-#  end
-#
-#  describe "PUT update" do
-#
-#    describe "with valid params" do
-#      it "updates the requested category" do
-#        Category.should_receive(:find).with("37").and_return(mock_category)
-#        mock_category.should_receive(:update_attributes).with({'these' => 'params'})
-#        put :update, :id => "37", :category => {:these => 'params'}
-#      end
-#
-#      it "assigns the requested category as @category" do
-#        Category.stub(:find).and_return(mock_category(:update_attributes => true))
-#        put :update, :id => "1"
-#        assigns[:category].should equal(mock_category)
-#      end
-#
-#      it "redirects to the category" do
-#        Category.stub(:find).and_return(mock_category(:update_attributes => true))
-#        put :update, :id => "1"
-#        response.should redirect_to(category_url(mock_category))
-#      end
-#    end
-#
-#    describe "with invalid params" do
-#      it "updates the requested category" do
-#        Category.should_receive(:find).with("37").and_return(mock_category)
-#        mock_category.should_receive(:update_attributes).with({'these' => 'params'})
-#        put :update, :id => "37", :category => {:these => 'params'}
-#      end
-#
-#      it "assigns the category as @category" do
-#        Category.stub(:find).and_return(mock_category(:update_attributes => false))
-#        put :update, :id => "1"
-#        assigns[:category].should equal(mock_category)
-#      end
-#
-#      it "re-renders the 'edit' template" do
-#        Category.stub(:find).and_return(mock_category(:update_attributes => false))
-#        put :update, :id => "1"
-#        response.should render_template('edit')
-#      end
-#    end
-#
-#  end
-#
-#  describe "DELETE destroy" do
-#    it "destroys the requested category" do
-#      Category.should_receive(:find).with("37").and_return(mock_category)
-#      mock_category.should_receive(:destroy)
-#      delete :destroy, :id => "37"
-#    end
-#
-#    it "redirects to the categories list" do
-#      Category.stub(:find).and_return(mock_category(:destroy => true))
-#      delete :destroy, :id => "1"
-#      response.should redirect_to(categories_url)
-#    end
-#  end
-#
-#end
+describe CategoriesController do
+
+  before( :each ) do
+    logout_user
+  end
+
+  #===============
+  # NOT LOGGED IN
+  #===============
+  describe "when not logged in" do
+
+    #
+    # INDEX
+    #
+    describe "GET 'index'" do
+      it "should return a 403" do
+        lambda { get :index }.should raise_error PermissionDenied
+      end
+    end
+
+    #
+    # SHOW
+    #
+    describe "GET 'show'" do
+      describe "with a valid slug" do
+        before( :each ) do
+          @category = mock( 'category', :name => 'Test Category' )
+          Category.stubs( :find_by_slug ).returns( @category )
+          get :show, :id => 'test-category'
+        end
+
+        it { should respond_with( :success ) }
+        it { should assign_to( :category ).with( @category ) }
+        it { should render_template( :show ) }
+      end
+
+      describe "with an invalid slug" do
+        before( :each ) do
+          Category.stubs( :find_by_slug ).returns( nil )
+        end
+
+        it "should fail with 404" do
+          lambda { get :show, :id => 'invalid-category' }.should raise_error( ActiveRecord::RecordNotFound )
+        end
+      end
+    end
+
+    #
+    # NEW
+    #
+    describe "GET 'new'" do
+      it "should raise a 403" do
+        lambda { get :new }.should raise_error PermissionDenied
+      end
+    end
+
+    #
+    # EDIT
+    #
+    describe "GET 'edit'" do
+      it "should raise a 403" do
+        lambda { get :edit, :id => 'slug' }.should raise_error PermissionDenied
+      end
+    end
+
+    #
+    # CREATE
+    #
+    describe "POST 'create'" do
+      it "should raise a 403" do
+        lambda { post :create }.should raise_error PermissionDenied
+      end
+    end
+
+    #
+    # UPDATE
+    #
+    describe "PUT 'update'" do
+      it "should raise a 403" do
+        lambda { put :update, :id => 'slug' }.should raise_error PermissionDenied
+      end
+    end
+
+    #
+    # DELETE
+    #
+    describe "DELETE 'destroy'" do
+      it "should raise a 403" do
+        lambda { delete :destroy, :id => 'slug' }.should raise_error PermissionDenied
+      end
+    end
+  end
+
+  describe "when logged in as an admin" do
+    before( :each ) do
+      login_admin
+    end
+
+    #
+    # NEW
+    #
+    describe "GET 'new'" do
+      before( :each ) do
+        @category = Category.new
+        Category.stubs( :new ).returns( @category )
+        get :new
+      end
+
+      it { should respond_with( :success ) }
+      it { should assign_to( :category ).with( @category ) }
+      it { should render_template( :new ) }
+    end
+
+    #
+    # EDIT
+    #
+    describe "GET 'edit'" do
+      describe "with a valid slug" do
+        before( :each ) do
+          @category = mock()
+          Category.stubs( :find_by_slug ).returns( @category )
+          get :edit, :id => 'test'
+        end
+
+        it { should respond_with( :success ) }
+        it { should assign_to( :category ).with( @category ) }
+        it { should render_template( :edit ) }
+      end
+
+      describe "with an invalid slug" do
+        it "should fail" do
+          Category.stubs( :find_by_slug ).raises( ActiveRecord::RecordNotFound )
+          lambda { get :edit, :id => 'test' }.should raise_error( ActiveRecord::RecordNotFound )
+        end
+      end
+    end
+
+    #
+    # CREATE
+    #
+    describe "POST 'create'" do
+      describe "when save is successful" do
+        before( :each ) do
+          @category = stub( 'category' )
+        end
+      end
+    end
+  end
+end
