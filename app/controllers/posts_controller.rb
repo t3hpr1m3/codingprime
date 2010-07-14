@@ -1,5 +1,12 @@
 class PostsController < ApplicationController
-	before_filter :authorize, :except => [:index, :show, :show_by_slug]
+  def get_post_by_slug
+    @post = Post.find_by_slug( params[:id] )
+    raise ActiveRecord::RecordNotFound if @post.nil?
+  end
+
+  before_filter :authorize, :except => [:index, :show, :show_by_slug]
+  before_filter :get_post_by_slug, :except => [:index, :new, :create]
+
 	# GET /posts
 	# GEt /posts.xml
 	def index
@@ -8,33 +15,25 @@ class PostsController < ApplicationController
 		respond_to do |format|
 			format.html #index.html.erb
 			format.xml { render :xml => @posts }
-            format.atom
+      format.atom
 			format.json { render :json => @posts }
 		end
 	end
 
-    # GET /2010/02/01/my-post-title
-    # GET /2010/02/01/my-post-title.xml
-    def show_by_slug
-        @post = Post.find_by_slug( params[:slug] )
+  # GET /2010/02/01/my-post-title
+  # GET /2010/02/01/my-post-title.xml
+  def show_by_slug
+    @title = @post.title
 
-        if @post.nil?
-          raise ActiveRecord::RecordNotFound
-        end
-
-        @title = @post.title
-
-        respond_to do |format|
-          format.html { render :action => "show" }
-          format.xml { render :xml => @post }
-        end
+    respond_to do |format|
+      format.html { render :action => "show" }
+      format.xml { render :xml => @post }
     end
+  end
 
 	# GET /posts/1
 	# GET /posts/1.xml
 	def show
-		@post = Post.find( params[:id] )
-
 		@title = @post.title
 
 		respond_to do |format|
@@ -56,13 +55,11 @@ class PostsController < ApplicationController
 
     # GET /posts/1/edit
 	def edit
-		@post = Post.find( params[:id] )
-
-        respond_to do |format|
-          format.html
-          format.xml { render :xml => @post }
-          format.json { render :json => @post }
-        end
+    respond_to do |format|
+      format.html
+      format.xml { render :xml => @post }
+      format.json { render :json => @post }
+    end
 	end
 
 	# POST /posts
@@ -95,8 +92,6 @@ class PostsController < ApplicationController
 	# PUT /posts/1
 	# PUT /posts/1.xml
 	def update
-		@post = Post.find( params[:id] )
-
 		if params[:preview_button]
 			@preview = true
             @post.attributes= params[:post]
@@ -123,7 +118,6 @@ class PostsController < ApplicationController
 	# DELETE /posts/1
 	# DELETE /posts/1.xml
 	def destroy
-		@post = Post.find( params[:id] )
 		@post.delete
 
 		respond_to do |format|
