@@ -36,3 +36,22 @@ Spec::Runner.configure do |config|
   #
   # For more information take a look at Spec::Runner::Configuration and Spec::Runner
 end
+
+def login_user( options = {} )
+  @logged_in_user = Factory.build( :user, options )
+  @controller.stubs( :current_user ).returns( @logged_in_user )
+  @logged_in_user
+end
+
+def login_admin( options = {} )
+  options[:is_admin] = true
+  @logged_in_user = Factory.build( :user, options )
+  @controller.stubs( :current_user ).returns( @logged_in_user )
+  @logged_in_user
+end
+
+def logout_user
+  @logged_in_user = nil
+  @controller.stubs( :current_user ).returns( @logged_in_user )
+  @logged_in_user
+end
