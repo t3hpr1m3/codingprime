@@ -8,6 +8,9 @@ config.cache_classes = true
 config.action_controller.consider_all_requests_local = false
 config.action_controller.perform_caching             = true
 config.action_view.cache_template_loading            = true
+config.action_controller.session ||= {}
+config.action_controller.session[:session_domain] = "codingprime.com"
+config.action_controller.asset_host = "http://static.codingprime.com"
 
 # See everything in the log (default is :info)
 # config.log_level = :debug

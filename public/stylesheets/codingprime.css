@@ -2,7 +2,9 @@ body {
 	height: 100%;
 	margin: 0;
 	padding: 0;
-	background: #928ebb;
+	/*
+	background: #6996d3;
+	*/
 	font-size: 80%;
 	font-family: verdana, arial, sans-serif;
 }
@@ -70,6 +72,14 @@ pre {
 	text-align: center;
 }
 
+.fright {
+  float: right;
+}
+
+.fleft {
+  float: left;
+}
+
 dl.formfields {
 	margin: 0;
 }
@@ -93,17 +103,25 @@ dl.formfields dd {
  * Site Structure
  ***********************/
 #header {
-	background: #dac1a1;
+	/*
+	background: #160773;
+	*/
 	font-size: 1.2em;
 	font-family: "Trebuchet MS", "Lucida Grande", arial, helvetica, sans-serif;
-	border-bottom: 10px solid #7b6b59;
+	/*
+	border-bottom: 10px solid #bfa130;
+	*/
+    display: none;
 }
 
 #headercontent {
-	background: #0e0940;
 	width: 900px;
+	height: 100px;
 	margin: 0 auto;
-	padding: 10px 0 .5em 0;
+	padding: 10px 0 0 0;
+	background-color: #05316d;
+	border-right: 1px solid #000000;
+	border-left: 1px solid #000000;
 }
 
 #headercontent h1 {
@@ -113,7 +131,7 @@ dl.formfields dd {
 #headercontent h1 a {
 	color: #ffffff;
 	text-decoration: none;
-	font-family: courier, times, serif;
+	font-family: helvetica, times, serif;
 }
 
 #headercontent h1 a span {
@@ -134,38 +152,62 @@ dl.formfields dd {
 #headercontent p span {
 	font-weight: bold;
 	font-style: normal;
-	color: #5c360c;
+	color: #ffe273;
 }
 
 #nav {
 	position: absolute;
-	bottom: 0;
-	text-decoration: none;
-	margin: .2em 1em;
-	padding: 0;
-	display: none;
+	top: 0;
+	background-color: #000000;
+	width: 100%;
 }
 
-#nav li {
-	display: inline-block;
-	width: 5em;
-}
-
-#nav li a {
-	text-decoration: none;
+#nav span a {
 	color: #ffffff;
+	text-decoration: none;
+	font-style: italic;
+	line-height: 2em;
+	margin-right: 2em;
+}
+
+#nav ul {
+	text-decoration: none;
+	width: 870px;
+	margin: 0 auto;
+	padding: 0;
+	line-height: 2em;
+}
+
+#nav ul li {
+	display: inline-block;
+	float: left;
+	width: 5em;
+	color: #ffe273;
 	font-variant: small-caps;
 }
 
-#nav li a:hover {
+#nav ul li a {
+	text-decoration: none;
+	color: #ffffff;
+    /*
+	font-variant: small-caps;
+    */
+}
+
+#nav ul li a:hover {
 	text-decoration: underline;
 	color: #002670;
 }
 
 #container {
 	width: 900px;
-	margin: 0 auto;
+	margin: 2em auto;
+	padding: 0;
 	background-color: #ffffff;
+    /*
+	border-right: 1px solid #000000;
+	border-left: 1px solid #000000;
+    */
 }
 
 #content {
@@ -179,14 +221,28 @@ dl.formfields dd {
 	width: 160px;
 	float: left;
 	margin-left: 5px;
+    padding-top: 1em;
 }
 
 #footer {
+  /*
 	width: 890px;
 	margin: 0 auto;
-	background-color: #9dcb93;
-	padding: 5px;
-	color: #0e0940;
+	background-color: #05316d;
+    */
+  background-color: #000000;
+	padding: 5px 0;
+	color: #ffffff;
+    /*
+	border-right: 1px solid #000000;
+	border-left: 1px solid #000000;
+	border-bottom: 1px solid #000000;
+    */
+}
+
+#footer p {
+	width: 870px;
+	margin: 0 auto;
 }
 
 /***********************

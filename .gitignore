@@ -1,4 +1,4 @@
-log/*.log
+log
 coverage/*
 coverate/**/*
 tmp/*
@@ -10,3 +10,4 @@ db/*.sqlite3
 *.swo
 *~
 .DS_Store
+config/mongrel_cluster.yml

@@ -18,8 +18,9 @@
 #
 
 class Comment < ActiveRecord::Base
+  include Rakismet::Model
   belongs_to :post
-  has_rakismet :author => :user_name,
+  rakismet_attrs :author => :user_name,
                 :author_email => :user_email,
                 :author_url => :user_site,
                 :comment_type => 'comment',

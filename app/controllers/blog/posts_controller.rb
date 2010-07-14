@@ -1,18 +1,16 @@
-class PostsController < ApplicationController
+class Blog::PostsController < ApplicationController
+  before_filter :authorize, :except => [:index, :show, :show_by_slug]
+  before_filter :get_post_by_slug, :except => [:index, :new, :create]
+
   def get_post_by_slug
     @post = Post.find_by_slug( params[:id] )
     raise ActiveRecord::RecordNotFound if @post.nil?
   end
-
-  before_filter :authorize, :except => [:index, :show, :show_by_slug]
-  before_filter :get_post_by_slug, :except => [:index, :new, :create]
-
-	# GET /posts
-	# GEt /posts.xml
-	def index
-		@posts = Post.all
-
-		respond_to do |format|
+  # GET /posts
+  # GEt /posts.xml
+  def index
+    @posts = Post.all
+    respond_to do |format|
 			format.html #index.html.erb
 			format.xml { render :xml => @posts }
       format.atom
@@ -34,12 +32,8 @@ class PostsController < ApplicationController
 	# GET /posts/1
 	# GET /posts/1.xml
 	def show
-		@title = @post.title
-
-		respond_to do |format|
-			format.html # show.html.erb
-			format.xml { render :xml => @post }
-		end
+		@post = Post.find( params[:id] )
+		redirect_to @post.url, :status => 301
 	end
 
 	# GET /posts/new

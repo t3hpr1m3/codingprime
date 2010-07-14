@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe PostsController do
+describe Blog::PostsController do
 #  def mock_post( stubs = nil )
 #    args = {
 #      :title => 'Test Post',
@@ -37,7 +37,7 @@ describe PostsController do
       before( :each ) do
         @posts = mock()
         Post.stubs( :find ).with( :all ).returns( @posts )
-        get :index
+        get :index, {:subdomains => ["blog"]}
       end
 
       it { should respond_with( :success ) }
@@ -51,14 +51,18 @@ describe PostsController do
     describe "GET 'show'" do
       describe "with a valid id" do
         before( :each ) do
-          @post = mock( 'post', :title => 'Test Title' )
+          @post = mock( 'post' ) do
+	    expects( :url ).times( 2 ).returns( '/slug_url' )
+	  end
           Post.stubs( :find ).returns( @post )
-          get :show, :id => 1
+          #get :show, :id => 1
+          get :show, {:id => 1, :subdomains => ["blog"]}
         end
 
-        it { should respond_with( :success ) }
-        it { should assign_to( :post ).with( @post ) }
-        it { should render_template( :show ) }
+        it { should redirect_to( @request.protocol + @request.host + @post.url ) }
+        #it { should respond_with( :success ) }
+        #it { should assign_to( :post ).with( @post ) }
+        #it { should render_template( :show ) }
       end
     end
 
@@ -70,7 +74,7 @@ describe PostsController do
         before( :each ) do
           @post = mock( 'post', :title => 'Test Title' )
           Post.stubs( :find_by_slug ).returns( @post )
-          get :show_by_slug , :year => 2010, :month => 02, :day => 01, :slug => 'test-title'
+          get :show_by_slug , :year => 2010, :month => 02, :day => 01, :slug => 'test-title', :subdomains => ['blog']
         end
 
         it { should respond_with( :success ) }
@@ -81,9 +85,8 @@ describe PostsController do
       describe "with an invalid slug" do
 
         it "should fail with 404" do
-          Post.stub!( :find_by_slug ).and_return( nil )
-          get :show_by_slug , :year => 2010, :month => 02, :day => 01, :slug => 'test-title'
-          lambda { get :show_by_slug, :year => 2010, :month => 02, :day => 01, :slug => "invalid-slug" }.should raise_error ActiveRecord::RecordNotFound
+	  Post.stubs( :find_by_slug ).returns( nil )
+          lambda { get :show_by_slug, :year => 2010, :month => 02, :day => 01, :slug => "invalid-slug", :subdomains => ['blog'] }.should raise_error ActiveRecord::RecordNotFound
         end
       end
     end
