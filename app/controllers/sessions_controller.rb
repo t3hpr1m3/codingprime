@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
       if user = User.authenticate( params[:username], params[:password] )
         session[:user_id] = user.id
         flash[:notice] = 'Login Successful'
-        format.html { redirect_to( root_path ) }
+        format.html { redirect_to( blog_root_path ) }
       else
         flash[:error] = "Invalid Username/Password"
         format.html { redirect_to( login_path ) }
