@@ -1,5 +1,5 @@
-class CategoriesController < ApplicationController
-  before_filter :authorize, :except => [:show]
+class Blog::CategoriesController < ApplicationController
+  before_filter :authorize, :except => [:index, :show]
   before_filter :get_category_by_slug, :except => [:index, :new, :create]
 
   def get_category_by_slug
@@ -22,6 +22,7 @@ class CategoriesController < ApplicationController
   # GET /categories/1.xml
   def show
     @title = @category.name
+    @posts = @category.posts
 
     respond_to do |format|
       format.html # show.html.erb
@@ -52,12 +53,12 @@ class CategoriesController < ApplicationController
   # POST /categories
   # POST /categories.xml
   def create
-    @category = Category.new(params[:category])
+    @category = Category.new( params[:category] )
 
     respond_to do |format|
       if @category.save
         flash[:notice] = 'Category was successfully created.'
-        format.html { redirect_to(@category) }
+        format.html { redirect_to( [:blog, @category] ) }
         format.xml  { render :xml => @category, :status => :created, :location => @category }
       else
         format.html { render :action => "new" }
@@ -74,7 +75,7 @@ class CategoriesController < ApplicationController
     respond_to do |format|
       if @category.update_attributes(params[:category])
         flash[:notice] = 'Category was successfully updated.'
-        format.html { redirect_to(@category) }
+        format.html { redirect_to( [:blog, @category] ) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

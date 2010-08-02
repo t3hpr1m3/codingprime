@@ -1,5 +1,5 @@
-class CommentsController < ApplicationController
-  before_filter(:get_post)
+class Blog::CommentsController < ApplicationController
+  before_filter :get_post, :except => [:index]
 
   # GET /comments
   # GET /comments.xml

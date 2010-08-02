@@ -5,8 +5,13 @@
 	<fieldset>
 		<%= f.error_messages %>
 		<p>
-			<%= f.label :title, 'Title:' %> <%= f.text_field :title, :size => 60 %>
+		<%= f.label :title, 'Title:' %> <%= f.text_field :title, :size => 60 %>
+		<%- if @post.new_record? %>
+		<br />
+		<%= f.label :category, 'Category:' %> <%= f.collection_select :category_id, @categories, :id, :name %>
+		<%- end %>
 		</p>
+		<p>
 		<%= f.label :body, 'Body:', :class => 'invisible' %>
 		<%= f.text_area :body, :size => '80x30' %>
 		<p class="centertext">

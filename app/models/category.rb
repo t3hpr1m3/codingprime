@@ -18,10 +18,14 @@ class Category < ActiveRecord::Base
 
   before_create :add_slug
 
+  def to_param
+    "#{slug}"
+  end
+
   private
 
   def add_slug
-    self.slug = generate_slug( self.name )
+    self.slug = Category.generate_slug( self.name )
   end
 end
 

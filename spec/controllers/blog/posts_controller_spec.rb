@@ -1,34 +1,13 @@
 require 'spec_helper'
 
 describe Blog::PostsController do
-#  def mock_post( stubs = nil )
-#    args = {
-#      :title => 'Test Post',
-#      :year => '2010',
-#      :month => '02',
-#      :day => '25',
-#      :slug => 'test-post',
-#      :url => '/test-post',
-#      :user => nil
-#    }
-#    if stubs
-#      args = args.merge( stubs )
-#    end
-#    mock_model( Post, args )
-#  end
-#
-#  def mock_admin_user( stubs = nil )
-#    args = { :is_admin => true }
-#    if stubs
-#      args = args.merge( stubs )
-#    end
-#    mock_model( User, args )
-#  end
-
   #===============
   # NOT LOGGED IN
   #===============
   describe "when not logged in" do
+    before( :each ) do
+      logout_user
+    end
 
     #
     # INDEX
@@ -36,7 +15,7 @@ describe Blog::PostsController do
     describe "GET 'index'" do
       before( :each ) do
         @posts = mock()
-        Post.stubs( :find ).with( :all ).returns( @posts )
+        Post.expects( :find ).with( :all ).returns( @posts )
         get :index, {:subdomains => ["blog"]}
       end
 
@@ -52,17 +31,13 @@ describe Blog::PostsController do
       describe "with a valid id" do
         before( :each ) do
           @post = mock( 'post' ) do
-	    expects( :url ).times( 2 ).returns( '/slug_url' )
-	  end
+            expects( :url ).times( 2 ).returns( '/slug_url' )
+          end
           Post.stubs( :find ).returns( @post )
-          #get :show, :id => 1
           get :show, {:id => 1, :subdomains => ["blog"]}
         end
 
         it { should redirect_to( @request.protocol + @request.host + @post.url ) }
-        #it { should respond_with( :success ) }
-        #it { should assign_to( :post ).with( @post ) }
-        #it { should render_template( :show ) }
       end
     end
 

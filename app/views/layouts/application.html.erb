@@ -26,6 +26,12 @@
 			<%= link_to image_tag( "gentoo-badge3.png" ), "http://www.gentoo.org" %>
 			<%= link_to image_tag( "palink.gif" ), "http://www.penny-arcade.com" %>
 			<%= link_to image_tag( "dronezone.gif" ), "http://www.somafm.com" %>
+			<h2>Categories</h2>
+			<ul>
+			<%- Category.all.each do |category| %>
+				<li><%= link_to category.name, [:blog, category] %></li>
+			<%- end %>
+			</ul>
 		</div>
 	</div>
 <%= render 'layouts/nav' %>

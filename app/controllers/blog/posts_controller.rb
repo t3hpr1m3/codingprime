@@ -1,10 +1,15 @@
 class Blog::PostsController < ApplicationController
   before_filter :authorize, :except => [:index, :show, :show_by_slug]
-  before_filter :get_post_by_slug, :except => [:index, :new, :create]
+  before_filter :get_post_by_slug, :only => [:show_by_slug]
+  before_filter :get_post, :only => [:show, :edit, :update, :delete]
 
   def get_post_by_slug
     @post = Post.find_by_slug( params[:slug] )
     raise ActiveRecord::RecordNotFound if @post.nil?
+  end
+
+  def get_post
+    @post = Post.find( params[:id] )
   end
 
   # GET /posts
@@ -33,7 +38,6 @@ class Blog::PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.xml
   def show
-    @post = Post.find( params[:id] )
     redirect_to @post.url, :status => 301
   end
 
@@ -89,7 +93,8 @@ class Blog::PostsController < ApplicationController
   def update
     if params[:preview_button]
       @preview = true
-      @post.attributes= params[:post]
+      puts "Post: #{params[:post]}"
+      @post.attributes = params[:post]
       #@post.title = params[:post][:title]
       #@post.body = params[:post][:body]
       respond_to do |format|

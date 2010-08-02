@@ -1,3 +1,5 @@
+require 'slug_extensions'
+
 Factory.sequence :username do |n|
   "user#{n}"
 end
@@ -11,7 +13,7 @@ Factory.sequence :blog_title do |n|
 end
 
 Factory.sequence :category_name do |n|
-  "Text Category #{n}"
+  "Test Category #{n}"
 end
 
 Factory.define :user do |f|
@@ -34,7 +36,7 @@ end
 
 Factory.define :category do |c|
   c.name { Factory.next( :category_name ) }
-  c.slug "test-category"
+  c.slug { |s| Category.generate_slug( s.name ) }
 end
 
 Factory.define :post do |p|

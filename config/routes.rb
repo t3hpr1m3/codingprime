@@ -1,10 +1,11 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :categories
-
   map.subdomain :blog do |blog|
     blog.resources :posts do |post|
-      post.resources :comments, :except => [:index, :update, :destroy]
+      post.resources :comments, :except => [:index]
     end
+    blog.resources :categories do |category|
+    end
+    blog.resources :comments, :only => [:index]
     blog.root :controller => "posts"
     blog.connect ':year/:month/:day/:slug.:format',
                 :controller => 'posts',
@@ -25,7 +26,6 @@ ActionController::Routing::Routes.draw do |map|
   #  blog.root :controller => "posts"
   #end
   map.resources :sessions, :users
-  map.resources :comments, :only => [:index, :update, :destroy]
   #map.connect ':year/:month/:day/:slug.:format',
   #              :controller => 'blog/posts',
   #              :action => 'show_by_slug',

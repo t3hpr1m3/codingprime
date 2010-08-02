@@ -23,10 +23,6 @@ class Post < ActiveRecord::Base
 
   before_create :add_slug
 
-  def to_param
-    "#{slug}"
-  end
-
   def approved_comments
     self.comments.find( :all, :conditions => 'approved="t"', :order => 'created_at ASC' )
   end
@@ -53,6 +49,6 @@ class Post < ActiveRecord::Base
 
   private
     def add_slug
-      self.slug = generate_slug( self.title )
+      self.slug = Post.generate_slug( self.title )
     end
 end

@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
     respond_to do |format|
       if current_user
         flash[:error] = 'Already logged in.  Please log out first.'
-        format.html { redirect_to( root_path ) }
+        format.html { redirect_to( blog_root_path ) }
       else
         format.html
       end
@@ -28,7 +28,7 @@ class SessionsController < ApplicationController
       reset_session
       flash[:notice] = 'Successfully logged out'
     end
-    redirect_to root_path
+    redirect_to blog_root_path
   end
 
 end

@@ -12,7 +12,7 @@ describe SessionsController do
       end
 
       it { should set_the_flash }
-      it { should redirect_to( root_url ) }
+      it { should redirect_to( blog_root_url ) }
     end
 
     describe "while not logged in" do
@@ -33,7 +33,7 @@ describe SessionsController do
         post :create, :username => 'test', :password => 'password'
       end
   
-      it { should redirect_to root_path }
+      it { should redirect_to blog_root_path }
       it { should set_session( :user_id ).to( @user.id ) }
       it { should set_the_flash.to( { :notice => "Login Successful" } ) }
     end
@@ -56,7 +56,7 @@ describe SessionsController do
         delete :destroy
       end
   
-      it { should redirect_to root_path }
+      it { should redirect_to blog_root_path }
       it { should set_the_flash }
       it { should set_session( :user_id ).to( nil ) }
     end
@@ -66,7 +66,7 @@ describe SessionsController do
         delete :destroy
       end
 
-      it { should redirect_to root_path }
+      it { should redirect_to blog_root_path }
       it { should_not set_session( :user_id ) }
     end
   end
