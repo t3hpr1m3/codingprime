@@ -3,8 +3,7 @@ ActionController::Routing::Routes.draw do |map|
     blog.resources :posts do |post|
       post.resources :comments, :except => [:index]
     end
-    blog.resources :categories do |category|
-    end
+    blog.resources :categories
     blog.resources :comments, :only => [:index]
     blog.root :controller => "posts"
     blog.connect ':year/:month/:day/:slug.:format',

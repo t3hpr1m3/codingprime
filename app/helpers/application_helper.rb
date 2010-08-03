@@ -30,18 +30,12 @@ module ApplicationHelper
           "<pre>" + h( piece.strip ) + "</pre>"
         else
           lang = language ? language : "ruby"
-          logger.debug( "lang => #{lang}" )
           harsh( piece.strip, { :format => lang, :theme => "spacecadet" } )
         end
       else
-        #concat( markdown( piece, options ) )
-        #output = output + markdown( piece, options )
         render_markdown( piece, options )
       end
     end
-    #output
-    #nil
-    #""
   end
 
   def render_markdown( text, options = {} )

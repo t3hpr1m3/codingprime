@@ -16,4 +16,18 @@ describe ApplicationHelper do
       end
     end
   end
+
+  describe "render_text" do
+    describe "with plain text" do
+      it "should be plain_text" do
+        helper.render_text( "plain_text" ).should eql( ["<p>plain_text</p>\n"] )
+      end
+    end
+
+    describe "with code chunk" do
+      it "should render properly" do
+        helper.render_text( "<code>foo</code>" ).should eql( ["\n", nil, "<pre class=\"spacecadet\">foo\n</pre>", nil] )
+      end
+    end
+  end
 end

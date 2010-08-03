@@ -61,6 +61,7 @@ class Blog::CategoriesController < ApplicationController
         format.html { redirect_to( [:blog, @category] ) }
         format.xml  { render :xml => @category, :status => :created, :location => @category }
       else
+        flash.now[:error] = 'There was an error saving your category.'
         format.html { render :action => "new" }
         format.xml  { render :xml => @category.errors, :status => :unprocessable_entity }
       end
@@ -78,6 +79,7 @@ class Blog::CategoriesController < ApplicationController
         format.html { redirect_to( [:blog, @category] ) }
         format.xml  { head :ok }
       else
+        flash.now[:error] = 'There was an error saving your category.'
         format.html { render :action => "edit" }
         format.xml  { render :xml => @category.errors, :status => :unprocessable_entity }
       end
@@ -91,7 +93,8 @@ class Blog::CategoriesController < ApplicationController
     @category.destroy
 
     respond_to do |format|
-      format.html { redirect_to(categories_url) }
+      flash[:notice] = "Category deleted successfully."
+      format.html { redirect_to( blog_root_path ) }
       format.xml  { head :ok }
     end
   end
