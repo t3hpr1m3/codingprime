@@ -160,6 +160,8 @@ dl.formfields dd {
 	top: 0;
 	background-color: #000000;
 	width: 100%;
+    background-image: url( '../images/nav_bg.jpg' );
+    background-repeat: repeat-x;
 }
 
 #nav span a {
@@ -238,6 +240,8 @@ dl.formfields dd {
 	border-left: 1px solid #000000;
 	border-bottom: 1px solid #000000;
     */
+    background-image: url( '../images/nav_bg.jpg' );
+    background-repeat: repeat-x;
 }
 
 #footer p {
