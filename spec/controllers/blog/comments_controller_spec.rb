@@ -47,7 +47,7 @@ describe Blog::CommentsController do
     before( :each ) do
       @post = stub()
       @comment = stub()
-      Post.stubs( :find_by_slug ).returns( @post )
+      Post.stubs( :find ).returns( @post )
       Comment.stubs( :find ).returns( @comment )
       get :show, { :post_id => 1, :id => 1, :subdomains => ["blog"] }
     end
@@ -65,7 +65,7 @@ describe Blog::CommentsController do
     before( :each ) do
       @post = stub()
       @comment = stub()
-      Post.stubs( :find_by_slug ).returns( @post )
+      Post.stubs( :find ).returns( @post )
       Comment.stubs( :new ).returns( @comment )
       get :new, { :post_id => 1, :subdomains => ["blog"] }
     end

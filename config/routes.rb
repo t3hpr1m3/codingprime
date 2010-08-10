@@ -16,7 +16,11 @@ ActionController::Routing::Routes.draw do |map|
   end
 
   map.subdomain :www, :namespace => nil do |www|
-    www.root :controller => "home"
+    www.root :controller => 'home'
+  end
+
+  map.subdomain nil do |n|
+    n.root :controller => 'home'
   end
   #, :path_prefix => '', :conditions => {:subdomain => 'blog'} do |blog|
   #  blog.resources :posts do |post|

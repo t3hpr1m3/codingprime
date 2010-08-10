@@ -7,6 +7,6 @@
 					<%= link_to 'Delete', blog_post_path( post.id ), :confirm => "Are you sure?", :method => :delete %>
 				<% end %>
 				<p>
-					Posted by <%= link_to post.user.name, www_root_url %>
+				Posted by <%= link_to post.user.name, www_root_url %>
 				</p>
 			<% end %>

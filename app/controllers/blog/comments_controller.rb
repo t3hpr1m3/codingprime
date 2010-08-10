@@ -1,5 +1,6 @@
 class Blog::CommentsController < ApplicationController
   before_filter :get_post, :except => [:index]
+  before_filter :authorize, :only => [:delete]
 
   # GET /comments
   # GET /comments.xml
@@ -49,7 +50,7 @@ class Blog::CommentsController < ApplicationController
     respond_to do |format|
       if @comment.save
         flash[:notice] = 'Comment was successfully created.'
-        format.html { redirect_to(@post) }
+        format.html { redirect_to [:blog, @post] }
         format.xml  { render :xml => @comment, :status => :created, :location => @comment }
       else
 	  	flash[:error] = 'Error saving comment.'
@@ -83,14 +84,14 @@ class Blog::CommentsController < ApplicationController
     @comment.destroy
 
     respond_to do |format|
-      format.html { redirect_to( comments_url( @post ) ) }
+      format.html { redirect_to [:blog, @post] }
       format.xml  { head :ok }
     end
   end
 
   private
   def get_post
-    @post = Post.find_by_slug( params[:post_id] )
+    @post = Post.find( params[:post_id] )
     raise ActiveRecord::RecordNotFound if @post.nil?
   end
 end
