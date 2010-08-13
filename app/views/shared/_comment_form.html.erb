@@ -1,3 +1,6 @@
+<% if @preview -%>
+	<%= render :partial => "shared/comment" %>
+<%- end %>
 <% form_for [:blog, @post, comment] do |f| %>
 	<fieldset>
 		<%= f.error_messages %>
@@ -9,9 +12,9 @@
 			<dt><%= f.label :user_site, 'Website URL' %></dt>
 			<dd><%= f.text_field :user_site, :size => 30 %></dd>
 			<dt><%= f.label :comment_text, 'Comment' %></dt>
-			<dd><%= f.text_area :comment_text %></dd>			
+			<dd><%= f.text_area :comment_text, :size => '60x12' %></dd>			
 		</dl>
-		<p class="centertext">
+		<p>
 			<%= f.submit 'Preview', :id => 'preview_button', :name => 'preview_button' %>
 			<%= f.submit 'Submit' %>
 		</p>
