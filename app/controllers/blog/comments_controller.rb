@@ -47,15 +47,23 @@ class Blog::CommentsController < ApplicationController
     @comment = @post.comments.build( params[:comment] )
 	@comment.request = request
 
-    respond_to do |format|
-      if @comment.save
-        flash[:notice] = 'Comment was successfully created.'
-        format.html { redirect_to [:blog, @post] }
-        format.xml  { render :xml => @comment, :status => :created, :location => @comment }
-      else
-	  	flash[:error] = 'Error saving comment.'
+    if params[:preview_button]
+      @preview = true
+      respond_to do |format|
         format.html { render :action => "new" }
-        format.xml  { render :xml => @comment.errors, :status => :unprocessable_entity }
+        format.xml
+      end
+    else
+      respond_to do |format|
+        if @comment.save
+          flash[:notice] = 'Comment was successfully created.'
+          format.html { redirect_to [:blog, @post] }
+          format.xml  { render :xml => @comment, :status => :created, :location => @comment }
+        else
+          flash[:error] = 'Error saving comment.'
+          format.html { render :action => "new" }
+          format.xml  { render :xml => @comment.errors, :status => :unprocessable_entity }
+        end
       end
     end
   end
