@@ -1,6 +1,3 @@
-<% if @preview -%>
-	<%= render :partial => "shared/comment" %>
-<%- end %>
 <% form_for [:blog, @post, comment] do |f| %>
 	<fieldset>
 		<%= f.error_messages %>

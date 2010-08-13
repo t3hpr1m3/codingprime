@@ -1,4 +1,4 @@
 <h3>Comments for <%= link_to @post.title, @post.url %></h3>
-<%= render :partial => 'shared/comment', :collection => @post.approved_comments %>
+<%= render :collection => @post.approved_comments %>
 
 <%= link_to 'New comment', new_post_comment_path( @post ) %>

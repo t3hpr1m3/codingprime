@@ -1,5 +1,5 @@
 <% if @preview -%>
-<%= render :partial => "shared/post_preview" %>
+	<%= render @post %>
 <% end -%>
 <% form_for [:blog, @post] do |f| %>
 	<fieldset>

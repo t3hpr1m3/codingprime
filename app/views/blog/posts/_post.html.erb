@@ -1,0 +1,20 @@
+			<% div_for post do %>
+				<%- if post.new_record? %>
+					<h2><%= post.title %></h2>
+				<%- else %>
+					<h2><%= link_to_unless_current h(post.title), post.url %></h2>
+				<%- end %>
+				<%- unless post.new_record? -%>
+					<span class="dateline"><%= post.created_at.to_s( :long_ordinal ) %> in <%= link_to post.category.name, [:blog, post.category] %></span>
+				<%- end -%>
+				<%= render_text( post.body ) %>
+				<%- unless post.new_record? -%>
+					<% if admin? %>
+						<%= link_to 'Edit', edit_blog_post_path( post.id ) %>
+						<%= link_to 'Delete', blog_post_path( post.id ), :confirm => "Are you sure?", :method => :delete %>
+					<%- end %>
+					<p>
+					Posted by <%= link_to post.user.name, www_root_url %>
+					</p>
+				<%- end -%>						
+			<% end %>

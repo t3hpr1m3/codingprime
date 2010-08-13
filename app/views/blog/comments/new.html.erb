@@ -1,3 +1,12 @@
-<%= render :partial => 'shared/comment_form', :locals => { :comment => @comment } %>
+<%- if params[:preview_button] %>
+	<h2>Comment Preview</h2>
+<%- else %>
+	<h2>New Comment</h2>
+<%- end %>
+
+<%- if params[:preview_button] %>
+	<%= render @comment %>
+<%- end %>
+<%= render :partial => 'form', :locals => { :comment => @comment } %>
 
 <%= link_to 'Back', blog_post_comments_path( @post ) %>
