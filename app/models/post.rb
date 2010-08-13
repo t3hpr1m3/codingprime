@@ -19,7 +19,7 @@ class Post < ActiveRecord::Base
   belongs_to :user
   belongs_to :category
   has_many :comments
-  attr_accessible :title, :body
+  attr_accessible :title, :body, :category_id
 
   before_create :add_slug
 

@@ -1,7 +1,7 @@
 class Blog::PostsController < ApplicationController
   before_filter :authorize, :except => [:index, :show, :show_by_slug]
   before_filter :get_post_by_slug, :only => [:show_by_slug]
-  before_filter :get_post, :only => [:show, :edit, :update, :delete]
+  before_filter :get_post, :only => [:show, :edit, :update, :destroy]
 
   def get_post_by_slug
     @post = Post.find_by_slug( params[:slug] )
@@ -121,7 +121,7 @@ class Blog::PostsController < ApplicationController
     @post.delete
 
     respond_to do |format|
-      format.html { redirect_to( posts_url ) }
+      format.html { redirect_to( blog_posts_url ) }
       format.xml { head :ok }
     end
   end
