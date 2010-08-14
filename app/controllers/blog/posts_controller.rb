@@ -15,7 +15,7 @@ class Blog::PostsController < ApplicationController
   # GET /posts
   # GEt /posts.xml
   def index
-    @posts = Post.all
+    @posts = Post.all( :order => 'created_at DESC' )
     respond_to do |format|
       format.html #index.html.erb
       format.xml { render :xml => @posts }
