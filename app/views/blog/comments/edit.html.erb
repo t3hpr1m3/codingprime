@@ -1,48 +1,10 @@
-<h1>Editing comment</h1>
-
-<% form_for([@post, @comment]) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.label :user_name %><br />
-    <%= f.text_field :user_name %>
-  </p>
-  <p>
-    <%= f.label :user_site %><br />
-    <%= f.text_field :user_site %>
-  </p>
-  <p>
-    <%= f.label :user_email %><br />
-    <%= f.text_field :user_email %>
-  </p>
-  <p>
-    <%= f.label :comment_text %><br />
-    <%= f.text_area :comment_text %>
-  </p>
-  <p>
-    <%= f.label :user_ip %><br />
-    <%= f.text_field :user_ip %>
-  </p>
-  <p>
-    <%= f.label :user_agent %><br />
-    <%= f.text_field :user_agent %>
-  </p>
-  <p>
-    <%= f.label :referrer %><br />
-    <%= f.text_field :referrer %>
-  </p>
-  <p>
-    <%= f.label :post %><br />
-    <%= f.text_field :post %>
-  </p>
-  <p>
-    <%= f.label :approved %><br />
-    <%= f.check_box :approved %>
-  </p>
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
-<% end %>
-
-<%= link_to 'Show', [@post, @comment] %> |
-<%= link_to 'Back', post_comments_path( @post ) %>
+    <%- if params[:preview_button] -%>
+    <h2>Edit Comment Preview</h2>
+    <%- else -%>
+    <h2>Edit Comment</h2>
+    <%- end -%>
+    <%- if params[:preview_button] -%>
+<%= render @comment %>
+    <%- end -%>
+<%= render :partial => 'form', :locals => { :comment => @comment } -%>
+    <%= link_to 'Back', blog_post_comments_path( @post ) %>

@@ -1,21 +1,17 @@
-<% if @preview -%>
-	<%= render @post %>
-<% end -%>
-<% form_for [:blog, @post] do |f| %>
-	<fieldset>
-		<%= f.error_messages %>
-		<p>
-		<%= f.label :title, 'Title:' %> <%= f.text_field :title, :size => 60 %>
-		<br />
-		<%= f.label :category, 'Category:' %> 
-		<%= collection_select( :post, :category_id, Category.all, :id, :name ) %>
-		</p>
-		<p>
-		<%= f.label :body, 'Body:', :class => 'invisible' %>
-		<%= f.text_area :body, :size => '80x30' %>
-		<p class="centertext">
-			<%= f.submit button_text %>
-			<%= f.submit 'Preview', :id => 'preview_button', :name => 'preview_button' %>
-		</p>
-	</fieldset>
-<% end %>
+      <% form_for [:blog, @post] do |f| %>
+        <fieldset>
+          <%= f.error_messages %>
+          <dl class="formfields">
+            <dt><%= f.label :title, 'Title:' %></dt>
+            <dd><%= f.text_field :title, :size => 60 %></dd>
+            <dt><%= f.label :category, 'Category:' %></dt>
+            <dd><%= collection_select( :post, :category_id, Category.all, :id, :name ) %></dd>
+            <dt><%= f.label :body, 'Body:', :class => 'invisible' %></dt>
+            <dd><%= f.text_area :body, :size => '80x30' %></dd>
+          </dl>
+          <p class="centertext">
+            <%= f.submit button_text %>
+            <%= f.submit 'Preview', :id => 'preview_button', :name => 'preview_button' %>
+          </p>
+        </fieldset>
+      <% end -%>

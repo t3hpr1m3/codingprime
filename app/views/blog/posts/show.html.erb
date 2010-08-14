@@ -1,8 +1,8 @@
-<%= render :partial => 'post', :collection => [@post] %>
-<hr />
-<%= render @post.approved_comments %>
-<%= render :partial => 'blog/comments/form', :locals => { :comment => Comment.new } %>
+<%= render :partial => 'post', :collection => [@post] -%>
+      <hr />
+<%= render @post.approved_comments -%>
+<%= render :partial => 'blog/comments/form', :locals => { :comment => Comment.new } -%>
 <% if admin? -%>
-<h3>Rejected Comments</h3>
-<%= render @post.rejected_comments %>
+      <h3>Rejected Comments</h3>
+<%= render @post.rejected_comments -%>
 <% end -%>

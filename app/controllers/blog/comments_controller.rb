@@ -98,6 +98,7 @@ class Blog::CommentsController < ApplicationController
   end
 
   private
+
   def get_post
     @post = Post.find( params[:post_id] )
     raise ActiveRecord::RecordNotFound if @post.nil?

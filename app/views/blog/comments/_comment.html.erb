@@ -1,13 +1,13 @@
-			<% div_for comment do %>
-				<strong><%= comment.user_site ? link_to( comment.user_name, comment.user_site ) : comment.user_name %></strong>
-				<%- unless comment.new_record? %>
-					<%=h comment.created_at.to_s( :post_date ) %>
-				<%- end %>
-				<%= render_text( comment.comment_text ) %>
-				<%- unless comment.new_record? %>
-				<%- if admin? %>
-					<%= link_to 'Delete', blog_post_comment_path( @post.id, comment.id ), :confirm => "Are you sure?", :method => :delete %>
-				<%- end %>
-			<%- end %>
-			<% end %>
+        <% div_for comment do %>
+          <strong><%= comment.user_site ? link_to( comment.user_name, comment.user_site ) : comment.user_name %></strong>
+          <%- unless comment.new_record? -%>
+          <%=h comment.created_at.to_s( :post_date ) %>
+          <%- end -%>
+          <%= simple_format( comment.comment_text ) -%>
+          <%- unless comment.new_record? -%>
+          <%- if admin? -%>
+          <%= link_to 'Delete', blog_post_comment_path( @post.id, comment.id ), :confirm => "Are you sure?", :method => :delete %>
+          <%- end -%>
+          <%- end -%>
+        <% end -%>
 

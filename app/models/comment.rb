@@ -28,6 +28,7 @@ class Comment < ActiveRecord::Base
                 :permalink => proc { post.url }
 
   before_save   :check_spam, :only => :create
+  before_save   :add_protocol_to_author_url
 
   validates_presence_of :user_name, :user_email, :comment_text, :user_ip, :user_agent, :post
   attr_accessible :user_name, :user_site, :user_email, :comment_text
@@ -59,5 +60,9 @@ class Comment < ActiveRecord::Base
 
   def self.recent( limit, criteria = nil )
     find( :all, :limit => limit, :conditions => criteria, :order => 'created_at DESC' )
+  end
+
+  def add_protocol_to_author_url
+    self.author_url = "http://#{author_url}" unless author_url.blank? || author_url.include?( "://" )
   end
 end
