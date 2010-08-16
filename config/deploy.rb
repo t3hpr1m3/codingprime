@@ -4,6 +4,7 @@ set :repository,  "git://github.com/t3hpr1m3/CodingPrime.git"
 set :scm, :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 set :deploy_to, "/web/#{application}"
+set :user, "josh"
 
 server "foobizzle.com", :app, :web, :db, :primary => true
 
