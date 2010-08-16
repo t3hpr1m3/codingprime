@@ -24,11 +24,11 @@ class Post < ActiveRecord::Base
   before_create :add_slug
 
   def approved_comments
-    self.comments.find( :all, :conditions => 'approved="t"', :order => 'created_at ASC' )
+    self.comments.find_all_by_approved( true, :order => 'created_at ASC' )
   end
 
   def rejected_comments
-    self.comments.find( :all, :conditions => 'approved="f"', :order => 'created_at ASC' )
+    self.comments.find_all_by_approved( false, :order => 'created_at ASC' )
   end
 
   def year
