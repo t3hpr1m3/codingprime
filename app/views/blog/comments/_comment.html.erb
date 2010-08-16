@@ -1,5 +1,5 @@
         <% div_for comment do %>
-          <strong><%= comment.user_site ? link_to( comment.user_name, comment.user_site ) : comment.user_name %></strong>
+          <strong><%= comment.author_site ? link_to( comment.author_name, comment.authorr_site ) : comment.author_name %></strong>
           <%- unless comment.new_record? -%>
           <%=h comment.created_at.to_s( :post_date ) %>
           <%- end -%>
