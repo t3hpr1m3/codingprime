@@ -29,7 +29,7 @@ class Comment < ActiveRecord::Base
                 :user_agent => :author_user_agent
 
   before_save   :check_spam, :only => :create
-  before_save   :add_protocol_to_author_url
+  before_save   :add_protocol_to_author_site
 
   validates_presence_of :author_name, :author_email, :comment_text, :author_ip, :author_user_agent, :post
   attr_accessible :author_name, :author_site, :author_email, :comment_text
@@ -63,7 +63,7 @@ class Comment < ActiveRecord::Base
     find( :all, :limit => limit, :conditions => criteria, :order => 'created_at DESC' )
   end
 
-  def add_protocol_to_author_url
-    self.author_url = "http://#{author_url}" unless author_url.blank? || author_url.include?( "://" )
+  def add_protocol_to_author_site
+    self.author_url = "http://#{author_site}" unless author_site.blank? || author_site.include?( "://" )
   end
 end
