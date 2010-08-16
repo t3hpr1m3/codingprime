@@ -64,6 +64,6 @@ class Comment < ActiveRecord::Base
   end
 
   def add_protocol_to_author_site
-    self.author_url = "http://#{author_site}" unless author_site.blank? || author_site.include?( "://" )
+    self.author_site = "http://#{author_site}" unless author_site.blank? || author_site.include?( "://" )
   end
 end
