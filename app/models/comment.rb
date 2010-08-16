@@ -20,22 +20,23 @@
 class Comment < ActiveRecord::Base
   include Rakismet::Model
   belongs_to :post
-  rakismet_attrs :author => :user_name,
-                :author_email => :user_email,
-                :author_url => :user_site,
+  rakismet_attrs :author => :author_name,
+                :author_url => :author_site,
                 :comment_type => 'comment',
                 :content => :comment_text,
-                :permalink => proc { post.url }
+                :permalink => proc { post.url },
+                :user_ip => :author_ip,
+                :user_agent => :author_user_agent
 
   before_save   :check_spam, :only => :create
   before_save   :add_protocol_to_author_url
 
-  validates_presence_of :user_name, :user_email, :comment_text, :user_ip, :user_agent, :post
-  attr_accessible :user_name, :user_site, :user_email, :comment_text
+  validates_presence_of :author_name, :author_email, :comment_text, :author_ip, :author_user_agent, :post
+  attr_accessible :author_name, :author_site, :author_email, :comment_text
 
   def request=( request )
-    self.user_ip = request.remote_ip
-	self.user_agent = request.env['HTTP_USER_AGENT']
+    self.author_ip = request.remote_ip
+	self.author_user_agent = request.env['HTTP_USER_AGENT']
 	self.referrer = request.env['HTTP_REFERER']
   end
 
