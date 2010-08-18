@@ -9,8 +9,9 @@
       <%- end -%>
         <%= render_text( post.body ) -%>
       <%- unless post.new_record? -%>
+        <%= link_to pluralize( post.comments.length, 'comment' ), "#{post.url}#comments" %>
       <%- if admin? -%>
-        <%= link_to 'Edit', edit_blog_post_path( post.id ) %>
+        <%= link_to 'Edit', edit_blog_post_path( post ) %>
         <%= link_to 'Delete', blog_post_path( post.id ), :confirm => "Are you sure?", :method => :delete %>
       <%- end -%>
       <%- end -%>

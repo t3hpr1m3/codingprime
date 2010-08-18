@@ -32,15 +32,15 @@ class Post < ActiveRecord::Base
   end
 
   def year
-    created_at.strftime( '%Y' )
+    created_at.strftime( "%Y" )
   end
 
   def month
-    created_at.strftime( '%0m' )
+    created_at.strftime( "%m" )
   end
 
   def day
-    created_at.strftime( '%0d' )
+    created_at.strftime( "%d" )
   end
 
   def url

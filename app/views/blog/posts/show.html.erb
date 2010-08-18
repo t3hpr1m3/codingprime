@@ -1,5 +1,6 @@
 <%= render :partial => 'post', :collection => [@post] -%>
       <hr />
+      <a name="comments"
 <%= render @post.approved_comments -%>
 <%= render :partial => 'blog/comments/form', :locals => { :comment => Comment.new } -%>
 <% if admin? -%>

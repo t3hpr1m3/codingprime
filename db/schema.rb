@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100226030058) do
+ActiveRecord::Schema.define(:version => 20100816142128) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -19,12 +19,12 @@ ActiveRecord::Schema.define(:version => 20100226030058) do
   end
 
   create_table "comments", :force => true do |t|
-    t.string   "user_name"
-    t.string   "user_site"
-    t.string   "user_email"
+    t.string   "author_name"
+    t.string   "author_site"
+    t.string   "author_email"
     t.text     "comment_text"
-    t.string   "user_ip"
-    t.string   "user_agent"
+    t.string   "author_ip"
+    t.string   "author_user_agent"
     t.string   "referrer"
     t.integer  "post_id"
     t.boolean  "approved"
