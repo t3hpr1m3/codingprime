@@ -1,40 +1,46 @@
 body {
-	height: 100%;
-	margin: 0;
-	padding: 0;
-	/*
-	background: #6996d3;
-	*/
-	font-size: 80%;
-	font-family: verdana, arial, sans-serif;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: 85%;
+  font-family: verdana, helvetica, arial, sans-serif;
 }
 
 /***********************
  * Global Styles
  ***********************/
 a {
-	color: #0e0940;
+  color: #ae7a2c;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 img {
-	border: 0 none;
+  border: 0 none;
 }
 
 h2 {
-	margin-bottom: 0;
-	border-bottom: 1px dotted #999999;
+  margin-bottom: 0;
+  border-bottom: 1px dotted #999999;
 }
 
 h2 a {
-	text-decoration: none;
+  text-decoration: none;
+}
+
+h2 a:hover {
+  text-decoration: underline;
 }
 
 fieldset {
-	border: 0 none;
+  border: 0 none;
 }
 
 pre {
-	padding: 10px;
+  padding: 10px;
 }
 
 /***********************
@@ -224,6 +230,10 @@ dl.formfields dd {
 	float: left;
 	margin-left: 5px;
     padding-top: 1em;
+}
+
+#sidebar p {
+  font-size: .8em;
 }
 
 #footer {

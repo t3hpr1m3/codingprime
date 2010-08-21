@@ -5,7 +5,6 @@
   <title><%= page_title %></title>
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <%= render 'layouts/stylesheets' -%>
-  <%= stylesheet_link_tag 'harsh/spacecadet' %>
   <%= auto_discovery_link_tag :atom, blog_posts_path( :atom ) %>
 </head>
 <body>
@@ -23,6 +22,10 @@
 <%= yield -%>
     </div>
     <div id="sidebar">
+      <h2>About</h2>
+      <p>
+        My name is Josh Williams.  I write code for fun and profit, but mainly for profit.
+      </p>
       <%= link_to image_tag( "gentoo-badge3.png" ), "http://www.gentoo.org" %>
       <%= link_to image_tag( "palink.gif" ), "http://www.penny-arcade.com" %>
       <%= link_to image_tag( "dronezone.gif" ), "http://www.somafm.com" %>
@@ -38,6 +41,8 @@
       <h2>Admin</h2>
       <ul>
         <li><%= link_to "New Category", new_blog_category_path %></li>
+        <li><%= link_to "New Post", new_blog_post_path %></li>
+        <li><%= link_to "Logout", logout_path %></li>
       </ul>
     <%- end -%>
     </div>

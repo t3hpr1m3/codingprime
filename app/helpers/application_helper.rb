@@ -30,7 +30,7 @@ module ApplicationHelper
           "<pre>" + h( piece.strip ) + "</pre>"
         else
           lang = language ? language : "ruby"
-          harsh( piece.strip, { :format => lang, :theme => "spacecadet" } )
+          harsh( piece.strip, { :format => lang, :theme => ::AppConfig.harsh_theme } )
         end
       else
         render_markdown( piece, options )
