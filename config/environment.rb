@@ -23,7 +23,7 @@ Rails::Initializer.run do |config|
   config.gem "textpow"
   config.gem "ultraviolet", :version => '0.10.2', :lib => 'uv'
   config.gem "rakismet"
-
+  config.gem 'mislav-will_paginate', :lib => 'will_paginate', :source => 'http://gems.github.com'
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
   # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
@@ -43,3 +43,5 @@ Rails::Initializer.run do |config|
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
 end
+
+require "will_paginate"

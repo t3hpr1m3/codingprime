@@ -33,6 +33,8 @@ class Comment < ActiveRecord::Base
 
   validates_presence_of :author_name, :author_email, :comment_text, :author_ip, :author_user_agent, :post
   attr_accessible :author_name, :author_site, :author_email, :comment_text
+  named_scope :valid, :conditions => { :approved => true }, :order => 'created_at ASC'
+  named_scope :rejected, :conditions => { :approved => false }, :order => 'created_at ASC'
 
   def request=( request )
     self.author_ip = request.remote_ip
@@ -53,14 +55,6 @@ class Comment < ActiveRecord::Base
   def reject
     self.spam!
     self.approved = false
-  end
-
-  def self.approved
-    find( :all, :conditions => 'approved=1', :order => 'created_at DESC' )
-  end
-
-  def self.recent( limit, criteria = nil )
-    find( :all, :limit => limit, :conditions => criteria, :order => 'created_at DESC' )
   end
 
   def add_protocol_to_author_site

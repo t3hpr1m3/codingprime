@@ -21,15 +21,9 @@ class Post < ActiveRecord::Base
   has_many :comments
   attr_accessible :title, :body, :category_id
 
+  named_scope :recent, :order => 'created_at DESC'
+
   before_create :add_slug
-
-  def approved_comments
-    self.comments.find_all_by_approved( true, :order => 'created_at ASC' )
-  end
-
-  def rejected_comments
-    self.comments.find_all_by_approved( false, :order => 'created_at ASC' )
-  end
 
   def year
     created_at.strftime( "%Y" )
@@ -48,7 +42,8 @@ class Post < ActiveRecord::Base
   end
 
   private
-    def add_slug
-      self.slug = Post.generate_slug( self.title )
-    end
+
+  def add_slug
+    self.slug = Post.generate_slug( self.title )
+  end
 end

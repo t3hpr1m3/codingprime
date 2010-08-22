@@ -15,9 +15,9 @@ class Blog::PostsController < ApplicationController
   # GET /posts
   # GEt /posts.xml
   def index
-    @posts = Post.all( :order => 'created_at DESC' )
+    @posts = Post.recent
     respond_to do |format|
-      format.html #index.html.erb
+      format.html { @posts = @posts.paginate( :page => params[:page], :per_page => 5 ) }
       format.xml { render :xml => @posts }
       format.atom
       format.json { render :json => @posts }

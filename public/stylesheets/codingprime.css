@@ -47,35 +47,35 @@ pre {
  * Global Classes
  ***********************/
 .flash {
-	padding: 1em;
+  padding: 1em;
 }
 
 .notice {
-	border: 1px solid #329000;
-	background-color: #99eeb6;
-	color: #55a62a;
+  border: 1px solid #329000;
+  background-color: #99eeb6;
+  color: #55a62a;
 }
 
 .error {
-	border: 1px solid #a62f00;
-	background-color: #fa7080;
-	color: #b72e3e;
+  border: 1px solid #a62f00;
+  background-color: #fa7080;
+  color: #b72e3e;
 }
 
 .clearfix:after {
-	content: ".";
-	display: block;
-	height: 0;
-	clear: both;
-	visibility: hidden;
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
 }
 
 .invisible {
-	display: none;
+  display: none;
 }
 
 .centertext {
-	text-align: center;
+  text-align: center;
 }
 
 .fright {
@@ -87,149 +87,90 @@ pre {
 }
 
 dl.formfields {
-	margin: 0;
+  margin: 0;
 }
+
 dl.formfields dt {
-	padding: 0 .5em 0 0;
-	margin: 1em 0 0 0;
-	line-height: 2em;
+  padding: 0 .5em 0 0;
+  margin: 1em 0 0 0;
+  line-height: 2em;
 }
 
 dl.formfields dt label {
-	line-height: 2em;
-	font-weight: bold;
+  line-height: 2em;
+  font-weight: bold;
 }
 
 dl.formfields dd {
-	margin: 0;
-	line-height: 2em;
+  margin: 0;
+  line-height: 2em;
 }
 
 /***********************
  * Site Structure
  ***********************/
-#header {
-	/*
-	background: #160773;
-	*/
-	font-size: 1.2em;
-	font-family: "Trebuchet MS", "Lucida Grande", arial, helvetica, sans-serif;
-	/*
-	border-bottom: 10px solid #bfa130;
-	*/
-    display: none;
-}
-
-#headercontent {
-	width: 900px;
-	height: 100px;
-	margin: 0 auto;
-	padding: 10px 0 0 0;
-	background-color: #05316d;
-	border-right: 1px solid #000000;
-	border-left: 1px solid #000000;
-}
-
-#headercontent h1 {
-	margin: 10px 0 0 10px;
-}
-
-#headercontent h1 a {
-	color: #ffffff;
-	text-decoration: none;
-	font-family: helvetica, times, serif;
-}
-
-#headercontent h1 a span {
-	color: #ffffff;
-	font-variant: small-caps;
-	font-family: georgia;
-	font-size: 1.3em;
-}
-
-#headercontent p {
-	margin: 0 0 0 10px;
-	font-style: italic;
-	text-transform: uppercase;
-	color: #dec1a1;
-	font-size: .8em;
-}
-
-#headercontent p span {
-	font-weight: bold;
-	font-style: normal;
-	color: #ffe273;
-}
-
 #nav {
-	position: absolute;
-	top: 0;
-	background-color: #000000;
-	width: 100%;
-    background-image: url( '../images/nav_bg.jpg' );
-    background-repeat: repeat-x;
+  position: absolute;
+  top: 0;
+  background-color: #000000;
+  width: 100%;
+  background-image: url( '../images/nav_bg.jpg' );
+  background-repeat: repeat-x;
 }
 
 #nav span a {
-	color: #ffffff;
-	text-decoration: none;
-	font-style: italic;
-	line-height: 2em;
-	margin-right: 2em;
+  color: #ffffff;
+  text-decoration: none;
+  font-style: italic;
+  line-height: 2em;
+  margin-right: 2em;
 }
 
 #nav ul {
-	text-decoration: none;
-	width: 870px;
-	margin: 0 auto;
-	padding: 0;
-	line-height: 2em;
+  text-decoration: none;
+  width: 870px;
+  margin: 0 auto;
+  padding: 0;
+  line-height: 2em;
 }
 
 #nav ul li {
-	display: inline-block;
-	float: left;
-	width: 5em;
-	color: #ffe273;
-	font-variant: small-caps;
+  display: inline-block;
+  float: left;
+  width: 5em;
+  color: #ffe273;
+  font-variant: small-caps;
 }
 
 #nav ul li a {
-	text-decoration: none;
-	color: #ffffff;
-    /*
-	font-variant: small-caps;
-    */
+  text-decoration: none;
+  color: #ffffff;
 }
 
 #nav ul li a:hover {
-	text-decoration: underline;
-	color: #002670;
+  text-decoration: underline;
+  color: #002670;
 }
 
 #container {
-	width: 900px;
-	margin: 2em auto;
-	padding: 0;
-	background-color: #ffffff;
-    /*
-	border-right: 1px solid #000000;
-	border-left: 1px solid #000000;
-    */
+  width: 900px;
+  margin: 2em auto;
+  padding: 0;
+  background-color: #ffffff;
 }
 
 #content {
-	padding: 5px 30px 30px 30px;
-	width: 600px;
-	float: left;
-	border-right: 1px solid #90cb84;
+  padding: 5px 30px 30px 30px;
+  width: 600px;
+  float: left;
+  border-right: 1px solid #90cb84;
 }
 
 #sidebar {
-	width: 160px;
-	float: left;
-	margin-left: 5px;
-    padding-top: 1em;
+  width: 160px;
+  float: left;
+  margin-left: 5px;
+  padding-top: 1em;
 }
 
 #sidebar p {
@@ -237,58 +178,48 @@ dl.formfields dd {
 }
 
 #footer {
-  /*
-	width: 890px;
-	margin: 0 auto;
-	background-color: #05316d;
-    */
   background-color: #000000;
-	padding: 5px 0;
-	color: #ffffff;
-    /*
-	border-right: 1px solid #000000;
-	border-left: 1px solid #000000;
-	border-bottom: 1px solid #000000;
-    */
-    background-image: url( '../images/nav_bg.jpg' );
-    background-repeat: repeat-x;
+  padding: 5px 0;
+  color: #ffffff;
+  background-image: url( '../images/nav_bg.jpg' );
+  background-repeat: repeat-x;
 }
 
 #footer p {
-	width: 870px;
-	margin: 0 auto;
+  width: 870px;
+  margin: 0 auto;
 }
 
 /***********************
  * Post Display
  ***********************/
 .dateline {
-	font-size: .8em;
-	color: #303030;
+  font-size: .8em;
+  color: #303030;
 }
 
 .code_block_title {
-	font-style: italic;
+  font-style: italic;
 }
 
 /***********************
  * Post Editing
  ***********************/
 .post_preview_header {
-	text-size: 1.2em;
+  text-size: 1.2em;
 }
 
 .post_preview {
-	border: 1px solid #000000;
-	padding: .5em;
+  border: 1px solid #000000;
+  padding: .5em;
 }
 
 /***********************
  * Post Editing
  ***********************/
 .comment {
-	border: 1px solid #cccccc;
-	background-color: #e0e0e0;
-	padding: 1em;
-	margin-bottom: 20px;
+  border: 1px solid #cccccc;
+  background-color: #e0e0e0;
+  padding: 1em;
+  margin-bottom: 20px;
 }

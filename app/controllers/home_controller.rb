@@ -6,4 +6,7 @@ class HomeController < ApplicationController
       format.atom
     end
   end
+
+  def contact
+  end
 end

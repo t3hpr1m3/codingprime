@@ -3,7 +3,7 @@ atom_feed do |feed|
   feed.updated( @posts.first.created_at )
 
   @posts.each do |post|
-    feed.entry( post ) do |entry|
+    feed.entry( [:blog, post] ) do |entry|
       entry.title( post.title )
       #entry.content( render_markdown( post.body ), :type => 'html' )
       entry.content :type => 'html' do |c|
@@ -11,7 +11,7 @@ atom_feed do |feed|
       end
       entry.author do |author|
         author.name( post.user.name )
-        author.uri( root_url )
+        author.uri( blog_root_url )
       end
     end
   end

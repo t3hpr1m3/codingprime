@@ -8,14 +8,6 @@
   <%= auto_discovery_link_tag :atom, blog_posts_path( :atom ) %>
 </head>
 <body>
-  <div id="header" class="clearfix">
-    <div id="headercontent">
-      <h1><%= link_to '#codingPrime', www_root_url %></h1>
-      <p>
-        <span>&lt;blurb&gt;</span>insert witty text here<span>&lt;/blurb&gt;</span>
-      </p>
-    </div>
-  </div>
   <div id="container" class="clearfix">
     <div id="content">
 <%= render 'shared/display_flash' -%>

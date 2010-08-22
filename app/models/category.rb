@@ -18,6 +18,10 @@ class Category < ActiveRecord::Base
 
   before_create :add_slug
 
+  def recent_posts
+    posts.recent
+  end
+
   def to_param
     "#{slug}"
   end

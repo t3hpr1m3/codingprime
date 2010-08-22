@@ -1,5 +1,3 @@
-<%= render :partial => 'post', :collection => @posts  -%>
-<%- if admin? -%>
-      <hr />
-      <%= link_to 'New post', new_blog_post_path %>
-<%- end -%>
+<%= render :partial => 'shared/pagination', :locals => { :coll => @posts, :next_text => 'Older Posts >', :prev_text => '< Newer Posts' } %>
+<%= render @posts  -%>
+<%= render :partial => 'shared/pagination', :locals => { :coll => @posts, :next_text => 'Older Posts >', :prev_text => '< Newer Posts' } %>

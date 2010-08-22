@@ -22,10 +22,10 @@ class Blog::CategoriesController < ApplicationController
   # GET /categories/1.xml
   def show
     @title = @category.name
-    @posts = @category.posts
+    @posts = @category.posts.recent
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html { @posts = @posts.paginate( :page => params[:page], :per_page => 5 ) }
       format.xml  { render :xml => @category }
     end
   end
