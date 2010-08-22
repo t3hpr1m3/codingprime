@@ -2,7 +2,7 @@
       <hr />
       <a name="comments"></a>
 <%= render @post.comments.valid -%>
-<%= render :partial => 'blog/comments/form', :locals => { :comment => Comment.new } -%>
+<%= render :partial => 'blog/comments/form', :locals => { :comment => @comment } -%>
 <% if admin? and @post.comments.rejected.count > 0 -%>
       <h3>Rejected Comments</h3>
 <%= render @post.comments.rejected -%>

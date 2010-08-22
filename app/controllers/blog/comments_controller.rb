@@ -1,12 +1,11 @@
 class Blog::CommentsController < ApplicationController
-  before_filter :get_post, :except => [:index]
-  before_filter :authorize, :only => [:delete]
+  before_filter :authorize, :only => [:edit, :update, :destroy]
 
   # GET /comments
   # GET /comments.xml
   def index
-    @approved_comments = Comment.recent( 20, :approved => true )
-    @rejected_comments = Comment.recent( 20, :approved => false ) if admin?
+    @approved_comments = Comment.valid
+    @rejected_comments = Comment.rejected if admin?
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,37 +13,26 @@ class Blog::CommentsController < ApplicationController
     end
   end
 
-  # GET /comments/1
-  # GET /comments/1.xml
-  def show
-    @comment = Comment.find( params[:id] )
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @comment }
-    end
-  end
-
   # GET /comments/new
   # GET /comments/new.xml
   def new
-    @comment = Comment.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @comment }
-    end
+    flash[:notice] = 'To add a comment, please visit a post.'
+    redirect_to blog_root_url
   end
 
   # GET /comments/1/edit
   def edit
-    @comment = @post.comments.find( params[:id] )
+    @comment = Comment.find( params[:id] )
+    raise ActiveRecord::RecordNotFound if @comment.nil?
+    respond_to do |format|
+      format.html
+    end
   end
 
   # POST /comments
   # POST /comments.xml
   def create
-    @comment = @post.comments.build( params[:comment] )
+    @comment = Comment.new( params[:comment] )
 	@comment.request = request
 
     if params[:preview_button]
@@ -57,7 +45,7 @@ class Blog::CommentsController < ApplicationController
       respond_to do |format|
         if @comment.save
           flash[:notice] = 'Comment was successfully created.'
-          format.html { redirect_to [:blog, @post] }
+          format.html { redirect_to @comment.post.url }
           format.xml  { render :xml => @comment, :status => :created, :location => @comment }
         else
           flash[:error] = 'Error saving comment.'
@@ -71,16 +59,23 @@ class Blog::CommentsController < ApplicationController
   # PUT /comments/1
   # PUT /comments/1.xml
   def update
-    @comment = @post.comments.find( params[:id] )
+    @comment = Comment.find( params[:id] )
 
     respond_to do |format|
-      if @comment.update_attributes(params[:comment])
-        flash[:notice] = 'Comment was successfully updated.'
-        format.html { redirect_to(@comment) }
-        format.xml  { head :ok }
-      else
+      if params[:preview]
+        @preview = true
+        @comment.attributes = params[:comment]
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @comment.errors, :status => :unprocessable_entity }
+      else
+        if @comment.update_attributes(params[:comment])
+          flash[:notice] = 'Comment was successfully updated.'
+          format.html { redirect_to(@comment.post.url) }
+          format.xml  { head :ok }
+        else
+          flash[:error] = 'Error saving comment.'
+          format.html { render :action => "edit" }
+          format.xml  { render :xml => @comment.errors, :status => :unprocessable_entity }
+        end
       end
     end
   end
@@ -88,19 +83,13 @@ class Blog::CommentsController < ApplicationController
   # DELETE /comments/1
   # DELETE /comments/1.xml
   def destroy
-    @comment = @post.comments.find( params[:id] )
+    @comment = Comment.find( params[:id] )
+    @post = @comment.post
     @comment.destroy
 
     respond_to do |format|
-      format.html { redirect_to [:blog, @post] }
+      format.html { redirect_to @post.url }
       format.xml  { head :ok }
     end
-  end
-
-  private
-
-  def get_post
-    @post = Post.find( params[:post_id] )
-    raise ActiveRecord::RecordNotFound if @post.nil?
   end
 end

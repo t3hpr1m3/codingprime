@@ -28,6 +28,7 @@ class Blog::PostsController < ApplicationController
   # GET /2010/02/01/my-post-title.xml
   def show_by_slug
     @title = @post.title
+    @comment = Comment.new( :post => @post )
 
     respond_to do |format|
       format.html { render :action => "show" }
@@ -93,10 +94,7 @@ class Blog::PostsController < ApplicationController
   def update
     if params[:preview_button]
       @preview = true
-      puts "Post: #{params[:post]}"
       @post.attributes = params[:post]
-      #@post.title = params[:post][:title]
-      #@post.body = params[:post][:body]
       respond_to do |format|
         format.html { render :action => "edit" }
       end

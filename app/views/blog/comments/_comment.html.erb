@@ -6,7 +6,7 @@
           <%= simple_format( comment.comment_text ) -%>
           <%- unless comment.new_record? -%>
           <%- if admin? -%>
-          <%= link_to 'Delete', blog_post_comment_path( @post.id, comment.id ), :confirm => "Are you sure?", :method => :delete %>
+          <%= link_to 'Delete', blog_comment_path( comment ), :confirm => "Are you sure?", :method => :delete %>
           <%- end -%>
           <%- end -%>
         <% end -%>

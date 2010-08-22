@@ -4,6 +4,10 @@ Factory.sequence :username do |n|
   "user#{n}"
 end
 
+Factory.sequence :name do |n|
+  "Test User#{n}"
+end
+
 Factory.sequence :email do |n|
   "foo#{n}@bar.com"
 end
@@ -21,7 +25,7 @@ Factory.define :user do |f|
   f.password "foobar"
   f.password_confirmation { |u| u.password }
   f.email { Factory.next( :email ) }
-  f.name "Test User"
+  f.name { Factory.next( :name ) }
   f.is_admin false
 end
 
@@ -30,7 +34,7 @@ Factory.define :admin, :class => User do |u|
   u.password "foobar"
   u.password_confirmation { |f| f.password }
   u.email { Factory.next( :email ) }
-  u.name "Test User"
+  u.name { Factory.next( :name ) }
   u.is_admin true
 end
 
@@ -47,12 +51,12 @@ Factory.define :post do |p|
 end
 
 Factory.define :comment do |c|
-  c.user_name "comment_user"
-  c.user_site "www.google.com"
-  c.user_email "testuser@foo.com"
+  c.author_name "comment_user"
+  c.author_site "www.google.com"
+  c.author_email "testuser@foo.com"
   c.comment_text "My test comment"
-  c.user_ip "127.0.0.1"
-  c.user_agent "Mozilla"
+  c.author_ip "127.0.0.1"
+  c.author_user_agent "Mozilla"
   c.referrer ""
   c.approved false
   c.association :post

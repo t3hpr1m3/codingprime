@@ -1,4 +1,5 @@
-<h3>Comments for <%= link_to @post.title, @post.url %></h3>
-<%= render :collection => @post.approved_comments %>
-
-<%= link_to 'New comment', new_post_comment_path( @post ) %>
+<%= render :collection => @approved_comments -%>
+<%- if admin? -%>
+  <h2>Rejected Comments</h2>
+  <%= render :collection => @rejected_comments -%>
+<%- end -%>

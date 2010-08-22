@@ -1,10 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
   map.subdomain :blog do |blog|
-    blog.resources :posts do |post|
-      post.resources :comments, :except => [:index]
-    end
+    blog.resources :posts
     blog.resources :categories
-    blog.resources :comments, :only => [:index]
+    blog.resources :comments
     blog.root :controller => "posts"
     blog.connect ':year/:month/:day/:slug.:format',
                 :controller => 'posts',

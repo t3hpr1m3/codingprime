@@ -26,12 +26,8 @@ module ApplicationHelper
         language = nil
         nil
       elsif in_pre
-        if options[:escape_harsh]
-          "<pre>" + h( piece.strip ) + "</pre>"
-        else
-          lang = language ? language : "ruby"
-          harsh( piece.strip, { :format => lang, :theme => ::AppConfig.harsh_theme } )
-        end
+        lang = language ? language : "ruby"
+        harsh( piece.strip, { :format => lang, :theme => ::AppConfig.harsh_theme } )
       else
         render_markdown( piece, options )
       end
@@ -39,10 +35,6 @@ module ApplicationHelper
   end
 
   def render_markdown( text, options = {} )
-    if options[:strip]
-      RDiscount.new( strip_tags( text.strip ) ).to_html
-    else
-      RDiscount.new( text.strip ).to_html
-    end
+    RDiscount.new( text.strip ).to_html
   end
 end

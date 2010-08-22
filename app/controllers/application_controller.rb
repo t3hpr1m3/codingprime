@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
 
     def authorize
       unless admin?
-        raise PermissionDenied
+        raise Exceptions::PermissionDenied
       end
     end
 

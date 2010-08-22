@@ -1,20 +1,20 @@
 # == Schema Information
-# Schema version: 20100226030058
+# Schema version: 20100816142128
 #
 # Table name: comments
 #
-#  id           :integer         not null, primary key
-#  user_name    :string(255)
-#  user_site    :string(255)
-#  user_email   :string(255)
-#  comment_text :text
-#  user_ip      :string(255)
-#  user_agent   :string(255)
-#  referrer     :string(255)
-#  post_id      :integer
-#  approved     :boolean
-#  created_at   :datetime
-#  updated_at   :datetime
+#  id                :integer         not null, primary key
+#  author_name       :string(255)
+#  author_site       :string(255)
+#  author_email      :string(255)
+#  comment_text      :text
+#  author_ip         :string(255)
+#  author_user_agent :string(255)
+#  referrer          :string(255)
+#  post_id           :integer
+#  approved          :boolean
+#  created_at        :datetime
+#  updated_at        :datetime
 #
 
 class Comment < ActiveRecord::Base
@@ -32,7 +32,6 @@ class Comment < ActiveRecord::Base
   before_save   :add_protocol_to_author_site
 
   validates_presence_of :author_name, :author_email, :comment_text, :author_ip, :author_user_agent, :post
-  attr_accessible :author_name, :author_site, :author_email, :comment_text
   named_scope :valid, :conditions => { :approved => true }, :order => 'created_at ASC'
   named_scope :rejected, :conditions => { :approved => false }, :order => 'created_at ASC'
 

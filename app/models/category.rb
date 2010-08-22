@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100226030058
+# Schema version: 20100816142128
 #
 # Table name: categories
 #
@@ -17,10 +17,6 @@ class Category < ActiveRecord::Base
   validates_uniqueness_of :name
 
   before_create :add_slug
-
-  def recent_posts
-    posts.recent
-  end
 
   def to_param
     "#{slug}"

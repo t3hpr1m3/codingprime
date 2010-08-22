@@ -1,5 +1,6 @@
-      <% form_for [:blog, @post, comment] do |f| %>
+      <% form_for [:blog, comment] do |f| %>
         <fieldset>
+          <%= f.hidden_field :post_id %>
           <%= f.error_messages %>
           <dl class="formfields">
             <dt><%= f.label :author_name, 'Name' %></dt>

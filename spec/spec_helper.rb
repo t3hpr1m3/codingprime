@@ -35,6 +35,7 @@ Spec::Runner.configure do |config|
   # == Notes
   #
   # For more information take a look at Spec::Runner::Configuration and Spec::Runner
+  config.include CustomControllerMatchers
 end
 
 def login_user( options = {} )

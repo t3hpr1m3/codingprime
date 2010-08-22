@@ -1,20 +1,20 @@
 # == Schema Information
-# Schema version: 20100226030058
+# Schema version: 20100816142128
 #
 # Table name: comments
 #
-#  id           :integer         not null, primary key
-#  user_name    :string(255)
-#  user_site    :string(255)
-#  user_email   :string(255)
-#  comment_text :text
-#  user_ip      :string(255)
-#  user_agent   :string(255)
-#  referrer     :string(255)
-#  post_id      :integer
-#  approved     :boolean
-#  created_at   :datetime
-#  updated_at   :datetime
+#  id                :integer         not null, primary key
+#  author_name       :string(255)
+#  author_site       :string(255)
+#  author_email      :string(255)
+#  comment_text      :text
+#  author_ip         :string(255)
+#  author_user_agent :string(255)
+#  referrer          :string(255)
+#  post_id           :integer
+#  approved          :boolean
+#  created_at        :datetime
+#  updated_at        :datetime
 #
 
 require 'spec_helper'
@@ -25,10 +25,10 @@ describe Comment do
   end
 
   it { should validate_presence_of( :comment_text ) }
-  it { should validate_presence_of( :user_name ) }
-  it { should validate_presence_of( :user_email ) }
-  it { should validate_presence_of( :user_ip ) }
-  it { should validate_presence_of( :user_agent ) }
+  it { should validate_presence_of( :author_name ) }
+  it { should validate_presence_of( :author_email ) }
+  it { should validate_presence_of( :author_ip ) }
+  it { should validate_presence_of( :author_user_agent ) }
   it { should belong_to( :post ) }
 
   it "should be approved it it's not spam" do

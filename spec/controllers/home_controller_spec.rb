@@ -1,10 +1,11 @@
 require 'spec_helper'
 
-describe HomeController do
+describe HomeController, 'as guest' do
 
-  #Delete this example and add some real ones
-  it "should use HomeController" do
-    controller.should be_an_instance_of(HomeController)
+  describe 'index' do
+    before( :each ) do
+      get :index, :subdomains => ['www']
+    end
+    it { should redirect_to( blog_root_url ) }
   end
-
 end

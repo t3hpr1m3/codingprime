@@ -26,7 +26,7 @@ describe ApplicationHelper do
 
     describe "with code chunk" do
       it "should render properly" do
-        helper.render_text( "<code>foo</code>" ).should eql( ["\n", nil, "<pre class=\"spacecadet\">foo\n</pre>", nil] )
+        helper.render_text( "<code>foo</code>" ).should eql( ["\n", nil, "<pre class=\"#{::AppConfig.harsh_theme}\">foo\n</pre>", nil] )
       end
     end
   end
