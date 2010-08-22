@@ -203,19 +203,7 @@ dl.formfields dd {
 }
 
 /***********************
- * Post Editing
- ***********************/
-.post_preview_header {
-  text-size: 1.2em;
-}
-
-.post_preview {
-  border: 1px solid #000000;
-  padding: .5em;
-}
-
-/***********************
- * Post Editing
+ * Comments
  ***********************/
 .comment {
   border: 1px solid #cccccc;

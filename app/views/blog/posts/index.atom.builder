@@ -3,9 +3,8 @@ atom_feed do |feed|
   feed.updated( @posts.first.created_at )
 
   @posts.each do |post|
-    feed.entry( [:blog, post] ) do |entry|
+    feed.entry( [:blog, post], :url => post.url ) do |entry|
       entry.title( post.title )
-      #entry.content( render_markdown( post.body ), :type => 'html' )
       entry.content :type => 'html' do |c|
         c.cdata!( render_text( post.body, :escape_harsh => true ).join )
       end

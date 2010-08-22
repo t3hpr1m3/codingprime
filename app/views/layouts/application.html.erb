@@ -7,9 +7,9 @@
 <%= render 'layouts/stylesheets' -%>
   <%= auto_discovery_link_tag :atom, blog_posts_path( :atom ) %>
   <script type="text/javascript">
-
+  //<![CDATA[
     var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-18120505-1']);
+    _gaq.push(['_setAccount', 'UA-18124207-1']);
     _gaq.push(['_trackPageview']);
 
     (function() {
@@ -17,7 +17,7 @@
       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
-
+  //]]>
   </script>
 </head>
 <body>
@@ -50,13 +50,14 @@
         <li><%= link_to "Logout", logout_path %></li>
       </ul>
     <%- end -%>
-    <script type="text/javascript"><!--
+    <script type="text/javascript">
+    //<![CDATA[
       google_ad_client = "pub-1022704200414427";
       /* 120x240, created 8/21/10 */
       google_ad_slot = "4783612324";
       google_ad_width = 120;
       google_ad_height = 240;
-      //-->
+    //]]>
     </script>
     <script type="text/javascript"
       src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
