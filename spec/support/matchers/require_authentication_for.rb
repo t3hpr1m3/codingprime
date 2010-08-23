@@ -1,6 +1,7 @@
 module CustomControllerMatchers
-  def require_authentication_for( method, action, *args )
+  def require_authentication_for( action, *args )
     options = args.extract_options!
+    method = args.first.is_a?( Symbol ) ? args.first : :get
     RequireAuthenticationMatcher.new( method, action, options, self )
   end
 
@@ -35,10 +36,10 @@ module CustomControllerMatchers
     end
 
     def failure_message_for_should_not
-      if @except.nil?
+      if @actual_exception.nil?
         'Not sure what happened'
       else
-        "Expected the call to succeed, but #{@except.message} was raised"
+        "Expected the call to succeed, but #{@actual_exception.message} was raised"
       end
     end
 

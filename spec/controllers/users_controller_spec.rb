@@ -5,13 +5,13 @@ describe UsersController, 'as guest' do
     logout_user
   end
 
-  it { should require_authentication_for( :get, :index ) }
-  it { should require_authentication_for( :get, :show, :id => 1 ) }
-  it { should require_authentication_for( :get, :new ) }
-  it { should require_authentication_for( :get, :edit, :id => 1 ) }
-  it { should require_authentication_for( :post, :create ) }
-  it { should require_authentication_for( :put, :update, :id => 1 ) }
-  it { should require_authentication_for( :delete, :destroy, :id => 1 ) }
+  it { should require_authentication_for( :index ) }
+  it { should require_authentication_for( :show, :id => 1 ) }
+  it { should require_authentication_for( :new ) }
+  it { should require_authentication_for( :edit, :id => 1 ) }
+  it { should require_authentication_for( :create, :post ) }
+  it { should require_authentication_for( :update, :put, :id => 1 ) }
+  it { should require_authentication_for( :destroy, :delete, :id => 1 ) }
 end
 
 describe UsersController, 'as normal user' do
@@ -19,13 +19,13 @@ describe UsersController, 'as normal user' do
     login_user
   end
 
-  it { should require_authentication_for( :get, :index ) }
-  it { should require_authentication_for( :get, :show, :id => 1 ) }
-  it { should require_authentication_for( :get, :new ) }
-  it { should require_authentication_for( :get, :edit, :id => 1 ) }
-  it { should require_authentication_for( :post, :create ) }
-  it { should require_authentication_for( :put, :update, :id => 1 ) }
-  it { should require_authentication_for( :delete, :destroy, :id => 1 ) }
+  it { should require_authentication_for( :index ) }
+  it { should require_authentication_for( :show, :id => 1 ) }
+  it { should require_authentication_for( :new ) }
+  it { should require_authentication_for( :edit, :id => 1 ) }
+  it { should require_authentication_for( :create, :post ) }
+  it { should require_authentication_for( :update, :put, :id => 1 ) }
+  it { should require_authentication_for( :destroy, :delete, :id => 1 ) }
 end
 
 describe UsersController, 'as admin' do

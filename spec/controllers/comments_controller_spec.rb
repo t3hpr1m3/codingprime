@@ -5,9 +5,9 @@ describe Blog::CommentsController, 'as guest' do
     logout_user
   end
 
-  it { should require_authentication_for( :get, :edit, :id => 1, :subdomains => ['blog'] ) }
-  it { should require_authentication_for( :put, :update, :id => 1, :subdomains => ['blog'] ) }
-  it { should require_authentication_for( :delete, :destroy, :id => 1, :subdomains => ['blog'] ) }
+  it { should require_authentication_for( :edit, :id => 1, :subdomains => ['blog'] ) }
+  it { should require_authentication_for( :update, :put, :id => 1, :subdomains => ['blog'] ) }
+  it { should require_authentication_for( :destroy, :delete, :id => 1, :subdomains => ['blog'] ) }
 
   describe 'index' do
     before( :each ) do
