@@ -3,17 +3,6 @@ class Blog::PostsController < ApplicationController
   before_filter :get_post_by_slug, :only => [:show_by_slug]
   before_filter :get_post, :only => [:show, :edit, :update, :destroy]
 
-  def get_post_by_slug
-    @post = Post.find_by_slug( params[:slug] )
-    raise ActiveRecord::RecordNotFound if @post.nil?
-  end
-
-  def get_post
-    @post = Post.find( params[:id] )
-  end
-
-  # GET /posts
-  # GEt /posts.xml
   def index
     @posts = Post.recent
     respond_to do |format|
@@ -24,8 +13,6 @@ class Blog::PostsController < ApplicationController
     end
   end
 
-  # GET /2010/02/01/my-post-title
-  # GET /2010/02/01/my-post-title.xml
   def show_by_slug
     @title = @post.title
     @comment = Comment.new( :post => @post )
@@ -36,16 +23,12 @@ class Blog::PostsController < ApplicationController
     end
   end
 
-  # GET /posts/1
-  # GET /posts/1.xml
   def show
     redirect_to @post.url, :status => 301
   end
 
-  # GET /posts/new
-  # GET /post/new.xml
   def new
-    @post = Post.new
+    @post = current_user.posts.build
 
     respond_to do |format|
       format.html
@@ -53,7 +36,27 @@ class Blog::PostsController < ApplicationController
     end
   end
 
-  # GET /posts/1/edit
+  def create
+    @post = current_user.posts.build(params[:post])
+
+    if params[:preview_button]
+      respond_to do |format|
+        format.html { render :preview }
+        format.xml
+      end
+    else
+      respond_to do |format|
+        if @post.save
+          format.html { redirect_to @post.url, :notice => 'Post created successfully.' }
+          format.xml { render :xml => @post, :status => :created, :location => @post }
+        else
+          format.html { render :new }
+          format.xml { render :xml => @post.errors, :status => :unprocessable_entity }
+        end
+      end
+    end
+  end
+
   def edit
     respond_to do |format|
       format.html
@@ -62,65 +65,42 @@ class Blog::PostsController < ApplicationController
     end
   end
 
-  # POST /posts
-  # POST /post.xml
-  def create
-    @post = Post.new( params[:post] )
-
-    if params[:preview_button]
-      @preview = true
-      respond_to do |format|
-        format.html { render :action => "new" }
-        format.xml
-      end
-    else
-      @post.user = current_user
-      respond_to do |format|
-        if @post.save
-          flash[:notice] = 'Post created successfully.'
-          format.html { redirect_to( @post.url ) }
-          format.xml { render :xml => @post, :status => :created, :location => @post }
-        else
-          flash.now[:error] = 'There was an error saving your post.'
-          format.html { render :action => "new" }
-          format.xml { render :xml => @post.errors, :status => :unprocessable_entity }
-        end
-      end
-    end
-  end
-
-  # PUT /posts/1
-  # PUT /posts/1.xml
   def update
     if params[:preview_button]
-      @preview = true
       @post.attributes = params[:post]
       respond_to do |format|
-        format.html { render :action => "edit" }
+        format.html { render :preview }
       end
     else
       respond_to do |format|
-        if @post.update_attributes( params[:post] )
-          flash[:notice] = 'Post was successfully updated.'
-          format.html { redirect_to( @post.url ) }
+        if @post.update_attributes(params[:post])
+          format.html { redirect_to @post.url, :notice => 'Post was successfully updated.' }
           format.xml { head :ok }
         else
-          flash.now[:notice] = 'Unable to update post'
-          format.html { render :action => "edit" }
+          format.html { render :edit }
           format.xml { render :xml => @post.errors, :status => :unprocessable_entity }
         end
       end
     end
   end
 
-  # DELETE /posts/1
-  # DELETE /posts/1.xml
   def destroy
-    @post.delete
+    @post.destroy
 
     respond_to do |format|
-      format.html { redirect_to( blog_posts_url ) }
+      format.html { redirect_to root_url(:subdomain => request.subdomain), :notice => 'Post deleted.' }
       format.xml { head :ok }
     end
+  end
+
+  private
+
+  def get_post_by_slug
+    @post = Post.find_by_slug( params[:slug] )
+    raise ActiveRecord::RecordNotFound if @post.nil?
+  end
+
+  def get_post
+    @post = Post.find( params[:id] )
   end
 end

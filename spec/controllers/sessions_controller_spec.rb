@@ -1,73 +1,69 @@
 require 'spec_helper'
 
 describe SessionsController do
-  before( :each ) do
-    logout_user
-  end
+  before { logout_user }
+
   describe "GET 'new'" do
-    describe "while logged in" do
-      before( :each ) do
+    context 'while logged in' do
+      before {
         login_user
         get :new
-      end
+      }
 
-      it { should set_the_flash }
-      it { should redirect_to( blog_root_url ) }
+      it { should redirect_to root_url(:subdomain => @request.subdomain) }
+      specify { flash[:alert].should eql('Already logged in.  Please log out first.') }
     end
 
     describe "while not logged in" do
-      before( :each ) do
-        get :new
-      end
+      before { get :new }
   
-      it { should respond_with( :success ) }
-      it { should render_template( :new ) }
+      it { should respond_with(:success) }
+      it { should render_template(:new) }
     end
   end
 
   describe "POST 'create'" do
-    describe "with a valid username/password" do
-      before( :each ) do
-        @user = stub( :id => 1 )
-        User.stubs( :authenticate ).returns( @user )
-        post :create, :username => 'test', :password => 'password'
-      end
-  
-      it { should redirect_to blog_root_path }
-      it { should set_session( :user_id ).to( @user.id ) }
-      it { should set_the_flash.to( { :notice => "Login Successful" } ) }
+
+    context 'with an invalid username/password' do
+      before {
+        User.stubs(:authenticate).returns( nil )
+        post :create
+      }
+
+      it { should redirect_to login_url(:subdomain => @request.subdomain) }
+      specify { flash[:alert].should eql('Invalid Username/Password') }
     end
 
-    describe "with an invalid username/password" do
-      before( :each ) do
-        User.stubs( :authenticate ).returns( nil )
-        post :create, :username => 'test', :password => 'badpassword'
-      end
-
-      it { should redirect_to login_path }
-      it { should set_the_flash.to( { :notice => "Invalid username/password" } ) }
+    context 'with a valid username/password' do
+      let(:user) { stub(:id => 1) }
+      before {
+        User.stubs(:authenticate).returns(user)
+        post :create
+      }
+  
+      it { should redirect_to root_url(:subdomain => @request.subdomain) }
+      it { should set_session(:user_id).to(user.id) }
+      specify { flash[:notice].should eql('Login Successful') }
     end
   end
 
-  describe "DELETE 'delete'" do
-    describe "while logged in" do
-      before( :each ) do
+  describe "DELETE 'destroy'" do
+    context 'while logged in' do
+      before {
         login_user
         delete :destroy
-      end
+      }
   
-      it { should redirect_to blog_root_path }
+      it { should redirect_to root_url(:subdomain => @request.subdomain) }
       it { should set_the_flash }
-      it { should set_session( :user_id ).to( nil ) }
+      it { should set_session(:user_id).to(nil) }
     end
 
-    describe "while not logged in" do
-      before( :each ) do
-        delete :destroy
-      end
+    context 'while not logged in' do
+      before { delete :destroy }
 
-      it { should redirect_to blog_root_path }
-      it { should_not set_session( :user_id ) }
+      it { should redirect_to root_url(:subdomain => @request.subdomain) }
+      it { should_not set_session(:user_id) }
     end
   end
 end

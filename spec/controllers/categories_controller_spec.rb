@@ -1,9 +1,7 @@
 require 'spec_helper'
 
 describe Blog::CategoriesController, 'as guest' do
-  before( :each ) do
-    logout_user
-  end
+  before { logout_user }
 
   it { should require_authentication_for( :new, :subdomains => ['blog'] ) }
   it { should require_authentication_for( :edit, :id => 1, :subdomains => ['blog'] ) }
@@ -11,64 +9,62 @@ describe Blog::CategoriesController, 'as guest' do
   it { should require_authentication_for( :update, :put, :id => 1, :subdomains => ['blog'] ) }
   it { should require_authentication_for( :destroy, :delete, :id => 1, :subdomains => ['blog'] ) }
 
+  let(:categories) { FactoryGirl.create_list(:category, 2) }
   describe 'index' do
-    before( :each ) do
-      @categories = mock()
-      Category.expects( :find ).with( :all ).returns( @categories )
-      get :index, { :subdomains => ["blog"] }
-    end
+    before {
+      Category.stubs(:all).returns(categories)
+      get :index#, { :subdomains => ["blog"] }
+    }
 
-    it { should respond_with( :success ) }
-    it { should assign_to( :categories ).with( @categories ) }
-    it { should render_template( :index ) }
+    it { should respond_with(:success) }
+    it { should assign_to(:categories).with(categories) }
+    it { should render_template(:index) }
   end
 
   describe 'show' do
-    before( :each ) do
-      @category = Factory.create( :category )
-      Category.expects( :find_by_slug ).with( @category.slug ).returns( @category )
-      get :show, { :id => @category.slug, :subdomains => ["blog"] }
-    end
+    let(:category) { Factory(:category) }
+    before {
+      Category.stubs(:find_by_slug).with(category.slug).returns(category)
+      get :show, :id => category.slug
+    }
 
-    it { should respond_with( :success ) }
-    it { should assign_to( :category ).with( @category ) }
-    it { should render_template( :show ) }
+    it { should respond_with(:success) }
+    it { should assign_to(:category).with(category) }
+    it { should render_template(:show) }
   end
 end
 
 describe Blog::CategoriesController, 'as normal user' do
-  before( :each ) do
-    login_user
-  end
+  before { login_user }
 
   #
   # INDEX
   #
   describe "GET 'index'" do
-    before( :each ) do
-      @categories = mock()
-      Category.expects( :find ).with( :all ).returns( @categories )
-      get :index, { :subdomains => ["blog"] }
-    end
+    let(:categories) { FactoryGirl.create_list(:category, 2) }
+    before {
+      Category.stubs(:all).returns(categories)
+      get :index
+    }
 
-    it { should respond_with( :success ) }
-    it { should assign_to( :categories ).with( @categories ) }
-    it { should render_template( :index ) }
+    it { should respond_with(:success) }
+    it { should assign_to(:categories).with(categories) }
+    it { should render_template(:index) }
   end
 
   #
   # SHOW
   #
   describe "GET 'show'" do
-    before( :each ) do
-      @category = Factory.create( :category )
-      Category.expects( :find_by_slug ).with( @category.slug ).returns( @category )
-      get :show, { :id => @category.slug, :subdomains => ["blog"] }
-    end
+    let(:category) { Factory(:category) }
+    before {
+      Category.stubs(:find_by_slug).with(category.slug).returns(category)
+      get :show, :id => category.slug
+    }
 
-    it { should respond_with( :success ) }
-    it { should assign_to( :category ).with( @category ) }
-    it { should render_template( :show ) }
+    it { should respond_with(:success) }
+    it { should assign_to(:category).with(category) }
+    it { should render_template(:show) }
   end
 
   it { should require_authentication_for( :new, :subdomains => ['blog'] ) }
@@ -79,99 +75,90 @@ describe Blog::CategoriesController, 'as normal user' do
 end
 
 describe Blog::CategoriesController, 'as admin' do
-  before( :each ) do
-    login_admin
-  end
+  before { login_admin }
 
   #
   # INDEX
   #
   describe "GET 'index'" do
-    before( :each ) do
-      @categories = mock()
-      Category.expects( :find ).with( :all ).returns( @categories )
-      get :index, { :subdomains => ["blog"] }
-    end
+    let(:categories) { FactoryGirl.create_list(:category, 2) }
+    before {
+      Category.stubs(:all).returns(categories)
+      get :index
+    }
 
-    it { should respond_with( :success ) }
-    it { should assign_to( :categories ).with( @categories ) }
-    it { should render_template( :index ) }
+    it { should respond_with(:success) }
+    it { should assign_to(:categories).with(categories) }
+    it { should render_template(:index) }
   end
 
   #
   # SHOW
   #
   describe "GET 'show'" do
-    before( :each ) do
-      @category = Factory.create( :category )
-      Category.expects( :find_by_slug ).with( @category.slug ).returns( @category )
-      get :show, { :id => @category.slug, :subdomains => ["blog"] }
-    end
+    let(:category) { Factory(:category) }
+    before {
+      Category.stubs(:find_by_slug).with(category.slug).returns(category)
+      get :show, :id => category.slug
+    }
 
-    it { should respond_with( :success ) }
-    it { should assign_to( :category ).with( @category ) }
-    it { should render_template( :show ) }
+    it { should respond_with(:success) }
+    it { should assign_to(:category).with(category) }
+    it { should render_template(:show) }
   end
 
   #
   # NEW
   #
   describe "GET 'new'" do
-    before( :each ) do
-      @category = Category.new
-      Category.stubs( :new ).returns( @category )
-      get :new, { :subdomains => ["blog"] }
-    end
-    it { should respond_with( :success ) }
-    it { should assign_to( :category).with( @category ) }
-    it { should render_template( :new ) }
+    let!(:category) { Factory.build(:category) }
+    before {
+      Category.stubs(:new).returns(category)
+      get :new
+    }
+    it { should respond_with(:success) }
+    it { should assign_to(:category).with(category) }
+    it { should render_template(:new) }
   end
 
   #
   # EDIT
   #
   describe "GET 'edit'" do
-    describe "with a valid id" do
-      before( :each ) do
-        @category = Factory.create( :category )
-        Category.stubs( :find ).returns( @category )
-        get :edit, { :id => @category.id, :subdomains => ["blog"] }
-      end
-      it { should respond_with( :success ) }
-      it { should assign_to( :category ).with( @category ) }
-      it { should render_template( :edit ) }
-    end
-
-    describe "with an invalid id" do
-      it "should fail" do
-        Category.stubs( :find ).returns( nil )
-        lambda { get :edit, { :id => 1, :subdomains => ["blog"] } }.should raise_error( ActiveRecord::RecordNotFound )
-      end
-    end
+    let(:category) { Factory(:category) }
+    before {
+      Category.stubs(:find_by_slug).with(category.slug).returns(category)
+      get :edit, :id => category.slug
+    }
+    it { should respond_with(:success) }
+    it { should assign_to(:category).with(category) }
+    it { should render_template(:edit) }
   end
 
   #
   # CREATE
   #
   describe "POST 'create'" do
-    describe "with a duplicate name" do
-      before( :each ) do
-        @category = Factory.create( :category )
-        post :create, { :category => Factory.attributes_for( :category, { :name => @category.name } ), :subdomains => ["blog"] }
-      end
-      it { should set_the_flash }
-      it { should render_template( :new ) }
+    let!(:category) { Factory(:category) }
+    before { Category.stubs(:new).returns(category) }
+
+    context 'with invalid attributes' do
+      before {
+        category.stubs(:save).returns(false)
+        post :create, :category => {}
+      }
+      it { should respond_with(:success) }
+      it { should render_template(:new) }
+      it { should assign_to(:category).with(category) }
     end
 
-    describe "with a valid name" do
-      before( :each ) do
-        @category = Factory.create( :category )
-        @category.stubs( :save ).returns( true )
-        Category.stubs( :new ).returns( @category )
-        post :create, { :category => {}, :subdomains => ["blog"] }
-      end
+    describe 'with valid attributes' do
+      before {
+        category.stubs(:save).returns(true)
+        post :create, :category => {}
+      }
       it { should set_the_flash }
-      it { should redirect_to( blog_category_path( @category ) ) }
+      it { should redirect_to(category) }
     end
   end
 
@@ -179,49 +166,39 @@ describe Blog::CategoriesController, 'as admin' do
   # UPDATE
   #
   describe "PUT 'update'" do
-    describe "with a duplicate name" do
-      before( :each ) do
-        @category = Factory.create( :category )
-        @dup = Factory.create( :category )
-        Category.stubs( :find ).returns( @dup )
-        put :update, { :id => @dup.id, :category => Factory.attributes_for( :category, { :name => @category.name } ), :subdomains => ["blog"] }
-      end
-      it { should set_the_flash }
-      it { should render_template( :edit ) }
+    let(:category) { Factory(:category) }
+    before { Category.stubs(:find_by_slug).with(category.slug).returns(category) }
+
+    context 'with invalid attributes' do
+      before {
+        category.stubs(:update_attributes).returns(false)
+        put :update, :id => category.slug, :category => {}
+      }
+      it { should respond_with(:success) }
+      it { should render_template(:edit) }
+      it { should assign_to(:category).with(category) }
     end
 
-    describe "with a valid name" do
-      before( :each ) do
-        @category = Factory.create( :category )
-        @category.stubs( :save ).returns( true )
-        Category.stubs( :find ).returns( @category )
-        put :update, { :id => @category.id, :category => {}, :subdomains => ["blog"] }
-      end
+    context 'with valid attributes' do
+      before {
+        category.stubs(:update_attributes).returns(true)
+        put :update, :id => category.slug, :category => {}
+      }
       it { should set_the_flash }
-      it { should redirect_to( blog_category_path( @category ) ) }
+      it { should redirect_to(category) }
     end
   end
 
   #
   # DELETE
   #
-  describe "delete 'delete'" do
-    describe "with an invalid id" do
-      it "should raise RecordNotFound" do
-        Category.stubs( :find ).returns( nil )
-        lambda { delete :destroy, { :id => 1, :subdomains => ["blog"] } }.should raise_error( ActiveRecord::RecordNotFound )
-      end
-    end
-
-    describe "with a valid id" do
-      before( :each ) do
-        @category = Factory.create( :category )
-        @category.stubs( :delete ).returns( true )
-        Category.stubs( :find ).returns( @category )
-        delete :destroy, { :id => @category.id, :subdomains => ["blog"] }
-      end
-      it { should set_the_flash }
-      it { should redirect_to( blog_root_path ) }
-    end
+  describe "DELETE 'destroy'" do
+    let(:category) { stub(:destroy => true) }
+    before {
+      Category.stubs(:find_by_slug).returns(category)
+      delete :destroy, :id => 1
+    }
+    it { should set_the_flash }
+    it { should redirect_to root_url(:subdomain => 'blog') }
   end
 end

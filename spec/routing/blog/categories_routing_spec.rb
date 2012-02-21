@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Blog:: CategoriesController do
   context 'with a valid subdomain' do
-    let(:url) { 'http://blog.example.host' }
+    let(:url) { 'http://blog.test.host' }
     specify { {:get => "#{url}/categories" }.should route_to(
       :controller => 'blog/categories',
       :action => 'index'

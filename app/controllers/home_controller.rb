@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   def index
     respond_to do |format|
-      format.html { redirect_to blog_root_url }
+      format.html { redirect_to root_url(:subdomain => 'blog') }
       format.atom
     end
   end

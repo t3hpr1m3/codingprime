@@ -2,13 +2,6 @@ class Blog::CategoriesController < ApplicationController
   before_filter :authorize, :except => [:index, :show]
   before_filter :get_category_by_slug, :except => [:index, :new, :create]
 
-  def get_category_by_slug
-    @category = Category.find_by_slug( params[:id] )
-    raise ActiveRecord::RecordNotFound if @category.nil?
-  end
-
-  # GET /categories
-  # GET /categories.xml
   def index
     @categories = Category.all
 
@@ -17,9 +10,6 @@ class Blog::CategoriesController < ApplicationController
       format.xml  { render :xml => @categories }
     end
   end
-
-  # GET /categories/1
-  # GET /categories/1.xml
   def show
     @title = @category.name
     @posts = @category.posts.recent
@@ -30,8 +20,6 @@ class Blog::CategoriesController < ApplicationController
     end
   end
 
-  # GET /categories/new
-  # GET /categories/new.xml
   def new
     @category = Category.new
 
@@ -41,7 +29,6 @@ class Blog::CategoriesController < ApplicationController
     end
   end
 
-  # GET /categories/1/edit
   def edit
     respond_to do |format|
       format.html
@@ -50,51 +37,45 @@ class Blog::CategoriesController < ApplicationController
     end
   end
 
-  # POST /categories
-  # POST /categories.xml
   def create
-    @category = Category.new( params[:category] )
+    @category = Category.new(params[:category])
 
     respond_to do |format|
       if @category.save
-        flash[:notice] = 'Category was successfully created.'
-        format.html { redirect_to( [:blog, @category] ) }
+        format.html { redirect_to @category, :notice => 'Category was successfully created.' }
         format.xml  { render :xml => @category, :status => :created, :location => @category }
       else
-        flash.now[:error] = 'There was an error saving your category.'
-        format.html { render :action => "new" }
+        format.html { render :new }
         format.xml  { render :xml => @category.errors, :status => :unprocessable_entity }
       end
     end
   end
 
-  # PUT /categories/1
-  # PUT /categories/1.xml
   def update
-    @category = Category.find(params[:id])
-
     respond_to do |format|
       if @category.update_attributes(params[:category])
-        flash[:notice] = 'Category was successfully updated.'
-        format.html { redirect_to( [:blog, @category] ) }
+        format.html { redirect_to @category, :notice => 'Category was successfully updated.' }
         format.xml  { head :ok }
       else
-        flash.now[:error] = 'There was an error saving your category.'
-        format.html { render :action => "edit" }
+        format.html { render :edit }
         format.xml  { render :xml => @category.errors, :status => :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /categories/1
-  # DELETE /categories/1.xml
   def destroy
     @category.destroy
 
     respond_to do |format|
-      flash[:notice] = "Category deleted successfully."
-      format.html { redirect_to( blog_root_path ) }
+      format.html { redirect_to root_url(:subdomain => 'blog'), :notice => 'Category deleted successfully.' }
       format.xml  { head :ok }
     end
+  end
+
+  private
+
+  def get_category_by_slug
+    @category = Category.find_by_slug(params[:id])
+    raise ActiveRecord::RecordNotFound if @category.nil?
   end
 end

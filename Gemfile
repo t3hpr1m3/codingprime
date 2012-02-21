@@ -24,7 +24,7 @@ group :test, :development do
   gem 'guard-rspec',        '0.5.10'
   gem 'libnotify',          '0.6.0'
   gem 'annotate',           '2.4.1.beta1'
-  gem 'simplecov',          '~> 0.4.0', :require => false
+  gem 'simplecov',          '~> 0.5.4', :require => false
 end
 
 gem 'warden',         '~> 1.1.0'

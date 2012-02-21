@@ -2,8 +2,7 @@ class SessionsController < ApplicationController
   def new
     respond_to do |format|
       if current_user
-        flash[:error] = 'Already logged in.  Please log out first.'
-        format.html { redirect_to( blog_root_path ) }
+        format.html { redirect_to root_url(:subdomain => request.subdomain), :alert => 'Already logged in.  Please log out first.' }
       else
         format.html
       end
@@ -14,11 +13,10 @@ class SessionsController < ApplicationController
     respond_to do |format|
       if user = User.authenticate( params[:username], params[:password] )
         session[:user_id] = user.id
-        flash[:notice] = 'Login Successful'
-        format.html { redirect_to( blog_root_path ) }
+        format.html { redirect_to root_url(:subdomain => request.subdomain), :notice => 'Login Successful' }
       else
         flash[:error] = "Invalid Username/Password"
-        format.html { redirect_to( login_path ) }
+        format.html { redirect_to login_url(:subdomain => request.subdomain), :alert => 'Invalid Username/Password' }
       end
     end
   end
@@ -28,7 +26,7 @@ class SessionsController < ApplicationController
       reset_session
       flash[:notice] = 'Successfully logged out'
     end
-    redirect_to blog_root_path
+    redirect_to root_url(:subdomain => request.subdomain)
   end
 
 end

@@ -1,121 +1,105 @@
 require 'spec_helper'
 
 describe UsersController, 'as guest' do
-  before( :each ) do
-    logout_user
-  end
+  before { logout_user }
 
-  it { should require_authentication_for( :index ) }
-  it { should require_authentication_for( :show, :id => 1 ) }
-  it { should require_authentication_for( :new ) }
-  it { should require_authentication_for( :edit, :id => 1 ) }
-  it { should require_authentication_for( :create, :post ) }
-  it { should require_authentication_for( :update, :put, :id => 1 ) }
-  it { should require_authentication_for( :destroy, :delete, :id => 1 ) }
-end
-
-describe UsersController, 'as normal user' do
-  before( :each ) do
-    login_user
-  end
-
-  it { should require_authentication_for( :index ) }
-  it { should require_authentication_for( :show, :id => 1 ) }
-  it { should require_authentication_for( :new ) }
-  it { should require_authentication_for( :edit, :id => 1 ) }
-  it { should require_authentication_for( :create, :post ) }
-  it { should require_authentication_for( :update, :put, :id => 1 ) }
-  it { should require_authentication_for( :destroy, :delete, :id => 1 ) }
+  it { should require_authentication_for :index }
+  it { should require_authentication_for :show, :id => 1 }
+  it { should require_authentication_for :new }
+  it { should require_authentication_for :edit, :id => 1 }
+  it { should require_authentication_for :create, :id => 1 }
+  it { should require_authentication_for :update, :id => 1 }
+  it { should require_authentication_for :destroy, :id => 1 }
 end
 
 describe UsersController, 'as admin' do
-  before( :each ) do
-    login_admin
-  end
+  before { login_admin }
 
   #
   # INDEX
   #
   describe "GET 'index'" do
-    before( :each ) do
-      @users = mock()
-      User.stubs( :find ).returns( @users )
+    let(:users) { mock('Users') }
+    before {
+      User.stubs(:all).returns(users)
       get :index
-    end
+    }
 
-    it { should respond_with( :success ) }
-    it { should assign_to( :users ).with( @users ) }
-    it { should render_template( :index ) }
+    it { should respond_with(:success) }
+    it { should render_template(:index) }
+    it { should assign_to(:users).with(users) }
   end
 
   #
   # SHOW
   #
   describe "GET 'show'" do
-    before( :each ) do
-      @user = mock()
-      User.stubs( :find ).returns( @user )
+    let(:user) { mock('User') }
+    before {
+      User.stubs(:find).returns(user)
       get :show, :id => 1
-    end
+    }
 
-    it { should respond_with( :success ) }
-    it { should assign_to( :user ).with( @user ) }
-    it { should render_template( :show ) }
+    it { should respond_with(:success) }
+    it { should render_template(:show) }
+    it { should assign_to(:user).with(user) }
   end
 
   #
   # NEW
   #
   describe "GET 'new'" do
-    before( :each ) do
-      @user = mock()
-      User.stubs( :new ).returns( @user )
+    let(:user) { mock('User') }
+    before {
+      User.stubs(:new).returns(user)
       get :new
-    end
+    }
 
-    it { should respond_with( :success ) }
-    it { should assign_to( :user ).with( @user ) }
-    it { should render_template( :new ) }
+    it { should respond_with(:success) }
+    it { should render_template(:new) }
+    it { should assign_to(:user).with(user) }
   end
 
   #
   # EDIT
   #
   describe "GET 'edit'" do
-    before( :each ) do
-      @user = mock()
-      User.stubs( :find ).returns( @user )
+    let(:user) { mock('User') }
+    before {
+      User.stubs(:find).returns(user)
       get :edit, :id => 1
-    end
+    }
 
-    it { should respond_with( :success ) }
-    it { should assign_to( :user ).with( @user ) }
-    it { should render_template( :edit ) }
+    it { should respond_with(:success) }
+    it { should render_template(:edit) }
+    it { should assign_to(:user).with(user) }
   end
 
   #
   # CREATE
   #
   describe "POST 'create'" do
-    describe "when save is successful" do
-      before( :each ) do
-        User.any_instance.stubs( :save ).returns( true )
-        post :create, :user => {}
-      end
+    let!(:user) { mock('User') }
+    before { User.stubs(:new).returns(user) }
 
-      it { should redirect_to( users_path ) }
-      it { should set_the_flash }
+    context 'with invalid arguments' do
+      before {
+        user.stubs(:save).returns(false)
+        post :create, :user => {}
+      }
+      it { should respond_with(:success) }
+      it { should render_template(:new) }
+      it { should assign_to(:user).with(user) }
     end
 
-    describe "when save is unsuccessful" do
-      before( :each ) do
-        User.any_instance.stubs( :save ).returns( false )
+    context 'with valid arguments' do
+      before {
+        user.stubs(:save).returns(true)
         post :create, :user => {}
-      end
+      }
 
+      it { should redirect_to(users_path) }
       it { should set_the_flash }
-      it { should render_template( :new ) }
-      it { should assign_to( :user ).with_kind_of( User ) }
     end
   end
 
@@ -123,27 +107,26 @@ describe UsersController, 'as admin' do
   # UPDATE
   #
   describe "PUT 'update'" do
-    describe "when save is successful" do
-      before( :each ) do
-        @user = stub( :update_attributes => true )
-        User.stubs( :find ).returns( @user )
-        put :update, :id => 1, :user => {}
-      end
+    let(:user) { mock('User') }
+    before { User.stubs(:find).returns(user) }
 
-      it { should set_the_flash }
-      it { should redirect_to( users_path ) }
+    context 'with invalid attributes' do
+      before {
+        user.stubs(:update_attributes).returns(false)
+        put :update, :id => 1, :user => {}
+      }
+      it { should respond_with(:success) }
+      it { should render_template(:edit) }
+      it { should assign_to(:user).with(user) }
     end
 
-    describe "when save fails" do
-      before( :each ) do
-        @user = stub( :update_attributes => false )
-        User.stubs( :find ).returns( @user )
+    context 'with valid attributes' do
+      before {
+        user.stubs(:update_attributes).returns(true)
         put :update, :id => 1, :user => {}
-      end
-
+      }
       it { should set_the_flash }
-      it { should render_template( :edit ) }
-      it { should assign_to( :user ).with( @user ) }
+      it { should redirect_to users_path }
     end
   end
 
@@ -151,13 +134,13 @@ describe UsersController, 'as admin' do
   # DELETE
   #
   describe "DELETE 'destroy'" do
-    before( :each ) do
-      @user = stub( :destroy => true )
-      User.stubs( :find ).returns( @user )
-      delete :destroy, :id => @user.object_id
-    end
+    let(:user) { stub(:destroy => true) }
+    before {
+      User.stubs(:find).returns(user)
+      delete :destroy, :id => 1
+    }
 
     it { should set_the_flash }
-    it { should redirect_to( users_path ) }
+    it { should redirect_to users_path }
   end
 end

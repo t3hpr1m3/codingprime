@@ -1,8 +1,7 @@
 class Blog::CommentsController < ApplicationController
   before_filter :authorize, :only => [:edit, :update, :destroy]
+  before_filter :load_post, :only => [:create, :edit, :update, :destroy]
 
-  # GET /comments
-  # GET /comments.xml
   def index
     @approved_comments = Comment.valid
     @rejected_comments = Comment.rejected if admin?
@@ -13,11 +12,26 @@ class Blog::CommentsController < ApplicationController
     end
   end
 
-  # GET /comments/new
-  # GET /comments/new.xml
-  def new
-    flash[:notice] = 'To add a comment, please visit a post.'
-    redirect_to blog_root_url
+  def create
+    @comment = @post.comments.build(params[:comment])
+	@comment.request = request
+
+    if params[:preview_button]
+      respond_to do |format|
+        format.html { render :preview }
+        format.xml
+      end
+    else
+      respond_to do |format|
+        if @comment.save
+          format.html { redirect_to @post.url, :notice => 'Comment was successfully created.' }
+          format.xml  { render :xml => @comment, :status => :created, :location => @comment }
+        else
+          format.html { render :new }
+          format.xml  { render :xml => @comment.errors, :status => :unprocessable_entity }
+        end
+      end
+    end
   end
 
   # GET /comments/1/edit
@@ -26,33 +40,6 @@ class Blog::CommentsController < ApplicationController
     raise ActiveRecord::RecordNotFound if @comment.nil?
     respond_to do |format|
       format.html
-    end
-  end
-
-  # POST /comments
-  # POST /comments.xml
-  def create
-    @comment = Comment.new( params[:comment] )
-	@comment.request = request
-
-    if params[:preview_button]
-      @preview = true
-      respond_to do |format|
-        format.html { render :action => "new" }
-        format.xml
-      end
-    else
-      respond_to do |format|
-        if @comment.save
-          flash[:notice] = 'Comment was successfully created.'
-          format.html { redirect_to @comment.post.url }
-          format.xml  { render :xml => @comment, :status => :created, :location => @comment }
-        else
-          flash[:error] = 'Error saving comment.'
-          format.html { render :action => "new" }
-          format.xml  { render :xml => @comment.errors, :status => :unprocessable_entity }
-        end
-      end
     end
   end
 
@@ -91,5 +78,11 @@ class Blog::CommentsController < ApplicationController
       format.html { redirect_to @post.url }
       format.xml  { head :ok }
     end
+  end
+
+  private
+
+  def load_post
+    @post = Post.find(params[:post_id])
   end
 end
