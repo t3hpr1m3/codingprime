@@ -12,18 +12,16 @@ class ApplicationController < ActionController::Base
   end
 
   protected
-    def admin?
-      if user = current_user
-        return current_user.is_admin
-      end
-    end
 
-    def authorize
-      unless admin?
-        raise Exceptions::PermissionDenied
-      end
+  def admin?
+    if user = current_user
+      return current_user.is_admin
     end
+  end
 
-  # Scrub sensitive parameters from your log
-  filter_parameter_logging :password
+  def authorize
+    unless admin?
+      raise Exceptions::PermissionDenied
+    end
+  end
 end

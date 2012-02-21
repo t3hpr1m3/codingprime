@@ -28,4 +28,3 @@ class Category < ActiveRecord::Base
     self.slug = Category.generate_slug( self.name )
   end
 end
-

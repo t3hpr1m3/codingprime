@@ -1,10 +1,10 @@
-ActionController::Routing::Routes.draw do |map|
-  map.subdomain :blog do |blog|
-    blog.resources :posts
-    blog.resources :categories
-    blog.resources :comments
-    blog.root :controller => "posts"
-    blog.connect ':year/:month/:day/:slug.:format',
+CodingPrime::Application.routes.draw do
+  namespace :blog, :constraints => {:subdomain => /blog/} do
+    resources :posts
+    resources :categories
+    resources :comments
+    match '/' => 'posts#index'
+    match ':year/:month/:day/:slug.:format',
                 :controller => 'posts',
                 :action => 'show_by_slug',
                 :year => /\d{4}/,
@@ -12,14 +12,12 @@ ActionController::Routing::Routes.draw do |map|
                 :day => /\d{1,2}/
   end
 
-  map.subdomain :www, :namespace => nil do |www|
-    www.root :controller => 'home'
+  constraints :subdomain => /^(www|)$/ do
+    match '/' => 'home#index'
   end
 
-  map.subdomain nil do |n|
-    n.root :controller => 'home'
-  end
-  map.resources :sessions, :users
-  map.login 'login', :controller => 'sessions', :action => 'new'
-  map.logout 'logout', :controller => 'sessions', :action => 'destroy'
+  resources :sessions, :users
+  get 'login' => 'sessions#new'
+  post 'login' => 'sessions#create'
+  get 'logout' => 'sessions#destroy'
 end

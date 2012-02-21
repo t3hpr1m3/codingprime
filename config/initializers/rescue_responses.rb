@@ -1,1 +1,1 @@
-ActionController::Base.rescue_responses['PermissionDenied'] = :forbidden
+ActionDispatch::ShowExceptions.rescue_responses.update('ActionController::Forbidden' => :forbidden)

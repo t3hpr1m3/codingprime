@@ -21,7 +21,7 @@ class Post < ActiveRecord::Base
   has_many :comments
   attr_accessible :title, :body, :category_id
 
-  named_scope :recent, :order => 'created_at DESC'
+  scope :recent, :order => 'created_at DESC'
 
   before_create :add_slug
 

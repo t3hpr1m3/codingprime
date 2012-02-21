@@ -1,13 +1,13 @@
 require 'spec_helper'
 
 describe Blog:: CategoriesController do
-  describe "routing" do
-    it "recognizes and generates #index" do
-      assert_recognizes_with_host(
-        { :controller => "blog/categories", :action => "index", :subdomains => ["blog"] },
-        { :path => "/categories", :host => "blog.foo.local", :method => :get } )
-      #{ :get => "/categories", :subdomain => 'blog' }.should route_to(:controller => "categories", :action => "index")
-    end
+  context 'with a valid subdomain' do
+    let(:url) { 'http://blog.example.host' }
+    specify { {:get => "#{url}/categories" }.should route_to(
+      :controller => 'blog/categories',
+      :action => 'index'
+    ) }
+  end
 
 #    it "recognizes and generates #new" do
 #      { :get => "/categories/new" }.should route_to(:controller => "categories", :action => "new")
@@ -32,5 +32,4 @@ describe Blog:: CategoriesController do
 #    it "recognizes and generates #destroy" do
 #      { :delete => "/categories/1", :subdomain => "blog" }.should route_to(:controller => "categories", :action => "destroy", :id => "1") 
 #    end
-  end
 end

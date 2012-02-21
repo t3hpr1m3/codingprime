@@ -32,8 +32,8 @@ class Comment < ActiveRecord::Base
   before_save   :add_protocol_to_author_site
 
   validates_presence_of :author_name, :author_email, :comment_text, :author_ip, :author_user_agent, :post
-  named_scope :valid, :conditions => { :approved => true }, :order => 'created_at ASC'
-  named_scope :rejected, :conditions => { :approved => false }, :order => 'created_at ASC'
+  scope :valid, :conditions => { :approved => true }, :order => 'created_at ASC'
+  scope :rejected, :conditions => { :approved => false }, :order => 'created_at ASC'
 
   def request=( request )
     self.author_ip = request.remote_ip
