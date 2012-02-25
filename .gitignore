@@ -1,3 +1,4 @@
+.bundle
 log
 coverage/*
 coverate/**/*
@@ -6,8 +7,7 @@ tmp/**/*
 doc/api
 doc/app
 db/*.sqlite3
+vendor/ruby
 *.swp
 *.swo
 *~
-.DS_Store
-config/mongrel_cluster.yml
