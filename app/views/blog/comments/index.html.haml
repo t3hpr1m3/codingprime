@@ -1,0 +1,4 @@
+= render collection: @approved_comments
+- if admin?
+  %h2 Rejected Comments
+  = render :collection @rejected_comments

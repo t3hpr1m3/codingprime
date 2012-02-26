@@ -1,0 +1,8 @@
+- if params[:preview_button]
+  %h2 Comment Preview
+- else
+  %h2 New Comment
+- if params[:preview_button]
+    = render @comment
+= render 'form', comment: @comment
+= link_to 'Back', blog_post_comments_path(@post)

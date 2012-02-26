@@ -1,0 +1,40 @@
+%p
+  %strong User name:
+  = @comment.user_name
+
+%p
+  %strong User site:
+  = @comment.user_site
+
+%p
+  %strong User email:
+  = @comment.user_email
+
+%p
+  %strong Comment text:
+  = @comment.comment_text
+
+%p
+  %strong User ip:
+  = @comment.user_ip
+
+%p
+  %strong User agent:
+  = @comment.user_agent
+
+%p
+  %strong Referrer:
+  = @comment.referrer
+
+%p
+  %strong Post:
+  = @comment.post
+
+%p
+  %strong Approved:
+  = @comment.approved
+
+
+= link_to 'Edit', edit_post_comment_path(@post, @comment)
+|
+= link_to 'Back', post_comments_path(@post)
