@@ -1,0 +1,23 @@
+%h1 Listing categories
+%table
+  %thead
+    %tr
+      %th Name
+      %th Slug
+      %th Posts
+      %th Actions
+
+  %tbody
+    - @categories.each do |category|
+      = content_tag_for(:tr, category) do
+        %td= link_to h(category.name), [:blog, category]
+        %td= h(category.slug)
+        %td= category.posts.count
+        %td
+          = link_to 'Show', [:blog, category]
+          = link_to 'Edit', edit_blog_category_path(category)
+          = link_to 'Delete', [:blog, category], confirm: 'Are you sure?', method: :delete
+
+%br/
+
+= link_to 'New category', new_blog_category_path

@@ -1,0 +1,15 @@
+= div_for post do
+  - if post.new_record?
+    %h2= post.title
+  - else
+    %h2= link_to_unless_current h(post.title), post.url
+  - unless post.new_record?
+    %span.dateline= post.created_at.to_s(:long_ordinal)
+    in
+    = link_to post.category.name, [:blog, post.category]
+  ~ raw render_text(post.body)
+  - unless post.new_record?
+    = link_to pluralize(post.comments.valid.length, 'comment'), "#{post.url}#comments"
+    - if admin?
+      = link_to 'Edit', edit_blog_post_path(post)
+      = link_to 'Delete', [:blog, post], :confirm => "Are you sure?", :method => :delete

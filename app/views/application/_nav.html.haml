@@ -1,0 +1,8 @@
+#nav
+  %span.fright= link_to '#codingPrime', root_path(subdomain: 'blog')
+  /
+    %ul.clearfix
+      %li= link_to_unless request.subdomains.first.eql?("www"), "home", root_path(subdomain: 'www')
+      %li= link_to_unless request.subdomains.first.eql?("blog"), "blog", blog_root_path(subdomain: 'blog')
+      %li= link_to "code", "#"
+      %li= link_to "contact", "#"

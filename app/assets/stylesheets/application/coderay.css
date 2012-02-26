@@ -1,0 +1,33 @@
+.CodeRay {
+  background-color: #232323;
+  border: 1px solid black;
+  font-family: 'Courier New', 'Terminal', monospace;
+  color: #E6E0DB;
+  padding: 3px 5px;
+  overflow: auto;
+  font-size: 12px;
+  margin: 12px 0;
+}
+.CodeRay pre {
+  margin: 0px;
+  padding: 0px;
+}
+
+.CodeRay .annotation { color:#E7BE69 }                    /* html attribute */
+.CodeRay .comment  { color:#BC9358; font-style: italic; } /* comment */
+.CodeRay .char { color:#509E4F }                          /* escaped character */
+.CodeRay .class { color:#FFF }                            /* class */
+.CodeRay .constant { color:#FFF }                         /* constant */
+.CodeRay .float { color:#A4C260 }                         /* float */
+.CodeRay .function { color:#FFC56D }                      /* function */
+.CodeRay .global-variable { color:#D0CFFE }               /* global variable */
+.CodeRay .integer  { color:#A4C260 }                      /* integer */
+.CodeRay .inline { background:#151515 }                   /* inline code */
+.CodeRay .instance-variable { color:#D0CFFE }             /* instance variable */
+.CodeRay .preprocessor { color:#E7BE69 }                  /* doctype */
+.CodeRay .keyword  { color:#CB7832 }                      /* keyword */
+.CodeRay .regexp { color:#A4C260 }                        /* regex */
+.CodeRay .string  { color:#A4C260 }                       /* string */
+.CodeRay .symbol { color:#6C9CBD }                        /* symbol */
+.CodeRay .tag { color:#E7BE69 }                           /* html tag */
+.CodeRay .predefined-constant { color:#6C9CBD }           /* boolean */

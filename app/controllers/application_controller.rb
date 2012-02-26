@@ -5,19 +5,24 @@ class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
-  helper_method :admin?
 
   def current_user
-    @current_user ||= session[:user_id] && User.find( session[:user_id] )
+    warden.user
   end
+  helper_method :current_user
 
   protected
 
+  def warden
+    env['warden']
+  end
+
   def admin?
     if user = current_user
-      return current_user.is_admin
+      return user.is_admin
     end
   end
+  helper_method :admin?
 
   def authorize
     unless admin?

@@ -1,5 +1,0 @@
-<%- if params[:preview_button] %>
-	<%= render @post %>
-<%- end %>
-<%= render :partial => "form", :locals => { :button_text => 'Create' } %>
-<%= link_to 'Back', blog_posts_path %>

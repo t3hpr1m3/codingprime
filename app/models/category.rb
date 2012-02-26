@@ -17,12 +17,20 @@ class Category < ActiveRecord::Base
   validates_uniqueness_of :name
 
   before_create :add_slug
+  before_destroy :check_for_posts
 
   def to_param
     "#{slug}"
   end
 
   private
+
+  def check_for_posts
+    if posts.count > 0
+      errors.add(:base, 'Cannot delete a category that has associated posts.')
+      false
+    end
+  end
 
   def add_slug
     self.slug = Category.generate_slug( self.name )

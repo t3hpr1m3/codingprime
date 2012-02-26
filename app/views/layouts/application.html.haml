@@ -1,0 +1,56 @@
+!!! 5
+%html
+  %head
+    %title= content_for?(:title) ? yield(:title) : 'brain_dump.engage' + ' :: CodingPrime'
+    %meta{'http-equiv' => 'Content-Type', 'content' => 'text/html; charset=utf-8'}/
+    = stylesheet_link_tag 'application'
+    = javascript_include_tag 'application'
+    = auto_discovery_link_tag :atom, blog_posts_path(format: :atom)
+    :javascript
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18124207-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+  %body
+    #container.clearfix
+      #content
+        = render 'flash', flash: flash
+        = yield
+      #sidebar
+        %h2 About
+        %p My name is Josh Williams.  I write code for fun and profit, but mainly for profit.
+        = link_to image_tag('gentoo-badge3.png'), 'http://www.gentoo.org'
+        = link_to image_tag('palink.gif'), 'http://www.penny-arcade.com'
+        = link_to image_tag('dronezone.gif'), 'http://www.somafm.com'
+        %h2 Categories
+        %ul
+          - Category.all.each do |category|
+            - if category.posts.length > 0
+              %li
+                = link_to category.name, [:blog, category]
+                - if admin?
+                  = link_to "x", blog_category_path(category.slug),
+                    confirm: "Are you sure?", method: :delete
+        - if admin?
+          %h2 Admin
+          %ul
+            %li= link_to 'New Category', new_blog_category_path
+            %li= link_to 'New Post', new_blog_post_path
+            %li= link_to "Logout", logout_path
+        :javascript
+          google_ad_client = "pub-1022704200414427";
+          /* 120x240, created 8/21/10 */
+          google_ad_slot = "4783612324";
+          google_ad_width = 120;
+          google_ad_height = 240;
+
+        %script{:type => 'text/javascript', :src => 'http://pagead2.googlesyndication.com/pagead/show_ads.js'}
+    = render 'nav'
+    #footer
+      %p All content Copyright &copy; 2009-2010 Josh Williams

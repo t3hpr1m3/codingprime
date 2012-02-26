@@ -1,0 +1,9 @@
+= form_tag action: :create do
+  = field_set_tag do
+    %dl.formfields.clearfix
+      %dt= label_tag 'username', 'Username:'
+      %dd= text_field_tag 'username'
+      %dt= label_tag 'password', 'Password:'
+      %dd= password_field_tag
+    %p.centertext
+      = submit_tag 'Login'

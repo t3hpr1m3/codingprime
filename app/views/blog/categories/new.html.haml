@@ -1,0 +1,11 @@
+%h1 New category
+= form_for [:blog, @category] do |f|
+  = render 'model_errors', target: @category
+  = field_set_tag do
+    %dl.formfields.clearfix
+      %dt= f.label :name
+      %dd= f.text_field :name
+    %p.centertext
+      = f.submit
+
+= link_to 'Back', blog_categories_path

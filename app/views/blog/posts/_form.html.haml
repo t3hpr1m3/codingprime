@@ -1,0 +1,13 @@
+= form_for [:blog, @post] do |f|
+  = render 'model_errors', target: @post
+  = field_set_tag do
+    %dl.formfields
+      %dt= f.label :title
+      %dd= f.text_field :title, :size => 60
+      %dt= f.label :category_id
+      %dd= collection_select(:post, :category_id, Category.all, :id, :name)
+      %dt= f.label :body, class: 'invisible'
+      %dd= f.text_area :body, size: '80x30'
+    %p.centertext
+      = f.submit
+      = f.submit 'Preview', id: 'preview_button', name: 'preview_button'

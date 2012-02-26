@@ -2,74 +2,49 @@ class Blog::CategoriesController < ApplicationController
   before_filter :authorize, :except => [:index, :show]
   before_filter :get_category_by_slug, :except => [:index, :new, :create]
 
+  respond_to :html, :xml, :json
+
   def index
     @categories = Category.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @categories }
-    end
+    respond_with(:blog, @categories)
   end
+
   def show
     @title = @category.name
     @posts = @category.posts.recent
 
-    respond_to do |format|
-      format.html { @posts = @posts.paginate( :page => params[:page], :per_page => 5 ) }
-      format.xml  { render :xml => @category }
+    respond_with(:blog, @category) do |format|
+      format.html { @posts = @posts.paginate(page: params[:page], per_page: 5 ) }
     end
   end
 
   def new
     @category = Category.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @category }
-    end
-  end
-
-  def edit
-    respond_to do |format|
-      format.html
-      format.xml { render :xml => @category }
-      format.json { render :json => @category }
-    end
+    respond_with(:blog, @category)
   end
 
   def create
     @category = Category.new(params[:category])
+    flash.notice = 'Category was successfully created.' if @category.save
+    respond_with(:blog, @category)
+  end
 
-    respond_to do |format|
-      if @category.save
-        format.html { redirect_to @category, :notice => 'Category was successfully created.' }
-        format.xml  { render :xml => @category, :status => :created, :location => @category }
-      else
-        format.html { render :new }
-        format.xml  { render :xml => @category.errors, :status => :unprocessable_entity }
-      end
-    end
+  def edit
+    respond_with(:blog, @category)
   end
 
   def update
-    respond_to do |format|
-      if @category.update_attributes(params[:category])
-        format.html { redirect_to @category, :notice => 'Category was successfully updated.' }
-        format.xml  { head :ok }
-      else
-        format.html { render :edit }
-        format.xml  { render :xml => @category.errors, :status => :unprocessable_entity }
-      end
-    end
+    flash[:notice] = 'Category was successfully updated.' if @category.update_attributes(params[:category])
+    respond_with(:blog, @category)
   end
 
   def destroy
-    @category.destroy
-
-    respond_to do |format|
-      format.html { redirect_to root_url(:subdomain => 'blog'), :notice => 'Category deleted successfully.' }
-      format.xml  { head :ok }
+    if @category.destroy
+      flash.notice = 'Category deleted successfully.'
+    else
+      flash.alert = @category.errors.full_messages.join("\n")
     end
+    respond_with(:blog, @category)
   end
 
   private

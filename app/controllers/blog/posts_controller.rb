@@ -3,37 +3,31 @@ class Blog::PostsController < ApplicationController
   before_filter :get_post_by_slug, :only => [:show_by_slug]
   before_filter :get_post, :only => [:show, :edit, :update, :destroy]
 
+  respond_to :html, :xml, :json
+
   def index
     @posts = Post.recent
-    respond_to do |format|
-      format.html { @posts = @posts.paginate( :page => params[:page], :per_page => 5 ) }
-      format.xml { render :xml => @posts }
+    respond_with @posts do |format|
+      format.html { @posts = @posts.paginate(page: params[:page], per_page: 5) }
       format.atom
-      format.json { render :json => @posts }
     end
   end
 
   def show_by_slug
     @title = @post.title
-    @comment = Comment.new( :post => @post )
-
-    respond_to do |format|
-      format.html { render :action => "show" }
-      format.xml { render :xml => @post }
+    @comment = Comment.new(post: @post)
+    respond_with @comment do |format|
+      format.html { render :show }
     end
   end
 
   def show
-    redirect_to @post.url, :status => 301
+    redirect_to @post.url, status: 301
   end
 
   def new
     @post = current_user.posts.build
-
-    respond_to do |format|
-      format.html
-      format.xml { render :xml => @post }
-    end
+    respond_with @post
   end
 
   def create
@@ -42,27 +36,19 @@ class Blog::PostsController < ApplicationController
     if params[:preview_button]
       respond_to do |format|
         format.html { render :preview }
-        format.xml
       end
     else
-      respond_to do |format|
-        if @post.save
-          format.html { redirect_to @post.url, :notice => 'Post created successfully.' }
-          format.xml { render :xml => @post, :status => :created, :location => @post }
-        else
-          format.html { render :new }
-          format.xml { render :xml => @post.errors, :status => :unprocessable_entity }
-        end
+      if @post.save
+        flash.notice = 'Post created successfully.'
+        respond_with @post, location: blog_post_by_slug_url(@post.slug_options)
+      else
+        respond_with @post
       end
     end
   end
 
   def edit
-    respond_to do |format|
-      format.html
-      format.xml { render :xml => @post }
-      format.json { render :json => @post }
-    end
+    respond_with @post
   end
 
   def update
@@ -72,25 +58,15 @@ class Blog::PostsController < ApplicationController
         format.html { render :preview }
       end
     else
-      respond_to do |format|
-        if @post.update_attributes(params[:post])
-          format.html { redirect_to @post.url, :notice => 'Post was successfully updated.' }
-          format.xml { head :ok }
-        else
-          format.html { render :edit }
-          format.xml { render :xml => @post.errors, :status => :unprocessable_entity }
-        end
-      end
+      flash.notice = 'Post was successfully updated.' if @post.update_attributes(params[:post])
+      respond_with @post, location: blog_post_by_slug_url(@post.slug_options)
     end
   end
 
   def destroy
     @post.destroy
-
-    respond_to do |format|
-      format.html { redirect_to root_url(:subdomain => request.subdomain), :notice => 'Post deleted.' }
-      format.xml { head :ok }
-    end
+    flash.notice = 'Post deleted.'
+    respond_with @post, location: root_url
   end
 
   private

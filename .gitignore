@@ -2,6 +2,7 @@
 log
 coverage/*
 coverate/**/*
+db/schema.rb
 tmp/*
 tmp/**/*
 doc/api

@@ -41,9 +41,18 @@ class Post < ActiveRecord::Base
     "/#{year}/#{month}/#{day}/#{slug}"
   end
 
+  def slug_options
+    {
+      year: self.year,
+      month: self.month,
+      day: self.day,
+      slug: self.slug
+    }
+  end
+
   private
 
   def add_slug
-    self.slug = Post.generate_slug( self.title )
+    self.slug = Post.generate_slug(self.title)
   end
 end

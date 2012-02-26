@@ -1,0 +1,16 @@
+= form_for [:blog, comment] do |f|
+  = field_set_tag do
+    = f.hidden_field :post_id
+    = render 'model_errors', target: comment
+    %dl(class="formfields")
+      %dt= f.label :author_name, 'Name'
+      %dd= f.text_field :author_name, size: 30
+      %dt= f.label :author_email, 'Email'
+      %dd= f.text_field :author_email, size: 30
+      %dt= f.label :author_site, 'Website URL'
+      %dd= f.text_field :author_site, size: 30
+      %dt= f.label :comment_text, 'Comment'
+      %dd= f.text_area :comment_text, size: '60x12'
+    %p
+      = f.submit 'Preview', id: 'preview_button', name: 'preview_button'
+      = f.submit 'Submit'

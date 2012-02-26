@@ -1,0 +1,6 @@
+- if target.errors.any?
+  #errorExplanation
+    %h3 Please correct the following errors:
+    %ul
+      - target.errors.full_messages.each do |msg|
+        %li= msg
