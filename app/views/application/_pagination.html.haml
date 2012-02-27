@@ -1,4 +1,4 @@
 - if coll.previous_page || coll.next_page
   %p.pagination.clearfix
-    = link_to h(next_text), overwrite_params: { page: coll.next_page}, class: 'fright' if coll.next_page
-    = link_to h(prev_text), overwrite_params: { page: coll.previous_page }, class: 'fleft' if coll.previous_page
+    = link_to(next_text, params.merge(page: coll.next_page), class: 'fright') if coll.next_page
+    = link_to(prev_text, params.merge(page: coll.previous_page), class: 'fleft') if coll.previous_page
