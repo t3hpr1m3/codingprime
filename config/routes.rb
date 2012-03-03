@@ -4,7 +4,7 @@ CodingPrime::Application.routes.draw do
       resources :comments, only: [:create, :edit, :update, :destroy]
     end
     resources :categories
-    resources :comments, only: [:index]
+    resources :comments, only: [:index, :show]
     root to: 'posts#index'
     get ':year/:month/:day/:slug', to: 'posts#show_by_slug', as: 'post_by_slug', constraints: {
       year: /\d{4}/,

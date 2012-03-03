@@ -4,6 +4,8 @@ body {
   padding: 0;
   font-size: 85%;
   font-family: verdana, helvetica, arial, sans-serif;
+  background-color: #ffffff;
+  color: #333333;
 }
 
 /***********************
@@ -207,7 +209,7 @@ dl.formfields dd {
 /***********************
  * Comments
  ***********************/
-.comment {
+div.comment {
   border: 1px solid #cccccc;
   background-color: #e0e0e0;
   padding: 1em;

@@ -13,7 +13,7 @@ set :user, "titus"
 set :unicorn_config, "#{current_path}/config/unicorn.rb"
 set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
 
-server "foobizzle.com", :app, :web, :db, :primary => true
+server "komos.cedarhouselabs.com", :app, :web, :db, :primary => true
 
 namespace :deploy do
   task :start, :roles => :app, :except => { :no_release => true } do
