@@ -9,6 +9,7 @@ set :use_sudo, false
 set :scm, :git
 set :deploy_to, "/var/www/#{application}"
 set :user, "titus"
+set :deploy_via, :remote_cache
 
 set :unicorn_config, "#{current_path}/config/unicorn.rb"
 set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
