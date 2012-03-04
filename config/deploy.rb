@@ -3,7 +3,7 @@ require 'bundler/capistrano'
 set :rails_env, :production
 
 set :application, "codingprime.com"
-set :repository,  "http://github.com/t3hpr1m3/codingprime.git"
+set :repository,  "git@github.com:t3hpr1m3/codingprime.git"
 set :use_sudo, false
 
 set :scm, :git
