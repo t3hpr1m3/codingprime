@@ -7,7 +7,7 @@
       %dt= f.label :category_id
       %dd= collection_select(:post, :category_id, Category.all, :id, :name)
       %dt= f.label :body, class: 'invisible'
-      %dd= f.text_area :body, size: '80x30'
+      %dd= f.text_area :body, size: '70x30'
     %p.centertext
       = f.submit
       = f.submit 'Preview', id: 'preview_button', name: 'preview_button'
