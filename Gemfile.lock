@@ -193,6 +193,7 @@ GEM
     will_paginate (3.0.3)
     xpath (0.1.4)
       nokogiri (~> 1.3)
+    yaml_db (0.2.2)
     yard (0.7.4)
 
 PLATFORMS
@@ -228,4 +229,5 @@ DEPENDENCIES
   unicorn
   warden (~> 1.1.0)
   will_paginate
+  yaml_db
   yard (= 0.7.4)
