@@ -30,11 +30,11 @@ namespace :deploy do
   end
 
   task :reload, :roles => :app, :except => { :no_release => true } do
-    run "kill -s USR2 `cat #{unicorn_pid}`"
+    stop
+    start
   end
 
   task :restart, :roles => :app, :except => { :no_release => true } do
-    stop
-    start
+    run "kill -s USR2 `cat #{unicorn_pid}`"
   end
 end
