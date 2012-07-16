@@ -21,6 +21,8 @@ gem 'rakismet'
 gem 'will_paginate'
 gem 'haml'
 gem 'mysql2'
+gem 'unicorn'
+gem 'yaml_db'
 #gem 'blog_me', :path => '../cedarhouselabs/blog_me'
 
 group :test, :development do

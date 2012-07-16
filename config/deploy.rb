@@ -1,26 +1,40 @@
-$:.unshift(File.expand_path('./lib', ENV['rvm_path']))
-require 'rvm/capistrano'
 require 'bundler/capistrano'
 
-set :rvm_ruby_string, 'ruby-1.9.2'
+set :rails_env, :production
+
 set :application, "codingprime.com"
-set :repository,  "http://github.com/t3hpr1m3/codingprime.git"
+set :repository,  "git@github.com:t3hpr1m3/codingprime.git"
+set :use_sudo, false
 
 set :scm, :git
-# Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
-set :deploy_to, "/web/#{application}"
+set :deploy_to, "/var/www/#{application}"
 set :user, "titus"
+set :deploy_via, :remote_cache
 
-server "foobizzle.com", :app, :web, :db, :primary => true
+set :unicorn_config, "#{current_path}/config/unicorn.rb"
+set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
 
-# If you are using Passenger mod_rails uncomment this:
-# if you're still using the script/reapear helper you will need
-# these http://github.com/rails/irs_process_scripts
+server "komos.cedarhouselabs.com", :app, :web, :db, :primary => true
 
 namespace :deploy do
-  task :start do ; end
-  task :stop do ; end
+  task :start, :roles => :app, :except => { :no_release => true } do
+    run "cd #{current_path} && bundle exec unicorn -c #{unicorn_config} -E #{rails_env} -D"
+  end
+
+  task :stop, :roles => :app, :except => { :no_release => true } do
+    run "kill `cat #{unicorn_pid}`"
+  end
+
+  task :graceful_stop, :roles => :app, :except => { :no_release => true } do
+    run "kill -s QUIT `cat #{unicorn_pid}`"
+  end
+
+  task :reload, :roles => :app, :except => { :no_release => true } do
+    stop
+    start
+  end
+
   task :restart, :roles => :app, :except => { :no_release => true } do
-    run "touch #{File.join(current_path,'tmp','restart.txt')}"
+    run "kill -s USR2 `cat #{unicorn_pid}`"
   end
 end

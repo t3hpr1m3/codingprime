@@ -19,6 +19,6 @@ production:
   adapter: mysql2
   database: codingprime
   host: localhost
-  username: pr1m3
+  username: codingprime
   password: t3hpr1m3
   encoding: utf8
