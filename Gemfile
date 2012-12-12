@@ -24,6 +24,7 @@ gem 'mysql2'
 gem 'unicorn'
 gem 'yaml_db'
 #gem 'blog_me', :path => '../cedarhouselabs/blog_me'
+gem 'newrelic_rpm'
 
 group :test, :development do
   gem 'rspec-rails',        '~> 2.8.0'
