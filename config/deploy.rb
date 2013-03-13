@@ -12,7 +12,7 @@ set :user, "titus"
 set :deploy_via, :remote_cache
 
 set :unicorn_config, "#{current_path}/config/unicorn.rb"
-set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
+set :unicorn_pid, "#{shared_path}/tmp/pids/unicorn.pid"
 
 server "komos.cedarhouselabs.com", :app, :web, :db, :primary => true
 
