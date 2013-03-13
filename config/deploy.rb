@@ -3,7 +3,7 @@ require 'bundler/capistrano'
 set :rails_env, :production
 
 set :application, "codingprime.com"
-set :repository,  "http://github.com/t3hpr1m3/codingprime.git"
+set :repository,  "git@github.com:t3hpr1m3/codingprime.git"
 set :use_sudo, false
 
 set :scm, :git
@@ -30,11 +30,11 @@ namespace :deploy do
   end
 
   task :reload, :roles => :app, :except => { :no_release => true } do
-    run "kill -s USR2 `cat #{unicorn_pid}`"
+    stop
+    start
   end
 
   task :restart, :roles => :app, :except => { :no_release => true } do
-    stop
-    start
+    run "kill -s USR2 `cat #{unicorn_pid}`"
   end
 end

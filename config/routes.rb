@@ -1,10 +1,10 @@
 CodingPrime::Application.routes.draw do
   scope module: 'blog', as: 'blog', constraints: {subdomain: /blog/} do
     resources :posts do
-      resources :comments, only: [:create, :edit, :update, :destroy]
+      resources :comments, only: [:edit, :update, :destroy]
     end
     resources :categories
-    resources :comments, only: [:index, :show]
+    resources :comments, only: [:index, :show, :create]
     root to: 'posts#index'
     get ':year/:month/:day/:slug', to: 'posts#show_by_slug', as: 'post_by_slug', constraints: {
       year: /\d{4}/,
