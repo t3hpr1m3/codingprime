@@ -6,9 +6,11 @@ set :repo_url, 'git@github.com:t3hpr1m3/codingprime.git'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
+set :branch, ENV['BRANCH'] || :master
 
 # Default deploy_to directory is /var/www/my_app
-# set :deploy_to, '/var/www/my_app'
+set :deploy_to, "/var/www/#{fetch(:application)}" # Needed until next capistrano release
+# see: https://github.com/capistrano/capistrano/blob/master/lib/capistrano/defaults.rb#L3
 
 # Default value for :scm is :git
 # set :scm, :git
@@ -17,7 +19,7 @@ set :repo_url, 'git@github.com:t3hpr1m3/codingprime.git'
 # set :format, :pretty
 
 # Default value for :log_level is :debug
-# set :log_level, :debug
+set :log_level, :info
 
 # Default value for :pty is false
 # set :pty, true

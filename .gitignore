@@ -1,5 +1,6 @@
 .bundle
 log
+config/database.yml
 coverage/*
 coverate/**/*
 db/schema.rb
