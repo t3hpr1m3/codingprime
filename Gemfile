@@ -8,7 +8,6 @@ gem 'sass-rails',   '~> 4.0.2'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'uglifier',     '>= 1.3.0'
 
-gem 'capistrano', group: :development
 gem 'therubyracer', platforms: :ruby
 gem 'jquery-rails'
 gem 'warden',         '~> 1.2.3'
@@ -22,6 +21,13 @@ gem 'mysql2'
 gem 'unicorn'
 gem 'yaml_db'
 gem 'newrelic_rpm'
+
+group :development do
+  gem 'capistrano-rails'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rbenv', require: false
+  gem 'capistrano3-unicorn'
+end
 
 group :test, :development do
   gem 'rspec',              '~> 3.0.0.beta'
