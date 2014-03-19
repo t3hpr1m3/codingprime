@@ -3,7 +3,7 @@ require 'spec_helper'
 describe ApplicationHelper do
   describe 'title' do
     it 'should set the content_for :title' do
-      helper.expects(:content_for).with(:title).yields('Cool Page')
+      helper.should_receive(:content_for).with(:title)
       helper.title('Cool Page')
     end
   end

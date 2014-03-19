@@ -5,7 +5,6 @@ SimpleCov.start 'rails' do
 end
 require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
-require 'rspec/rails/mocha'
 require 'rspec/autorun'
 require 'capybara/rails'
 
@@ -16,7 +15,6 @@ Dir[Rails.root.join('spec/support/**/*.rb')].each {|f| require f}
 Warden.test_mode!
 
 RSpec.configure do |config|
-  config.mock_with :mocha
   config.use_transactional_fixtures = true
   config.include CustomControllerMatchers
   config.include Warden::Test::Helpers

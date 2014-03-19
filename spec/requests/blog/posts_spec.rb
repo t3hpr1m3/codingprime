@@ -30,7 +30,7 @@ describe Blog::PostsController do
     end
 
     it 'should show comments' do
-      Comment.any_instance.stubs(:check_spam).returns(true)
+      Comment.any_instance.stub(check_spam: true)
       post = Factory(:post, title: 'Awesome Post')
       Factory(:comment, comment_text: 'Cool Post!', approved: true, post: post)
       visit_slug_path(post)
