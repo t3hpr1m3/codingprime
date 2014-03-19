@@ -17,7 +17,7 @@
 require 'spec_helper'
 
 describe User do
-  let!(:user) { Factory(:user, password: 'valid', password_confirmation: 'valid') }
+  let!(:user) { create(:user, password: 'valid', password_confirmation: 'valid') }
 
   it { should validate_presence_of(:username) }
   it { should validate_presence_of(:email) }
@@ -26,10 +26,10 @@ describe User do
   it { should validate_uniqueness_of(:email) }
 
   it 'should authenticate with a valid password' do
-    user.authenticate('valid').should be_true
+    expect(user.authenticate('valid')).to eql(user)
   end
 
   it 'should fail authentication with an invalid password' do
-    user.authenticate('invalid').should be_false
+    expect(user.authenticate('invalid')).to be false
   end
 end

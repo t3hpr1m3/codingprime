@@ -19,9 +19,8 @@ class Post < ActiveRecord::Base
   belongs_to :user
   belongs_to :category
   has_many :comments
-  attr_accessible :title, :body, :category_id
 
-  scope :recent, :order => 'created_at DESC'
+  scope :recent, -> { order(created_at: :desc) }
 
   before_create :add_slug
 

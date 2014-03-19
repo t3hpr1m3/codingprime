@@ -22,15 +22,15 @@ describe Post do
   it { should belong_to( :user ) }
 
   it "should generate a valid slug after save" do
-    @post = Factory.build( :post, :title => "A very cool - first post!" )
+    @post = build( :post, :title => "A very cool - first post!" )
     @post.save!
-    @post.slug.should match( /^a-very-cool-first-post$/ )
+    expect(@post.slug).to match( /^a-very-cool-first-post$/ )
   end
 
   it "should generate a valid url after save" do
-    @post = Factory.create( :post, :title => "A very cool - first post!" )
+    @post = create( :post, :title => "A very cool - first post!" )
     @post.created_at = '2010/02/08'
-    @post.url.should match( /^\/2010\/02\/08\/a-very-cool-first-post$/ )
+    expect(@post.url).to match( /^\/2010\/02\/08\/a-very-cool-first-post$/ )
   end
 
 end

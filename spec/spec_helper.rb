@@ -5,7 +5,6 @@ SimpleCov.start 'rails' do
 end
 require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
-require 'rspec/autorun'
 require 'capybara/rails'
 
 # Requires supporting files with custom matchers and macros, etc,
@@ -18,6 +17,11 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
   config.include CustomControllerMatchers
   config.include Warden::Test::Helpers
+  config.include FactoryGirl::Syntax::Methods
+
+  config.before(:suite) do
+    FactoryGirl.lint
+  end
 
   config.after do
     Warden.test_reset!

@@ -28,40 +28,40 @@ describe Comment do
   it { should validate_presence_of(:author_user_agent) }
   it { should belong_to(:post) }
 
-  let(:comment) { Factory.build(:comment) }
+  let(:comment) { build(:comment) }
 
   it "should be approved if it's not spam" do
     register_akismet_uri 'comment-check', 'false'
     comment.save!
-    comment.approved.should eql(true)
+    expect(comment.approved).to be true
   end
 
   it "should be rejected if it's spam" do
     register_akismet_uri 'comment-check', 'true'
     comment.save!
-    comment.approved.should eql(false)
+    expect(comment.approved).to be false
   end
 
   it "should be marked as ham if it's approved" do
     register_akismet_uri 'submit-ham', 'true'
     comment.approve
-    comment.approved.should eql(true)
+    expect(comment.approved).to be true
   end
 
   it "should be marked as spam if it's rejected" do
     register_akismet_uri 'submit-spam', 'true'
     comment.reject
-    comment.approved.should eql(false)
+    expect(comment.approved).to be false
   end
 
   describe 'assigning the request' do
-    let(:request) { stub(remote_ip: '127.0.0.1', env: {'HTTP_USER_AGENT' => 'browser', 'HTTP_REFERER' => 'www.google.com'}) }
+    let(:request) { double('Request', remote_ip: '127.0.0.1', env: {'HTTP_USER_AGENT' => 'browser', 'HTTP_REFERER' => 'www.google.com'}) }
     before do
       comment.request = request
     end
-    specify { comment.author_ip.should eql('127.0.0.1') }
-    specify { comment.author_user_agent.should eql('browser') }
-    specify { comment.referrer.should eql('www.google.com') }
+    specify { expect(comment.author_ip).to eql('127.0.0.1') }
+    specify { expect(comment.author_user_agent).to eql('browser') }
+    specify { expect(comment.referrer).to eql('www.google.com') }
   end
 
   def register_akismet_uri(path, response_text)

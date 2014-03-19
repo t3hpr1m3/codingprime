@@ -31,7 +31,7 @@ class Blog::PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.build(params[:post])
+    @post = current_user.posts.build(post_params)
 
     if params[:preview_button]
       respond_to do |format|
@@ -53,12 +53,12 @@ class Blog::PostsController < ApplicationController
 
   def update
     if params[:preview_button]
-      @post.attributes = params[:post]
+      @post.attributes = post_params
       respond_to do |format|
         format.html { render :preview }
       end
     else
-      flash.notice = 'Post was successfully updated.' if @post.update_attributes(params[:post])
+      flash.notice = 'Post was successfully updated.' if @post.update_attributes(post_params)
       respond_with @post, location: blog_post_by_slug_url(@post.slug_options)
     end
   end
@@ -78,5 +78,9 @@ class Blog::PostsController < ApplicationController
 
   def get_post
     @post = Post.find( params[:id] )
+  end
+
+  def post_params
+    params.require(:post).permit(:title, :body, :category_id)
   end
 end

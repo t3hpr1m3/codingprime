@@ -20,30 +20,30 @@ FactoryGirl.define do
   end
 
   factory :user do
-    username { Factory.next( :username ) }
+    username { generate( :username ) }
     password "foobar"
     password_confirmation { |u| u.password }
-    email { Factory.next( :email ) }
-    name { Factory.next( :name ) }
+    email { generate( :email ) }
+    name { generate( :name ) }
     is_admin false
   end
 
   factory :admin, :class => User do
-    username { Factory.next( :username ) }
+    username { generate( :username ) }
     password "foobar"
     password_confirmation { |f| f.password }
-    email { Factory.next( :email ) }
-    name { Factory.next( :name ) }
+    email { generate( :email ) }
+    name { generate( :name ) }
     is_admin true
   end
 
   factory :category do
-    name { Factory.next(:category_name) }
+    name { generate(:category_name) }
     slug { Category.generate_slug(name) }
   end
 
   factory :post do
-    title { Factory.next( :blog_title ) }
+    title { generate( :blog_title ) }
     body "This is some test text"
     association :user
     association :category

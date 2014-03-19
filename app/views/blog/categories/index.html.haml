@@ -16,7 +16,7 @@
         %td
           = link_to 'Show', [:blog, category]
           = link_to 'Edit', edit_blog_category_path(category)
-          = link_to 'Delete', [:blog, category], confirm: 'Are you sure?', method: :delete
+          = link_to 'Delete', [:blog, category], data: { confirm: 'Are you sure?' }, method: :delete
 
 %br/
 

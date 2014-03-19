@@ -24,7 +24,7 @@ class Blog::CategoriesController < ApplicationController
   end
 
   def create
-    @category = Category.new(params[:category])
+    @category = Category.new(category_params)
     flash.notice = 'Category was successfully created.' if @category.save
     respond_with(:blog, @category)
   end
@@ -34,7 +34,7 @@ class Blog::CategoriesController < ApplicationController
   end
 
   def update
-    flash[:notice] = 'Category was successfully updated.' if @category.update_attributes(params[:category])
+    flash[:notice] = 'Category was successfully updated.' if @category.update_attributes(category_params)
     respond_with(:blog, @category)
   end
 
@@ -52,5 +52,9 @@ class Blog::CategoriesController < ApplicationController
   def get_category_by_slug
     @category = Category.find_by_slug(params[:id])
     raise ActiveRecord::RecordNotFound if @category.nil?
+  end
+
+  def category_params
+    params.require(:category).permit(:name)
   end
 end

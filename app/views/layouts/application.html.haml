@@ -36,7 +36,7 @@
                 = link_to category.name, [:blog, category]
                 - if admin?
                   = link_to "x", blog_category_path(category.slug),
-                    confirm: "Are you sure?", method: :delete
+                    data: { confirm: "Are you sure?" }, method: :delete
         - if admin?
           %h2 Admin
           %ul

@@ -20,7 +20,6 @@ class User < ActiveRecord::Base
   has_secure_password
 
   has_many :posts
-  attr_accessible         :name, :email, :is_admin
   validates_presence_of   :username, :email
   validates_presence_of   :password, :on => :create
   validates_uniqueness_of :username, :email

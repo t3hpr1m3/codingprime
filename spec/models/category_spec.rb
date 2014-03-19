@@ -14,21 +14,21 @@ require 'spec_helper'
 
 describe Category do
   before do
-    Factory(:category)
+    build(:category)
   end
 
   it { should validate_presence_of(:name) }
   it { should validate_uniqueness_of(:name) }
 
   it "should generate a valid slug on save" do
-    category = Factory.build(:category, name: 'Test Category', slug: nil )
+    category = build(:category, name: 'Test Category', slug: nil )
     category.save!
-    category.slug.should match( /^test-category$/ )
+    expect(category.slug).to match( /^test-category$/ )
   end
 
   it 'should not allow destroy if it has posts' do
-    category = Factory(:category)
-    post = Factory(:post, category: category)
-    category.destroy.should be_false
+    category = create(:category)
+    post = create(:post, category: category)
+    expect(category.destroy).to be false
   end
 end

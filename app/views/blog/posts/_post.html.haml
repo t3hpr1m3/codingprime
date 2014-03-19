@@ -12,4 +12,4 @@
     = link_to pluralize(post.comments.valid.length, 'comment'), "#{post.url}#comments"
     - if admin?
       = link_to 'Edit', edit_blog_post_path(post)
-      = link_to 'Delete', [:blog, post], :confirm => "Are you sure?", :method => :delete
+      = link_to 'Delete', [:blog, post], data: { confirm: "Are you sure?" }, method: :delete
