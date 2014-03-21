@@ -21,6 +21,7 @@ gem 'mysql2'
 gem 'unicorn'
 gem 'mtwtfss_yaml_db'
 gem 'newrelic_rpm'
+gem 'yaml_db', github: 'jetthoughts/yaml_db', ref: 'fb4b6bd'
 
 group :development do
   gem 'capistrano-rails'
